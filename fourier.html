@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="description" content="Displays my Blog">
+		<meta name="author" content="Ben Eskildsen">
+		<link rel="stylesheet" type="text/css" href="Blog.css">
+	</head>
+	<body>
+
+<!-- ****************************START OF POST********************* -->
+
+		<div id="blog-wrapper">
+
+			<div class="blog-text">
+				<h1> FOURIER TOY </h1>
+				<p style="font-size:12pt;">11/7/2013</p>
+			</div>
+
+			<div class="canvasses" style="background-color:#E8E8E8">
+				<canvas id="canvas2.1" width="1000" height="500"></canvas>
+				<script src="fourier.js"></script>
+				<script> 
+					var a = new circle ("canvas2.1");
+					var b = new circle ("");
+					var c = new circle ("");
+					var d = new circle ("");
+					var circles = [a,b,c,d]
+					var points = [];
+					var running = false;
+				</script>
+				<form name="formf" method="get">
+					<input type="button" name="run" value="Start" onClick="
+					initialize_and_runf (formf);">
+					<input type="button" name="stop" value="Stop" onClick="clearInterval(instancef);">
+					radius 1: <input type="text" name="rad1" value="100" size="2">
+					speed 1: <input type="text" name="spd1" value="1" size="2">
+					radius 2: <input type="text" name="rad2" value="75" size="2">
+					speed 2: <input type="text" name="spd2" value="2" size="2">
+					radius 3: <input type="text" name="rad3" value="50" size="2">
+					speed 3: <input type="text" name="spd3" value="3" size="2">
+					radius 4: <input type="text" name="rad4" value="25" size="2">
+				</form>
+			</div>
+
+			<div class="blog-text">
+				<p> A Fourier toy inspired by <a href="http://toxicdump.org/stuff/FourierToy.swf">this one</a>. Try adjusting the speeds and radii of the different circles to get different sinusoids.</p>
+			</div>
+
+		</div>
+
+				
+	</body>
+</html>

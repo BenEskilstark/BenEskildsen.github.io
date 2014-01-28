@@ -1,0 +1,53 @@
+#blog-wrapper {
+	background-color: #E8E8E8;
+	width: 1050px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#wrapper {
+	width: 1050px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.canvasses {
+	display: inline-block;
+	position: relative;
+	left: 23px;
+	background-color: black;
+	width: 1000px;
+	height: 500px;
+	border:2px solid #d3d3d3;
+}
+
+.blog-sub {
+	margin-left: 25px;
+	margin-right: 25px;
+	font-size: 10pt;
+	font-family: arial;
+}
+
+.blog-text {
+	position: relative;
+	margin-left: 25px;
+	margin-right: 25px;
+	font-size: 11pt;
+	font-family: arial;
+}
+
+.regular-text {
+	margin-left: 25px;
+	margin-right: 25px;
+	font-size: 11pt;
+	font-family: arial;
+}
+
+.console {
+	/*width: 695px;*/
+	position: relative;
+	display: inline;
+	left: 35px;
+	font-size: 11pt;
+	font-family: arial;
+}
