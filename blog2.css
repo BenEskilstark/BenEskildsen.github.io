@@ -1,3 +1,9 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+
 #maincontent 
 {
 	margin-left: auto;
