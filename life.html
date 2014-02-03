@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="description" content="CAs">
+		<meta name="author" content="Ben Eskildsen">
+		<link rel="stylesheet" type="text/css" href="Blog.css">
+	</head>
+
+		<div class="header">
+			<h1> CELLULAR AUTOMATA </h1>
+			<p style="font-size:12pt;">1/29/2014</p>
+		</div>
+
+		<div class="grid" id="grid">
+			<canvas id="tron_canvas" width="600" height="500"></canvas>
+			<script src="tron.js"></script>
+			<script>running = false; setup ()</script>
+			<input type="button" name="mirror" value="Mirror" onClick="run_tron ('mirror');">
+			<input type="button" name="multiplayer" value="Multiplayer" onClick="run_tron ('multi');">
+			<input type="button" name="stop" value="Stop" onClick="clearInterval(instancef);">
+		</div>
+	</body>
+</html>
