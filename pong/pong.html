@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="description" content="Displays my Blog">
+		<meta name="author" content="Ben Eskildsen">
+		<link rel="stylesheet" type="text/css" href="../blog.css">
+	</head>
+	<body>
+		<div id="header">
+			<div id="header_image_container">
+				<img id="header_img" src="../header_img.png">
+			</div>
+		</div>
+
+		<div id="maincontent">
+			<h1>Pong</h1>
+			<h3>2/8/2014</h3>
+
+			<canvas id="plot_canvas" style="display:inline-block; border:2px solid gray" 
+			width="800px" height="600px">
+			</canvas>
+
+			<script src="pong.js"></script>
+			<script>running = false; setup ()</script>
+			
+			<input type="button" value="Single" onClick="run ('single');">
+			<input type="button" value="Multiplayer" onClick="run ('multi');">
+			<input type="button" value="AIs" onClick="run ('ais');">
+			<input type="button" value="Stop" onClick="clearInterval(instancef);">
+
+		</div>
+	</body>
+</html>
