@@ -145,7 +145,14 @@ function handleClick (e)
 
 function placeNode (x, y, name, size)
 {
-	objects.push (new Node (x,y,name,size));
+	var n = new Node (x,y,name,size);
+
+	var isFilled = document.getElementById("filled").value;
+	if (isFilled == "no") {
+		n.filled = false;
+	}
+
+	objects.push (n);
 
 	var dropdownfrom = document.getElementById("from");
 	var dropdownto = document.getElementById("to");
