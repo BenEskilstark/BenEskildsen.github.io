@@ -10,11 +10,44 @@
 			<h1>Chart App</h1>
 			<h3>3/15/2014</h3>
 
+			Click the map to place points on it.
+			<canvas id="chart_canvas" width="1000px" height="750px"></canvas>
 			<script src="charts.js"></script>
-			<canvas id="chart_canvas" width="1000px" height="800px"></canvas>
+			
+			<form name="formf" method="get">
+				<input type="button" name="undo" value="Undo" onClick="undolast();">
+				Point Name: <input type="text" id="name" value="default" size="6">
+				Point Size: <input type="text" id="nodesize" value="5" size="1">
+				Arrow From: <select id="from" name="from"></select>
+				Arrow To: <select id="to" name="to"></select>	
+				Arrow Size: <input type="text" id="edgesize" value="5" size="1">
+				<input type="button" name="edge" value="Place Edge" onClick="placeEdgeForm();">
+				Map: <select id="maps" onchange="setBackgroundForm();">
+					<option>USA.jpeg</option>
+					<option>Europe.gif</option>
+					<option>MiddleEast.jpeg</option>
+					<option>SouthAmerica.jpeg</option>
+					<option>World.jpg</option>
+				</select>
+
+			</form>
+
 			<script>begin();</script>
+
+			
+
 		</div>
 
+		<p></p>
+		Background maps from:
+		<ul>
+		<li>www.af.mil (accessed 5/30/2013)</li>
+        <li>http://www.youreuropemap.com (accessed 5/31/2013)</li>
+        <li>http://geography.about.com (accessed 5/31/2013)</li>
+        <li>http://countries.bridgat.com (accessed 5/31/2013)</li>
+        </ul>
+
+		<p></p>
 		<a href="http://beneskildsen.github.io">Back to Blog</a>
 	</body>
 </html>
