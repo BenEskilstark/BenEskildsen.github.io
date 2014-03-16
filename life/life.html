@@ -3,22 +3,49 @@
 	<head>
 		<meta name="description" content="CAs">
 		<meta name="author" content="Ben Eskildsen">
-		<link rel="stylesheet" type="text/css" href="blog.css">
+		<link rel="stylesheet" type="text/css" href="../blog.css">
 	</head>
 
-		<div class="header">
-			<h1> CELLULAR AUTOMATA </h1>
-			<p style="font-size:12pt;">1/29/2014</p>
+		<div id="header">
+			<div id="header_image_container">
+				<img id="header_img" src="../header_img.png">
+			</div>
 		</div>
 
-		<div class="grid" id="grid">
-			<canvas id="tron_canvas" width="600" height="500"></canvas>
-			<script src="tron.js"></script>
-			<script>running = false; setup ()</script>
-			<input type="button" name="mirror" value="Mirror" onClick="run_tron ('mirror');">
-			<input type="button" name="multiplayer" value="Multiplayer" onClick="run_tron ('multi');">
-			<input type="button" name="stop" value="Stop" onClick="clearInterval(instancef);">
-		</div>
+		<div id="maincontent">
+			<h1> CELLULAR AUTOMATA </h1>
+			<h3>1/29/2014</h3>
+		<canvas id="canvas5" width="1000" height="500"></canvas>
+				<script src="life.js"></script>
+				<script>
+					var instance5 = new life_instance ();
+					instance5.divid = 'canvas5';
+				</script>
+				<form name="form" method="get">
+					create: <input type="text" name="create" value="3" size="2">
+					starve: <input type="text" name="starve" value="3" size="2">
+					suffocate: <input type="text" name="suffocate" value="5" size="2">
+					seed: <input type="text" name="seed" value=".075" size="2">
+					<input type="button" name="run" value="Run" onClick="create_instance (instance5, false, this.form);">
+				</form>
+				<p></p>
+				Exploring the state space of cellular automata. 
+				<p></p>We can find some really weird behavior: create:3;starve:4;suffocate7;seed:65% is just an oozing mass of cells that slowly congeals. But then create:3;starve:5;suffocate7;seed:65% just immediately decays to nothing. Other automata of interest: 
+					<ul>
+						<li>create:3; starve:4; suffocate:8; seed:55%</li> 
+						<li>create:3; starve:5; suffocate:8; seed:65%</li>
+						<li>create:3; starve:2; suffocate:4; seed:5%</li>
+						<li>create:3; starve:2; suffocate:3; seed:15% (note that these are Conway's rules)</li>
+						<li>These are getting harder to categorize. What was the last one? Decaying really slowly? Or just congealing?</li>
+						<li>create:2; starve:2; suffocate:3; seed:5% This is just static!</li>
+						<li>create:3; starve:2; suffocate:6; seed:99%</li>
+						<li>create:3; starve:2; suffocate:4; seed:50% vs create:4; starve:2; suffocate:4; seed:50% </li>
+					</ul>
+
+			<p>
+			I had meant for this post to be a lot more in-depth study of CA's, but it's been taking me so long to make any progress at all on that front that I've decided to just post this as-is and let any reader explore as they wish. I'll come back to CA's at some point.
+		</p>
+	</div>
 
 		<a href="http://beneskildsen.github.io">Back to Blog</a>
 	</body>
