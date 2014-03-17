@@ -72,7 +72,7 @@ function update ()
 			g2.stroke();
 
 			g2.fillStyle = "#0000FF"; // blue
-			g2.font="20px Georgia";
+			g2.font= document.getElementById("fontsize").value + "px Georgia";
 			g2.fillText (obj.name, obj.x - obj.size, obj.y - obj.size);
 
 		} else {
@@ -127,6 +127,28 @@ function getNodes ()
 function handleClick (e)
 {
 	var name = document.getElementById("name").value;
+
+	var nodes = getNodes();
+	var nameUsed = false;
+	var addTo = 0;
+	do {
+		nameUsed = false;
+		for (var i = 0; i < nodes.length; i++) {
+			if ((addTo == 0 && nodes[i].name == name) || 
+					nodes[i].name == name + addTo) {
+				nameUsed = true;
+				break;
+			}
+		}
+		if (nameUsed) {
+			addTo++;
+		}
+	} while (nameUsed);
+
+	if (addTo != 0) {
+		name += addTo;
+	}
+
 	var size = document.getElementById("nodesize").value;
 	// this code is from 
 	// http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
