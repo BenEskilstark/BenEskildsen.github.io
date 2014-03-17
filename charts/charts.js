@@ -3,7 +3,7 @@ var height = 750;
 var color = "#FF0000"; // red
 
 var backgroundImages = ["USA.jpeg", "Europe.gif", "MiddleEast.jpeg", 
-	"SouthAmerica.jpeg", "World.jpg"];
+	"SouthAmerica.jpeg", "World.jpg", "EastCoast.jpg"];
 var background = backgroundImages[0];
 
 var objects = [];
@@ -15,6 +15,7 @@ function Node (x,y,name,size)
 	this.name = name;
 	this.size = size;
 	this.filled = true;
+	this.fontsize = -1;
 
 	this.isNode = true; // it's almost like polymorphism. But worse
 }
@@ -71,10 +72,6 @@ function update ()
 			if (obj.filled) { g2.fill(); }
 			g2.stroke();
 
-			g2.fillStyle = "#0000FF"; // blue
-			g2.font= document.getElementById("fontsize").value + "px Georgia";
-			g2.fillText (obj.name, obj.x - obj.size, obj.y - obj.size);
-
 		} else {
 			g2.fillStyle = color;
 			g2.strokeStyle = color;
@@ -89,7 +86,7 @@ function update ()
 				var xd = obj.ex - obj.sx;
 				var yd = obj.ey - obj.sy;
 				var length = Math.sqrt (xd*xd + yd*yd);
-				point_length = obj.size*7;
+				point_length = obj.size*5;
 
 				var angle = Math.atan2 (yd,xd);
 				g2.translate (obj.ex, obj.ey);
@@ -111,6 +108,19 @@ function update ()
 			}
 		}
 	}
+
+	// ensure point names are on top:
+	var nodes = getNodes ();
+	for (var j = 0; j < nodes.length; j++) {
+		var obj = nodes[j];
+		g2.fillStyle = "#0000FF"; // blue
+		if (obj.fontsize == -1) {
+			obj.fontsize = document.getElementById("fontsize").value;
+		}
+		g2.font = obj.fontsize + "px Georgia";
+		g2.fillText (obj.name, obj.x - obj.size, obj.y - obj.size);		
+		g2.stroke();
+	}
 }
 
 function getNodes ()
@@ -128,6 +138,7 @@ function handleClick (e)
 {
 	var name = document.getElementById("name").value;
 
+	// force unique names:
 	var nodes = getNodes();
 	var nameUsed = false;
 	var addTo = 0;
@@ -144,7 +155,6 @@ function handleClick (e)
 			addTo++;
 		}
 	} while (nameUsed);
-
 	if (addTo != 0) {
 		name += addTo;
 	}
