@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="description" content="Displays my Blog">
+		<meta name="author" content="Ben Eskildsen">
+		<link rel="stylesheet" type="text/css" href="../blog.css">
+	</head>
+	<body>
+		<div id="header">
+			<div id="header_image_container">
+				<img id="header_img" src="../header_img.png">
+			</div>
+		</div>
+
+		<div id="maincontent">
+			<h1><a href="http://gabrielecirulli.github.io/2048/">2048</a> AI</h1>
+			<h3>3/21/2014</h3>
+		
+			<canvas id="canvas" style="display:inline-block; border:2px solid gray"width="600" height="600"></canvas>
+			<script src="2048.js"></script>
+			<script>running = false;</script>
+			<p></p>
+			<input type="button" name="play" value="Play or Restart" onClick="start('play');">
+			<input type="button" name="ai" value="AI Play" onClick="start('ai');">
+
+		</div>
+
+		<a href="http://beneskildsen.github.io">Back to Blog</a>
+	</body>
+</html>
