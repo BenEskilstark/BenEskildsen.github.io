@@ -3,40 +3,49 @@ var height = 600;
 
 var lineWidth = 6;
 
-var grid = [];
-
 var left_arrow = 37;
 var up_arrow = 38;
 var right_arrow = 39;
 var down_arrow = 40;
 
+var GRID = [];
+var over = false;
+
 document.onkeydown = function (e)
 {	
 	var dircode = e.keyCode;
 	if (dircode == up_arrow) {
-		up();
+		up (GRID);
 	}
 	if (dircode == down_arrow) {
-		down ();
+		down (GRID);
 	}
 	if (dircode == left_arrow) {
-		left ();
+		left (GRID);
 	}
 	if (dircode == right_arrow) {
-		right ();
+		right (GRID);
 	}
 }
 
 function start (mode)
 {
-	initialize_grid ();
-
-	update (true);
+	if (mode == "player") {
+		GRID = initialize_grid ();
+		update (true, GRID);
+	} else if (mode == "ai") {
+		GRID = initialize_grid ();
+		update (true, GRID);
+		while (!over) {
+			random_move (GRID);
+		}
+		over = false;
+	}
 }
 
 function initialize_grid ()
 {
-	grid = [];
+	var grid = [];
 	for (var r = 0; r < 4; r++) {
 		var grid_row = [];
 		for (var c = 0; c < 4; c++) {
@@ -45,10 +54,11 @@ function initialize_grid ()
 		grid.push(grid_row);
 	}
 
-	random_square();
+	random_square(grid);
+	return grid;
 }
 
-function update (random)
+function update (random, grid)
 {
 	var g2 = document.getElementById("canvas").getContext("2d");
 
@@ -70,7 +80,10 @@ function update (random)
 	}
 
 	if (random) {
-		random_square ();
+		random_square (grid);
+	} else if (full(grid)) {
+		console.log ("lose");
+		over = true;
 	}
 
 	for (var r = 0; r < 4; r++) {
@@ -89,15 +102,17 @@ function update (random)
 			}
 		}
 	}
-	if (won ()) {
+	if (won (grid)) {
 		console.log ("win");
+		over = true;
 		return;
 	}
+	return grid;
 }
 
-function left ()
+function left (grid)
 {
-	var old_grid = copy_grid ();
+	var old_grid = copy_grid (grid);
 	for (var r = 0; r < 4; r++) {
 		for (var c = 0; c < 4; c++) {
 			var sqr = grid [c][r];
@@ -113,14 +128,15 @@ function left ()
 			}
 		}
 	}
-	var random = !compare (old_grid);
-	update (random);
+	var random = !compare (old_grid, grid);
+	GRID = grid;
+	update (random, grid);
 	return random;
 }
 
-function right ()
+function right (grid)
 {
-	var old_grid = copy_grid ();
+	var old_grid = copy_grid (grid);
 	for (var r = 0; r < 4; r++) {
 		for (var c = 3; c >= 0; c--) {
 			var sqr = grid [c][r];
@@ -136,14 +152,15 @@ function right ()
 			}
 		}
 	}
-	var random = !compare (old_grid);
-	update (random);
+	var random = !compare (old_grid, grid);
+	GRID = grid;
+	update (random, grid);
 	return random;
 }
 
-function up ()
+function up (grid)
 {
-	var old_grid = copy_grid ();
+	var old_grid = copy_grid (grid);
 	for (var r = 0; r < 4; r++) {
 		for (var c = 0; c < 4; c++) {
 			var sqr = grid [c][r];
@@ -159,14 +176,15 @@ function up ()
 			}
 		}
 	}
-	var random = !compare (old_grid);
-	update (random);
+	var random = !compare (old_grid, grid);
+	GRID = grid;
+	update (random, grid);
 	return random;
 }
 
-function down ()
+function down (grid)
 {
-	var old_grid = copy_grid ();
+	var old_grid = copy_grid (grid);
 	for (var r = 3; r >= 0; r--) {
 		for (var c = 0; c < 4; c++) {
 			var sqr = grid [c][r];
@@ -182,17 +200,17 @@ function down ()
 			}
 		}
 	}
-	var random = !compare (old_grid);
-	update (random);
+	var random = !compare (old_grid, grid);
+	GRID = grid;
+	update (random, grid);
 	return random;
 }
 
-function random_square ()
+function random_square (grid)
 {
-	if (full () && !won()) {
-		console.log ("lose");
+	if (full (grid) && !won(grid)) {
 		return;
-	} else if (won ()) {
+	} else if (won (grid)) {
 		return;
 	}
 	var changed = false;
@@ -206,7 +224,7 @@ function random_square ()
 	}
 }
 
-function won ()
+function won (grid)
 {
 	for (var r = 0; r < 4; r++) {
 		for (var c = 0; c < 4; c++) {
@@ -218,7 +236,7 @@ function won ()
 	return false;
 }
 
-function full () 
+function full (grid) 
 {
 	for (var r = 0; r < 4; r++) {
 		for (var c = 0; c < 4; c++) {
@@ -230,7 +248,7 @@ function full ()
 	return true;
 }
 
-function copy_grid ()
+function copy_grid (grid)
 {
 	var new_grid = [];
 	for (var r = 0; r < 4; r++) {
@@ -243,7 +261,7 @@ function copy_grid ()
 	return new_grid;
 }
 
-function compare (g)
+function compare (g, grid)
 {
 	for (var r = 0; r < 4; r++) {
 		for (var c = 0; c < 4; c++) {
@@ -253,4 +271,18 @@ function compare (g)
 		}
 	}
 	return true;
+}
+
+function random_move (grid)
+{
+	var r = Math.floor((Math.random()*4));
+	if (r == 0) {
+		left (grid);
+	} else if (r == 1) {
+		right (grid);
+	} else if (r == 2) {
+		up (grid);
+	} else if (r == 3) {
+		down (grid);
+	}
 }
