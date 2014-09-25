@@ -7,7 +7,7 @@ var width = 960;
 var height = 700;
 
 var projection = d3.geo.equirectangular()
-    .scale(200)
+    .scale(150)
     .translate([width / 2, height / 2]);
 
 var svg = d3.select("body").append("svg")
@@ -25,6 +25,6 @@ d3.json(WORLDJSON, function(error, world) {
       .data(topojson.feature(world, world.objects.countries).features)
     .enter().append("path")
       .attr("class", function(d) { return "country_" + d.id; })
-      .attr("d", path);
+      .attr("d", d3.geo.path().projection(projection));
 
 });
