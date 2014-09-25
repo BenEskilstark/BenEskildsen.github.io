@@ -28,9 +28,7 @@ d3.json(WORLDJSON, function(error, world) {
           return "visibility: hidden";
         }
         return 
-          "stroke-width: 1px; 
-          stroke: #141414;
-          fill: #79A881;";
+          "stroke-width: 1px; stroke: #141414; fill: #79A881;";
       });
 
   // hide Antarctica
