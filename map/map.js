@@ -16,18 +16,16 @@ var svg = d3.select("body").append("svg")
 
 d3.json(WORLDJSON, function(error, world) {
   if (error) return console.error(error);
-  
-  svg.append("path")
 
-    svg.selectAll(".country")
-      .data(topojson.feature(world, world.objects.countries).features)
-    .enter().append("path")
-      .attr("class", function(d) { return "country_" + d.id; })
-      .attr("d", d3.geo.path().projection(projection))
-      .attr("style", "stroke-width: 1px");
+  svg.selectAll(".country")
+    .data(topojson.feature(world, world.objects.countries).features)
+  .enter().append("path")
+    .attr("class", function(d) { return "country_" + d.id; })
+    .attr("d", d3.geo.path().projection(projection))
+    .attr("style", "stroke-width: 1px");
 
-    // hide Antarctica
-    svg.selectAll("path").select("#country_10")
-      .attr("style", "visibility: hidden");
+  // hide Antarctica
+  svg.select("#country_10")
+    .attr("style", "visibility: hidden");
 
 });
