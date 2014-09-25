@@ -1,6 +1,7 @@
 svg {
 	background-color: #5A8DC0;
 	border: 2px solid gray;
+	margin: 5px;
 }
 
 
@@ -8,7 +9,7 @@ svg {
 /* default blog stuff */
 body {
 	margin: 0px;
-	padding: 5px;
+	padding: 0px;
 	border: none;
 }
 
