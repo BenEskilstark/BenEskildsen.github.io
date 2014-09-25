@@ -4,7 +4,10 @@ svg {
 	margin: 5px;
 }
 
-
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
 
 /* default blog stuff */
 body {
