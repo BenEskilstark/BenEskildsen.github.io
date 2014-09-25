@@ -4,7 +4,7 @@ var WORLDJSON = "world-50m.json";
 // })
 
 var width = 960;
-var height = 600;
+var height = 525;
 
 var projection = d3.geo.equirectangular()
     .scale(150)
@@ -22,7 +22,10 @@ d3.json(WORLDJSON, function(error, world) {
   .enter().append("path")
     .attr("class", function(d) { return "country_" + d.id; })
     .attr("d", d3.geo.path().projection(projection))
-    .attr("style", "stroke-width: 1px");
+    .attr("style", 
+      "stroke-width: 1px; 
+      stroke: #141414;
+      fill: #79A881;");
 
   // hide Antarctica
   svg.select("#country_10")
