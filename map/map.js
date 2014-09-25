@@ -1,4 +1,5 @@
-var WORLDJSON = "world-50m.json";
+var WORLD50JSON = "world-50m.json";
+var WORLD110JSON = "world-110m.json";
 // d3.json(WORLDJSON, function(error, world){
 //   console.log(world);
 // })
@@ -35,7 +36,7 @@ svg
   .call(zoom)
   .call(zoom.event);
 
-d3.json(WORLDJSON, function(error, world) {
+d3.json(WORLD110JSON, function(error, world) {
   if (error) return console.error(error);
 
   g.selectAll(".country")
