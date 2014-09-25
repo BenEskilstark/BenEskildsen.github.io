@@ -28,6 +28,6 @@ d3.json(WORLDJSON, function(error, world) {
 
     // hide Antarctica
     svg.selectAll("#country_10")
-      .attr("style", "visibility: none");
+      .attr("style", "visibility: hidden");
 
 });
