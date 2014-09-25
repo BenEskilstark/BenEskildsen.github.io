@@ -26,4 +26,8 @@ d3.json(WORLDJSON, function(error, world) {
       .attr("d", d3.geo.path().projection(projection))
       .attr("style", "stroke-width: 1px");
 
+    // hide Antarctica
+    svg.selectAll("#country_10")
+      .attr("style", "visibility: none");
+
 });
