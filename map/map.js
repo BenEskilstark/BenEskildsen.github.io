@@ -18,13 +18,12 @@ d3.json(WORLDJSON, function(error, world) {
   if (error) return console.error(error);
   
   svg.append("path")
-    // .datum(topojson.feature(world, world.objects.countries))
-    // .attr("d", d3.geo.path().projection(projection));
 
     svg.selectAll(".country")
       .data(topojson.feature(world, world.objects.countries).features)
     .enter().append("path")
       .attr("class", function(d) { return "country_" + d.id; })
-      .attr("d", d3.geo.path().projection(projection));
+      .attr("d", d3.geo.path().projection(projection))
+      .attr("style", "stroke-width: 1px");
 
 });
