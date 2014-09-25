@@ -28,7 +28,8 @@ var g = svg.append("g");
 svg.append("rect")
   .attr("class", "overlay")
   .attr("width", width)
-  .attr("height", height);
+  .attr("height", height)
+  .append("g");;
 
 svg
   .call(zoom)
