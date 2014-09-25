@@ -4,7 +4,7 @@ d3.json(WORLDJSON, function(error, world){
 })
 
 var width = 960;
-var height = 700;
+var height = 600;
 
 var projection = d3.geo.equirectangular()
     .scale(150)
