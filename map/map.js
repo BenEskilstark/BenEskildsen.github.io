@@ -1,7 +1,7 @@
 var WORLDJSON = "world-50m.json";
-d3.json(WORLDJSON, function(error, world){
-  console.log(world);
-})
+// d3.json(WORLDJSON, function(error, world){
+//   console.log(world);
+// })
 
 var width = 960;
 var height = 600;
@@ -27,7 +27,7 @@ d3.json(WORLDJSON, function(error, world) {
       .attr("style", "stroke-width: 1px");
 
     // hide Antarctica
-    svg.selectAll("#country_10")
+    svg.selectAll("path").select("#country_10")
       .attr("style", "visibility: hidden");
 
 });
