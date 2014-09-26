@@ -23,11 +23,6 @@ var svg = d3.select("body").append("svg")
 
 var g = svg.append("g");
 
-// svg.append("rect")
-//   .attr("class", "overlay")
-//   .attr("width", width)
-//   .attr("height", height);
-
 svg
   .call(zoom)
   .call(zoom.event);
@@ -51,8 +46,6 @@ d3.json(WORLD110JSON, function(error, world) {
           "visible";
       },
       "stroke-width": "1px"
-       // "stroke": "#141414", 
-       // "fill": "#79A881" 
       });
 
   g.selectAll(".country")
@@ -71,8 +64,6 @@ function zoomed() {
 
 function handleClick (d, i)
 {
-  console.log(d);
-  console.log(i);
   var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
   console.log(mouse);
   d3.select(".selected").classed("selected", false);
