@@ -56,7 +56,7 @@ d3.json(WORLD110JSON, function(error, world) {
       });
 
   g.selectAll(".country")
-    .on("mouseover", handleClick);
+    .on("mouseover", function(d,i) {console.log("pleaaaseeee"); console.log(d); console.log(i);});
 
 });
 
