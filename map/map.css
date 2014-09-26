@@ -4,9 +4,9 @@ svg {
 	margin: 5px;
 }
 
-.country:hover{
-  stroke: #fff;
-  stroke-width: 1.5px;
+.country {
+  fill: #79A881;
+  stroke: #141414;
 }
 
 .selected {

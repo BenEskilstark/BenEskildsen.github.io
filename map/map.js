@@ -50,9 +50,9 @@ d3.json(WORLD110JSON, function(error, world) {
         return 
           "visible";
       },
-      "stroke-width": "1px",
-       "stroke": "#141414", 
-       "fill": "#79A881" 
+      "stroke-width": "1px"
+       // "stroke": "#141414", 
+       // "fill": "#79A881" 
       });
 
   g.selectAll(".country")
