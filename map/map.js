@@ -23,8 +23,9 @@ var path = d3.geo.path().projection(projection);
 var svg = d3.select("body").append("svg")
   .attr("width", width)
   .attr("height", height)
-  .attr("onclick", mapClicked)
   .append("g");
+
+svg.addEventListener("click", handleClick, false);
 
 var g = svg.append("g");
 
@@ -74,7 +75,20 @@ function zoomed() {
     .attr("d", path);
 }
 
-function mapClicked(e) {
-  console.log(e.x);
-  console.log(e.y);
+function handleClick (e)
+{
+  // this code is from 
+  // http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+  var mouseX, mouseY;
+  if(e.offsetX) {
+    mouseX = e.offsetX;
+    mouseY = e.offsetY;
+  }
+  else if(e.layerX) {
+    mouseX = e.layerX;
+    mouseY = e.layerY;
+  }
+  console.log(mouseX);
+  console.log(mouseY);
+
 }
