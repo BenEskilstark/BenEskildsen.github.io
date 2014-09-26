@@ -1,3 +1,4 @@
+/* map */
 svg {
 	background-color: #5A8DC0;
 	border: 2px solid gray;
@@ -11,6 +12,13 @@ svg {
 
 .selected {
   fill: #755888;
+}
+
+/* info */
+.info {
+  position: absolute;
+  left: 975px;
+  top: 25px;
 }
 
 /* default blog stuff */
