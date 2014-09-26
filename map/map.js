@@ -42,9 +42,8 @@ d3.json(WORLD110JSON, function(error, world) {
     .data(topojson.feature(world, world.objects.countries).features)
   .enter().append("path")
     .attr("class", function(d) { return "country" })
-    .attr("id", function(d) {return "country_" + d.id})
+    // .attr("id", function(d) {return "country_" + d.id})
     .attr("d", path)
-    .on("click", handleClick)
     .style({
       "visibility": 
       function(d) {
@@ -59,9 +58,8 @@ d3.json(WORLD110JSON, function(error, world) {
        "fill": "#79A881" 
       });
 
-  // hide Antarctica
-  svg.select("#country_10")
-    .attr("style", "visibility: hidden");
+  g.selectAll(".country")
+    .on("click", handleClick);
 
 });
 
