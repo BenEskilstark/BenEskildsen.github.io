@@ -9,7 +9,7 @@ svg {
   pointer-events: all;
 }
 
-.country :hover {
+.country:hover {
 	fill: red;
 }
 
