@@ -24,8 +24,7 @@ var svg = d3.select("body").append("svg")
   .attr("width", width)
   .attr("height", height);
 
-var g = svg.append("g")
-  .on("click", handleClick);
+var g = svg.append("g");
 
 svg.append("rect")
   .attr("class", "overlay")
@@ -44,6 +43,7 @@ d3.json(WORLD110JSON, function(error, world) {
   .enter().append("path")
     .attr("class", function(d) { return "country_" + d.id; })
     .attr("d", path)
+    .on("click", handleClick)
     .style({
       "visibility": 
       function(d) {
