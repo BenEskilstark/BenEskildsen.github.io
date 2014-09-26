@@ -67,5 +67,38 @@ function handleClick (d, i)
   var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
   d3.select(".selected").classed("selected", false);
   d3.select("#country_" + d.id).classed("selected", true);
-  console.log(d3.select("#country_" + d.id));
+
+  displayInfo(d3.select("#country_" + d.id)));
 }
+
+function displayInfo(selection) {
+  console.log(selection[0]);
+  console.log(selection[0][0]);
+  var iframe = document.getElementById("iframe");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
