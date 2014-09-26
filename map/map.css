@@ -9,8 +9,8 @@ svg {
   pointer-events: all;
 }
 
-.country:hover {
-	fill: red;
+.selected {
+  fill: #ff0000;
 }
 
 /* default blog stuff */
