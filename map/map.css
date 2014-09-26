@@ -9,6 +9,11 @@ svg {
   pointer-events: all;
 }
 
+.country:hover{
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
 .selected {
   fill: #ff0000;
 }
