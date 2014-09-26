@@ -1,7 +1,7 @@
 var WORLD50JSON = "world-50m.json";
 var WORLD110JSON = "world-110m.json";
 
-var width = 900;
+var width = 800;
 var height = 525;
 var scale0 = (width - 1) / 2 / Math.PI;
 
