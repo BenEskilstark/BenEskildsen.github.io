@@ -4,11 +4,6 @@ svg {
 	margin: 5px;
 }
 
-.overlay {
-  fill: none;
-  pointer-events: all;
-}
-
 .country:hover{
   stroke: #fff;
   stroke-width: 1.5px;

@@ -56,7 +56,7 @@ d3.json(WORLD110JSON, function(error, world) {
       });
 
   g.selectAll(".country")
-    .on("mouseover", handleClick);
+    .on("click", handleClick);
 
 });
 
@@ -71,7 +71,8 @@ function zoomed() {
 
 function handleClick (d, i)
 {
-  console.log("handleClick called");
+  console.log(d);
+  console.log(i);
   var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
   console.log(mouse);
   d3.select(".selected").classed("selected", false);
