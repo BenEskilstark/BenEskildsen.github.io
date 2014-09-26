@@ -9,6 +9,10 @@ svg {
   pointer-events: all;
 }
 
+.country:hover {
+	fill: red;
+}
+
 /* default blog stuff */
 body {
 	margin: 0px;

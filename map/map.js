@@ -29,7 +29,8 @@ var g = svg.append("g");
 svg.append("rect")
   .attr("class", "overlay")
   .attr("width", width)
-  .attr("height", height);
+  .attr("height", height)
+  .on("mouseover", handleClick);
 
 svg
   .call(zoom)
@@ -38,12 +39,12 @@ svg
 d3.json(WORLD110JSON, function(error, world) {
   if (error) return console.error(error);
 
-  g.selectAll("path")
+  g.selectAll(".country")
     .data(topojson.feature(world, world.objects.countries).features)
   .enter().append("path")
-    .attr("class", function(d) { return "country_" + d.id; })
+    .attr("class", function(d) { return "country" })
+    .attr("id", function(d) {return "country_" + d.id})
     .attr("d", path)
-    .on("mouseover", handleClick)
     .style({
       "visibility": 
       function(d) {
@@ -73,8 +74,8 @@ function zoomed() {
     .attr("d", path);
 }
 
-function handleClick (d, i)
+function handleClick ()
 {
-  console.log(d);
-  console.log(i);
+  var latlon = projection.invert(d3.mouse(this));
+  console.log(latlon);
 }
