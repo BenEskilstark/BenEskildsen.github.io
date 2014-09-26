@@ -25,7 +25,7 @@ var svg = d3.select("body").append("svg")
   .attr("height", height);
 
 var g = svg.append("g")
-  .on("click", handleClick);;
+  .on("click", handleClick);
 
 svg.append("rect")
   .attr("class", "overlay")
