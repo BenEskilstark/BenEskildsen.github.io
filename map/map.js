@@ -72,9 +72,10 @@ function handleClick (d, i)
 }
 
 function displayInfo(selection) {
-  console.log(selection[0]);
-  console.log(selection[0][0].id);
+  var country = selection[0][0].id;
   var iframe = document.getElementById("iframe");
+
+  iframe.setAttribute("src", country);
 }
 
 
