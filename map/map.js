@@ -44,7 +44,7 @@ d3.json(WORLD110JSON, function(error, world) {
     .attr("class", function(d) { return "country" })
     .attr("id", function(d) {return "country_" + d.id})
     .attr("d", path)
-    .on("click", handleClick);
+    .on("click", handleClick)
     .style({
       "visibility": 
       function(d) {
