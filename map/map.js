@@ -20,7 +20,6 @@ var path = d3.geo.path().projection(projection);
 var svg = d3.select("body").append("svg")
   .attr("width", width)
   .attr("height", height);
-  // .append("g");
 
 var g = svg.append("g");
 
@@ -40,7 +39,7 @@ d3.json(WORLD110JSON, function(error, world) {
     .data(topojson.feature(world, world.objects.countries).features)
   .enter().append("path")
     .attr("class", function(d) { return "country" })
-    // .attr("id", function(d) {return "country_" + d.id})
+    .attr("id", function(d) {return "country_" + d.id})
     .attr("d", path)
     .style({
       "visibility": 
@@ -57,7 +56,7 @@ d3.json(WORLD110JSON, function(error, world) {
       });
 
   g.selectAll(".country")
-    .on("mouseover", function(d,i) {console.log("pleaaaseeee"); console.log(d); console.log(i);});
+    .on("mouseover", handleClick);
 
 });
 
@@ -76,5 +75,5 @@ function handleClick (d, i)
   var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
   console.log(mouse);
   d3.select(".selected").classed("selected", false);
-  d3.select(this).classed("selected", true);
+  d3.select("#country_" + d.id).classed("selected", true);
 }
