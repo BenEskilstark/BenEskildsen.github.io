@@ -29,7 +29,8 @@ var g = svg.append("g");
 svg.append("rect")
   .attr("class", "overlay")
   .attr("width", width)
-  .attr("height", height);
+  .attr("height", height)
+  .on("click", handleClick);
 
 svg
   .call(zoom)
@@ -43,7 +44,6 @@ d3.json(WORLD110JSON, function(error, world) {
   .enter().append("path")
     .attr("class", function(d) { return "country_" + d.id; })
     .attr("d", path)
-    .on("click", handleClick)
     .style({
       "visibility": 
       function(d) {
