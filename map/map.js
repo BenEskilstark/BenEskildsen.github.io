@@ -43,7 +43,7 @@ d3.json(WORLD110JSON, function(error, world) {
   .enter().append("path")
     .attr("class", function(d) { return "country_" + d.id; })
     .attr("d", path)
-    .on("click", handleClick)
+    .on("mouseover", handleClick)
     .style({
       "visibility": 
       function(d) {
