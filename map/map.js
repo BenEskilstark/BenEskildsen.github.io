@@ -68,7 +68,7 @@ function handleClick (d, i)
   d3.select(".selected").classed("selected", false);
   d3.select("#country_" + d.id).classed("selected", true);
 
-  displayInfo(d3.select("#country_" + d.id)));
+  displayInfo(d3.select("#country_" + d.id));
 }
 
 function displayInfo(selection) {
