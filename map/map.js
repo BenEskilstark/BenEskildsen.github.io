@@ -1,7 +1,7 @@
 var WORLD50JSON = "world-50m.json";
 var WORLD110JSON = "world-110m.json";
 
-var width = 960;
+var width = 900;
 var height = 525;
 var scale0 = (width - 1) / 2 / Math.PI;
 
@@ -65,7 +65,7 @@ function zoomed() {
 function handleClick (d, i)
 {
   var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
-  console.log(mouse);
   d3.select(".selected").classed("selected", false);
   d3.select("#country_" + d.id).classed("selected", true);
+  console.log(d3.select("#country_" + d.id));
 }
