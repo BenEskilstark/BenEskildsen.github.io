@@ -21,7 +21,7 @@ svg {
   /*border: 2px solid gray;*/
   float: right;
   margin: 5px;
-  width: 400px;
+  width: 575px;
   margin-right: 85px;
   height: 525px;
 }
@@ -42,7 +42,7 @@ body {
 {
 	margin-left: auto;
 	margin-right: auto;
-	width: 1200px;
+	width: 1500px;
 	color: #555555;
 	font: helvetica;
 	font-size: 14pt;
