@@ -14,17 +14,17 @@
 
 		<div id="maincontent">
 
-			<div>
-				<script src="http://d3js.org/d3.v3.min.js"></script>
-				<script src="http://d3js.org/topojson.v1.min.js"></script>
-				<script src="map.js"></script>
+			<div id="yearBox">
+				1945
 			</div>
 
-			<div class="info">
-				<iframe id="iframe" src="">
-				</iframe>
+			<script src="http://d3js.org/d3.v3.min.js"></script>
+			<script src="http://d3js.org/topojson.v1.min.js"></script>
+			<script src="map.js"></script>
+
+			<div style="width:800px">
+				<input type="range" value="1945" step="1" min="1945" max="1989" id="slider" oninput="updateYear(this.value);">
 			</div>
 		</div>
-
 	</body>
 </html>

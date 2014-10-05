@@ -4,7 +4,6 @@ svg {
 	border: 2px solid gray;
 	margin: 5px;
   width: 800px;
-  float: left;
 }
 
 .country {
@@ -16,21 +15,6 @@ svg {
   fill: #755888;
 }
 
-/* info */
-.info {
-  /*border: 2px solid gray;*/
-  float: right;
-  margin: 5px;
-  width: 575px;
-  margin-right: 85px;
-  height: 525px;
-}
-
-iframe {
-  width: 100%;
-  height: 100%;
-}
-
 /* default blog stuff */
 body {
 	margin: 0px;
@@ -38,14 +22,26 @@ body {
 	border: none;
 }
 
+#slider {
+  width: 805px;
+}
+
+#yearBox {
+  font: 24pt bold;
+  color: black;
+  position: absolute;
+  padding: 8px;
+}
+
 #maincontent 
 {
 	margin-left: auto;
 	margin-right: auto;
-	width: 1500px;
 	color: #555555;
 	font: helvetica;
 	font-size: 14pt;
+  width: 800px;
+  position: relative;
 }
 
 #header {

@@ -4,6 +4,7 @@ var WORLD110JSON = "world-110m.json";
 var width = 800;
 var height = 525;
 var scale0 = (width - 1) / 2 / Math.PI;
+var YEAR = 0;
 
 var projection = d3.geo.equirectangular()
     .scale(150)
@@ -17,7 +18,7 @@ var zoom = d3.behavior.zoom()
 
 var path = d3.geo.path().projection(projection);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("body").select("#maincontent").append("svg")
   .attr("width", width)
   .attr("height", height);
 
@@ -62,8 +63,7 @@ function zoomed() {
     .attr("d", path);
 }
 
-function handleClick (d, i)
-{
+function handleClick (d, i) {
   var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
   d3.select(".selected").classed("selected", false);
   d3.select("#country_" + d.id).classed("selected", true);
@@ -71,11 +71,9 @@ function handleClick (d, i)
   displayInfo(d3.select("#country_" + d.id));
 }
 
-function displayInfo(selection) {
-  var country = selection[0][0].id;
-  var iframe = document.getElementById("iframe");
-
-  iframe.setAttribute("src", country);
+function updateYear(year) {
+  YEAR = year;
+  d3.select("#yearBox").html(year);
 }
 
 
