@@ -1,10 +1,12 @@
 var WORLD50JSON = "world-50m.json";
 var WORLD110JSON = "world-110m.json";
+var COUNTRYCODESJSON = "countryCodes.json";
 
 var width = 800;
 var height = 525;
 var scale0 = (width - 1) / 2 / Math.PI;
 var YEAR = 0;
+var countryCodes = {};
 
 var projection = d3.geo.equirectangular()
     .scale(150)
@@ -54,6 +56,14 @@ d3.json(WORLD110JSON, function(error, world) {
 
 });
 
+// unpack country codes:
+d3.json(COUNTRYCODESJSON, function(error, json) {
+  if (error) return console.error(error);
+
+  countryCodes = json;
+  console.log(countryCodes);
+});
+
 function zoomed() {
   projection
     .translate(zoom.translate())
@@ -74,6 +84,11 @@ function handleClick (d, i) {
 function updateYear(year) {
   YEAR = year;
   d3.select("#yearBox").html(year);
+}
+
+function Event(year, countries) {
+  this.year = year;
+  this.countries = countries;
 }
 
 
