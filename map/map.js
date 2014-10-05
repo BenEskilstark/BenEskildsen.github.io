@@ -111,6 +111,7 @@ function Event(year, countries, information) {
 function groupHighlight(codes) {
   d3.select(".selected").classed("selected", false);
   for (var i = 0, d; d = codes[i]; i++) {
+    console.log(d.id);
     d3.select("#country_" + d.id).classed("selected", true);
   }
 }
