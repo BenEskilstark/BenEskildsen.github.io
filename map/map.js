@@ -81,6 +81,23 @@ function handleClick (d, i) {
   displayInfo(d3.select("#country_" + d.id));
 }
 
+function countryToCode(country) {
+  for (var i = 0, obj; obj = countryCodes[i]; i++) {
+    if (obj.name === country) {
+      return obj.countryCode;
+    }
+  }
+  return "";
+}
+function countryCodeToName(code) {
+  for (var i = 0, obj; obj = countryCodes[i]; i++) {
+    if (obj.countryCode === code) {
+      return obj.name;
+    }
+  }
+  return "";
+}
+
 function updateYear(year) {
   YEAR = year;
   d3.select("#yearBox").html(year);
