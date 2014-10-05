@@ -77,8 +77,6 @@ function handleClick (d, i) {
   var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
   d3.select(".selected").classed("selected", false);
   d3.select("#country_" + d.id).classed("selected", true);
-
-  displayInfo(d3.select("#country_" + d.id));
 }
 
 function countryToCode(country) {
@@ -89,6 +87,7 @@ function countryToCode(country) {
   }
   return "";
 }
+
 function countryCodeToName(code) {
   for (var i = 0, obj; obj = countryCodes[i]; i++) {
     if (obj.countryCode === code) {
@@ -103,11 +102,18 @@ function updateYear(year) {
   d3.select("#yearBox").html(year);
 }
 
-function Event(year, countries) {
+function Event(year, countries, information) {
   this.year = year;
-  this.countries = countries;
+  this.countries = countries; // list of country names
+  this.information = "";
 }
 
+function groupHighlight(codes) {
+  d3.select(".selected").classed("selected", false);
+  for (var i = 0, d; d = codes[i]; i++) {
+    d3.select("#country_" + d.id).classed("selected", true);
+  }
+}
 
 
 
