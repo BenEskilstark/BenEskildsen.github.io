@@ -108,13 +108,14 @@ function Event(year, countries, information) {
   this.information = "";
 }
 
-function groupHighlight(codes) {
-  d3.select(".selected").classed("selected", false);
+function groupHighlight(codes, color) {
   for (var i = 0, d; d = codes[i]; i++) {
-    d3.select("#country_" + d).classed("selected", true);
+    d3.select("#country_" + d).style("fill", color);
   }
 }
-
+function groupUnHighlight(codes) {
+  groupHighlight(codes, "#79A881");
+}
 
 
 
