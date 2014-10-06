@@ -119,6 +119,10 @@ function updateYear(year) {
   timeline(year);
 }
 
+function updateInfo(info) {
+  d3.select("#infoBox").html(info);
+}
+
 function Event(name, year, countries, color, information) {
   this.name = name;
   this.year = year;
@@ -166,7 +170,7 @@ var EVENTS = [
   new Event(
     "Warsaw Pact formed",
     "1955",
-    ["Russia",
+    ["Russian Federation",
     "Bulgaria",
     "Hungary",
     "Poland",
@@ -180,7 +184,9 @@ var EVENTS = [
 function timeline(year) {
   for (i = 0, event; event = EVENTS[i]; i++) {
     if (year == event.year) {
-      console.log(event.name);
+      updateInfo(event.name);
+    }
+    if (year >= event.year) {
       groupHighlight(countriesToCodes(event.countries), event.color);
     } else {
       groupUnHighlight(countriesToCodes(event.countries));
