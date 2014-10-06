@@ -59,7 +59,7 @@ d3.json(WORLD110JSON, function(error, world) {
     .on("mousemove", function(d, i) {
       var mouse = d3.mouse(svg.node()).map(function(d){return parseInt(d);});
       tooltip.classed("hidden", false)
-        .attr("style", "left:"+(mouse[0]+5)+"px;top:"+(mouse[1]+10)+"px")
+        .attr("style", "left:"+(mouse[0]+5)+"px;top:"+(mouse[1]+20)+"px")
         .html(countryCodeToName(""+d.id))
     })
     .on("mouseout", function(d, i) {
