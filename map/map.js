@@ -85,6 +85,7 @@ infoWindow.append("rect")
         .attr("width", width/2)
         .attr("x", width/2);
         SHOWINGINFO = true;
+        timeline(YEAR);
     } else {
       infoWindow.selectAll("text").remove();
       rect.transition().duration(500)
@@ -194,7 +195,7 @@ var EVENTS = [
     "Canada",
     "Belgium"], 
     "#2412AA",
-    ""
+    "NATO is created"
   ),
   new Event(
     "NATO adds Greece and Turkey",
@@ -202,7 +203,7 @@ var EVENTS = [
     ["Greece",
     "Turkey"],
     "#2412AA",
-    ""
+    "Turkey and Greece added to NATO in solidarity with their anti-communist movements"
   ),
   new Event(
     "Warsaw Pact formed",
