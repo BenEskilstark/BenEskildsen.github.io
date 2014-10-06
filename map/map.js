@@ -215,7 +215,7 @@ var EVENTS = [
     "Romania",
     "Albania"],
     "#CC3131",
-    "Soviet Union makes Warsaw Pact in respone to West Germany\nbeing added to NATO"
+    "Soviet Union makes Warsaw Pact in respone to West Germany being added to NATO"
   )
 ];
 
@@ -234,6 +234,7 @@ function timeline(year) {
           .attr("height", height)
           .attr("x", width/2 + 5)
           .attr("y", 30)
+          .transition().duration(500)
           .html(event.information);
       } 
     } else {
