@@ -2,8 +2,8 @@ var WORLD50JSON = "world-50m.json";
 var WORLD110JSON = "world-110m.json";
 var COUNTRYCODESJSON = "countryCodes.json";
 
-var width = 800;
-var height = 525;
+var width = 1000;
+var height = 625;
 var scale0 = (width - 1) / 2 / Math.PI;
 var YEAR = 0;
 var countryCodes = {};

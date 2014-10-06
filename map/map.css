@@ -3,7 +3,7 @@ svg {
 	background-color: #5A8DC0;
 	border: 2px solid gray;
 	padding: 5px;
-  width: 800px;
+  width: 1000px;
 }
 
 .country {
@@ -23,7 +23,7 @@ body {
 }
 
 #slider {
-  width: 805px;
+  width: 1005px;
 }
 
 #yearBox {
@@ -38,7 +38,7 @@ body {
   color: white;
   position: absolute;
   padding-left: 8px;
-  padding-top: 498px;
+  padding-top: 598px;
 }
 
 h1 {
@@ -54,7 +54,7 @@ h1 {
 	color: #555555;
 	font: helvetica;
 	font-size: 14pt;
-  width: 800px;
+  width: 1000px;
   position: relative;
 }
 
