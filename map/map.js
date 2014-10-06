@@ -59,9 +59,7 @@ d3.json(WORLD110JSON, function(error, world) {
 // unpack country codes:
 d3.json(COUNTRYCODESJSON, function(error, json) {
   if (error) return console.error(error);
-
   countryCodes = json;
-  console.log(countryCodes);
 });
 
 function zoomed() {
@@ -162,7 +160,7 @@ var EVENTS = [
 
 function timeline(year) {
   for (i = 0, event; event = EVENTS[i]; i++) {
-    if (event.year >= year) {
+    if (year >= event.year) {
       groupHighlight(countriesToCodes(event.countries), event.color);
     } else {
       groupUnHighlight(countriesToCodes(event.countries));
