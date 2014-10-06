@@ -68,6 +68,13 @@ d3.json(WORLD110JSON, function(error, world) {
 
 });
 
+// display info window:
+svg.append("rect")
+  .attr("x", width-50)
+  .attr("width","50")
+  .attr("height", height)
+  .attr("style", "fill:#ffffff");
+
 // unpack country codes:
 d3.json(COUNTRYCODESJSON, function(error, json) {
   if (error) return console.error(error);
@@ -197,9 +204,7 @@ function timeline(year) {
   for (i = 0, event; event = EVENTS[i]; i++) {
     if (year == event.year) {
       updateInfo(event.name);
-    }
-    if (year >= event.year) {
-      groupHighlight(countriesToCodes(event.countries), event.color);
+      groupHighlight(countriesToCodes(event.countries), event.color); 
     } else {
       groupUnHighlight(countriesToCodes(event.countries));
     }
