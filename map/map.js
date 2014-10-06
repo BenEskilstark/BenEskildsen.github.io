@@ -54,7 +54,7 @@ d3.json(WORLD110JSON, function(error, world) {
       });
 
   g.selectAll(".country")
-    .on("click", handleClick)
+    // .on("click", handleClick)
     .on("mousemove", function(d, i) {
       var mouse = d3.mouse(svg.node()).map(function(d){return parseInt(d);});
       tooltip.classed("hidden", false)
