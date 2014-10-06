@@ -175,12 +175,13 @@ var EVENTS = [
     "Czech Republic"],
     "#CC3131",
     ""
-  ),
+  )
 ];
 
 function timeline(year) {
   for (i = 0, event; event = EVENTS[i]; i++) {
     if (year >= event.year) {
+      console.log(event.name);
       groupHighlight(countriesToCodes(event.countries), event.color);
     } else {
       groupUnHighlight(countriesToCodes(event.countries));
