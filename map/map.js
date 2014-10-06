@@ -151,11 +151,31 @@ var EVENTS = [
     "France",
     "Denmark",
     "Canada",
-    "Belgium"
-    ], 
+    "Belgium"], 
     "#2412AA",
     ""
-  )
+  ),
+  new Event(
+    "NATO adds Greece and Turkey",
+    "1952",
+    ["Greece",
+    "Turkey"],
+    "#2412AA",
+    ""
+  ),
+  new Event(
+    "Warsaw Pact formed",
+    "1955",
+    ["Russia",
+    "Bulgaria",
+    "Hungary",
+    "Poland",
+    "Romania",
+    "Albania",
+    "Czech Republic"],
+    "#CC3131",
+    ""
+  ),
 ];
 
 function timeline(year) {
