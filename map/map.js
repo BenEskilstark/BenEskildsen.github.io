@@ -75,15 +75,16 @@ svg.append("rect")
   .attr("width","50")
   .attr("height", height)
   .attr("style", "fill:#F8F0E5; opacity:0.85")
-  .on("click", function(d, i) {
+  .on("click", function() {
     var rect = d3.select("#infoRect")
-      if(rect.width === 50) {
-        rect.transition().duration(500)
-          .attr("width", width/2)
-          .attr("x", width/2)
-      } else {
+    console.log(rect);
+    // if(rect.width === 50) {
+      rect.transition().duration(500)
+        .attr("width", width/2)
+        .attr("x", width/2)
+    // } else {
 
-      }
+    // }
   });
 
 // unpack country codes:
