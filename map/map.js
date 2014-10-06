@@ -69,22 +69,28 @@ d3.json(WORLD110JSON, function(error, world) {
 });
 
 // display info window:
+var SHOWINGINFO = false;
+var rectWidth = 50;
 svg.append("rect")
   .attr("id", "infoRect")
-  .attr("x", width-50)
-  .attr("width","50")
+  .attr("x", width - rectWidth)
+  .attr("width", "" + rectWidth)
   .attr("height", height)
   .attr("style", "fill:#F8F0E5; opacity:0.85")
   .on("click", function() {
     var rect = d3.select("#infoRect")
     console.log(rect);
-    // if(rect.width === 50) {
+    if(!SHOWINGINFO) {
       rect.transition().duration(500)
         .attr("width", width/2)
-        .attr("x", width/2)
-    // } else {
-
-    // }
+        .attr("x", width/2);
+        SHOWINGINFO = true;
+    } else {
+      rect.transition().duration(500)
+        .attr("width", rectWidth)
+        .attr("x", width - rectWidth);
+      SHOWINGINFO = false;
+    }
   });
 
 // unpack country codes:
