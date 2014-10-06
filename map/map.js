@@ -166,7 +166,7 @@ function Event(name, year, countries, color, information) {
   this.year = year;
   this.countries = countries; // list of country names
   this.color = color;
-  this.information = "";
+  this.information = information;
 }
 
 function groupHighlight(codes, color) {
@@ -220,6 +220,9 @@ var EVENTS = [
 ];
 
 function timeline(year) {
+  if (SHOWINGINFO) {
+    infoWindow.selectAll("text").remove();
+  }
   updateInfo("");
   for (i = 0, event; event = EVENTS[i]; i++) {
     if (year == event.year) {
