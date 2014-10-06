@@ -70,12 +70,20 @@ d3.json(WORLD110JSON, function(error, world) {
 
 // display info window:
 svg.append("rect")
+  .attr("id", "infoRect")
   .attr("x", width-50)
   .attr("width","50")
   .attr("height", height)
   .attr("style", "fill:#F8F0E5; opacity:0.85")
   .on("click", function(d, i) {
-    console.log(d,i);
+    var rect = d3.select("#infoRect")
+      if(rect.width === 50) {
+        rect.transition().duration(500)
+          .attr("width", width/2)
+          .attr("x", width/2)
+      } else {
+
+      }
   });
 
 // unpack country codes:
