@@ -79,7 +79,6 @@ svg.append("rect")
   .attr("style", "fill:#F8F0E5; opacity:0.85")
   .on("click", function() {
     var rect = d3.select("#infoRect")
-    console.log(rect);
     if(!SHOWINGINFO) {
       rect.transition().duration(500)
         .attr("width", width/2)
@@ -88,7 +87,8 @@ svg.append("rect")
     } else {
       rect.transition().duration(500)
         .attr("width", rectWidth)
-        .attr("x", width - rectWidth);
+        .attr("x", width - rectWidth)
+        .html("");
       SHOWINGINFO = false;
     }
   });
@@ -213,7 +213,7 @@ var EVENTS = [
     "Romania",
     "Albania"],
     "#CC3131",
-    ""
+    "Soviet Union makes Warsaw Pact in respone to West Germany\nbeing added to NATO"
   )
 ];
 
@@ -222,7 +222,11 @@ function timeline(year) {
   for (i = 0, event; event = EVENTS[i]; i++) {
     if (year == event.year) {
       updateInfo(event.name);
-      groupHighlight(countriesToCodes(event.countries), event.color); 
+      groupHighlight(countriesToCodes(event.countries), event.color);
+      if (SHOWINGINFO) {
+        var rect = d3.select("#infoRect");
+        rect.html(event.info);
+      } 
     } else {
       groupUnHighlight(countriesToCodes(event.countries));
     }
