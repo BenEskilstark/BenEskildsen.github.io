@@ -26,6 +26,8 @@ var svg = d3.select("body").select("#maincontent").append("svg")
 
 var g = svg.append("g");
 
+var tooltip = svg.append("div").attr("class", "tooltip hidden");
+
 svg
   .call(zoom)
   .call(zoom.event);
@@ -52,7 +54,16 @@ d3.json(WORLD110JSON, function(error, world) {
       });
 
   g.selectAll(".country")
-    .on("click", handleClick);
+    .on("click", handleClick)
+    .on("mousemove", function(d, i) {
+      var mouse = d3.mouse(svg.node()).map(function(d){return parseInt(d);});
+      tooltip.classed("hidden", false)
+        .attr("style", "left:"+(mouse[0]+offsetL)+"px;top:"+(mouse[1]+offsetT)+"px")
+        .html(countryCodeToName(""+d.id))
+    })
+    .on("mouseout", function(d, i) {
+      tooltip.classed("hidden", true);
+    });
 
 });
 
@@ -72,11 +83,8 @@ function zoomed() {
 }
 
 function handleClick (d, i) {
-  var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
   d3.select(".selected").classed("selected", false);
   d3.select("#country_" + d.id).classed("selected", true);
-
-  console.log(mouse);
 }
 
 ////////////////////////////////////////////////////////////////////////////
