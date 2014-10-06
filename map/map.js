@@ -79,6 +79,9 @@ function handleClick (d, i) {
   d3.select("#country_" + d.id).classed("selected", true);
 }
 
+////////////////////////////////////////////////////////////////////////////
+// conversion between country names and codes
+
 function countryToCode(country) {
   for (var i = 0, obj; obj = countryCodes[i]; i++) {
     if (obj.name === country) {
@@ -87,7 +90,6 @@ function countryToCode(country) {
   }
   return "";
 }
-
 function countryCodeToName(code) {
   for (var i = 0, obj; obj = countryCodes[i]; i++) {
     if (obj.countryCode === code) {
@@ -97,12 +99,30 @@ function countryCodeToName(code) {
   return "";
 }
 
+function countriesToCodes(countries) {
+  var codes = [];
+  for (var i = 0, country; country = countries[i]; i++) {
+    codes.push(countryToCode(country));
+  }
+  return codes;
+}
+function countryCodesToNames(codes) {
+  var names = [];
+  for (var i = 0, code; code = codes[i]; i++) {
+    names.push(countryCodeToName(code));
+  }
+  return names;
+}
+////////////////////////////////////////////////////////////////////////////
+
 function updateYear(year) {
   YEAR = year;
   d3.select("#yearBox").html(year);
+  timeline(year);
 }
 
-function Event(year, countries, information) {
+function Event(name, year, countries, information) {
+  this.name = name;
   this.year = year;
   this.countries = countries; // list of country names
   this.information = "";
@@ -117,6 +137,35 @@ function groupUnHighlight(codes) {
   groupHighlight(codes, "#79A881");
 }
 
+var EVENTS = [
+  new Event(
+    "NATO formed", 
+    "1949", 
+    ["United States",
+    "United Kingdom",
+    "Portugal",
+    "Norway",
+    "Netherlands",
+    "Luxembourg",
+    "Italy",
+    "Iceland",
+    "France",
+    "Denmark",
+    "Canada",
+    "Belgium"
+    ], ""
+  )
+];
+
+function timeline(year) {
+  for (i = 0, event; event = EVENTS[i]; i++) {
+    if (event.year >= year) {
+      groupHighlight(countriesToCodes(event.countries));
+    } else {
+      groupUnHighlight(countriesToCodes(event.countries));
+    }
+  }
+}
 
 
 
