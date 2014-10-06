@@ -230,7 +230,6 @@ function timeline(year) {
       groupHighlight(countriesToCodes(event.countries), event.color);
       if (SHOWINGINFO) {
         infoWindow.append("text")
-          .transition().duration(500)
           .attr("width", width/2)
           .attr("height", height)
           .attr("x", width/2 + 5)
