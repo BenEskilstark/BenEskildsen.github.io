@@ -26,7 +26,8 @@ var svg = d3.select("body").select("#maincontent").append("svg")
 
 var g = svg.append("g");
 
-var tooltip = svg.append("div").attr("class", "tooltip hidden");
+var tooltip = d3.select("body").select("#maincontent")
+  .append("div").attr("class", "tooltip hidden");
 
 svg
   .call(zoom)
