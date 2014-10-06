@@ -86,7 +86,7 @@ infoWindow.append("rect")
         .attr("x", width/2);
         SHOWINGINFO = true;
     } else {
-      infoWindow.select("text").remove();
+      infoWindow.selectAll("text").remove();
       rect.transition().duration(500)
         .attr("width", rectWidth)
         .attr("x", width - rectWidth);
@@ -226,7 +226,7 @@ function timeline(year) {
       groupHighlight(countriesToCodes(event.countries), event.color);
       if (SHOWINGINFO) {
         infoWindow.append("text")
-          .html(event.info);
+          .html(event.information);
       } 
     } else {
       groupUnHighlight(countriesToCodes(event.countries));
