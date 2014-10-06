@@ -15,6 +15,11 @@ svg {
   stroke: #141414;
 }
 
+.country:hover {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
 div.tooltip {
   color: #222; 
   background: #fff; 
