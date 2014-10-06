@@ -71,7 +71,8 @@ d3.json(WORLD110JSON, function(error, world) {
 // display info window:
 var SHOWINGINFO = false;
 var rectWidth = 50;
-svg.append("rect")
+var infoWindow = svg.append("g");
+infoWindow.append("rect")
   .attr("id", "infoRect")
   .attr("x", width - rectWidth)
   .attr("width", "" + rectWidth)
@@ -85,10 +86,10 @@ svg.append("rect")
         .attr("x", width/2);
         SHOWINGINFO = true;
     } else {
+      infoWindow.select("text").remove();
       rect.transition().duration(500)
         .attr("width", rectWidth)
-        .attr("x", width - rectWidth)
-        .html("");
+        .attr("x", width - rectWidth);
       SHOWINGINFO = false;
     }
   });
@@ -224,8 +225,8 @@ function timeline(year) {
       updateInfo(event.name);
       groupHighlight(countriesToCodes(event.countries), event.color);
       if (SHOWINGINFO) {
-        var rect = d3.select("#infoRect");
-        rect.html(event.info);
+        infoWindow.append("text")
+          .html(event.info);
       } 
     } else {
       groupUnHighlight(countriesToCodes(event.countries));
