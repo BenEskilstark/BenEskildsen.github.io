@@ -121,10 +121,11 @@ function updateYear(year) {
   timeline(year);
 }
 
-function Event(name, year, countries, information) {
+function Event(name, year, countries, color, information) {
   this.name = name;
   this.year = year;
   this.countries = countries; // list of country names
+  this.color = color;
   this.information = "";
 }
 
@@ -153,14 +154,16 @@ var EVENTS = [
     "Denmark",
     "Canada",
     "Belgium"
-    ], ""
+    ], 
+    "#2412AA",
+    ""
   )
 ];
 
 function timeline(year) {
   for (i = 0, event; event = EVENTS[i]; i++) {
     if (event.year >= year) {
-      groupHighlight(countriesToCodes(event.countries));
+      groupHighlight(countriesToCodes(event.countries), event.color);
     } else {
       groupUnHighlight(countriesToCodes(event.countries));
     }
