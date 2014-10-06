@@ -182,8 +182,8 @@ var EVENTS = [
 ];
 
 function timeline(year) {
+  updateInfo("");
   for (i = 0, event; event = EVENTS[i]; i++) {
-    updateInfo("");
     if (year == event.year) {
       updateInfo(event.name);
     }
