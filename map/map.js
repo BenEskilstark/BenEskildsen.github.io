@@ -73,7 +73,10 @@ svg.append("rect")
   .attr("x", width-50)
   .attr("width","50")
   .attr("height", height)
-  .attr("style", "fill:#ffffff");
+  .attr("style", "fill:#F8F0E5; opacity:0.85")
+  .on("click", function(d, i) {
+    console.log(d,i);
+  });
 
 // unpack country codes:
 d3.json(COUNTRYCODESJSON, function(error, json) {
