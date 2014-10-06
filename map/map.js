@@ -37,7 +37,7 @@ d3.json(WORLD110JSON, function(error, world) {
 
   g.selectAll(".country")
     .data(topojson.feature(world, world.objects.countries).features)
-  .enter().append("path")
+  .enter().insert("path")
     .attr("class", function(d) { return "country" })
     .attr("id", function(d) {return "country_" + d.id})
     .attr("d", path)
