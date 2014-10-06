@@ -232,7 +232,8 @@ function timeline(year) {
         infoWindow.append("text")
           .attr("width", width/2)
           .attr("height", height)
-          .attr("x", width/2)
+          .attr("x", width/2 + 5)
+          .attr("y", 30)
           .html(event.information);
       } 
     } else {
