@@ -75,6 +75,8 @@ function handleClick (d, i) {
   var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
   d3.select(".selected").classed("selected", false);
   d3.select("#country_" + d.id).classed("selected", true);
+
+  console.log(mouse);
 }
 
 ////////////////////////////////////////////////////////////////////////////
