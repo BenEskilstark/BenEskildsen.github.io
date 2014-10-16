@@ -95,6 +95,10 @@ function handleClick (d, i) {
   var countryCenter = [mouse[0], mouse[1]];
 
   svg.selectAll("circle")
+    .data([])
+  .exit().remove();
+
+  svg.selectAll("circle")
     .data(persons)
   .enter().append("circle")
     .attr("id", function(d, i) {return d.name;})
@@ -112,9 +116,7 @@ function handleClick (d, i) {
     .attr("r", 40);
 
 
-  svg.selectAll("circle")
-    .data(persons)
-  .exit().remove();
+  
 
 }
 
