@@ -148,8 +148,8 @@ function handleClick (d, i) {
         .attr("x", 10)
         .attr("y", 10);
       d3.select("#circle_" + i).transition().duration(500)
-        .attr("cx", 24)
-        .attr("cy", 24);
+        .attr("cx", 47)
+        .attr("cy", 40);
     })
     .attr("id", function(d, i) {return "image_" + i;})
     .attr("xlink:href", function(d, i) {return d.image;})
