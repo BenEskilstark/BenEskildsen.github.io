@@ -108,7 +108,7 @@ function handleClick (d, i) {
     })
     .attr("cy", function(d, i) {
       return countryCenter[1] + i * 50 + 50;
-    });
+    })
     .attr("r", 40)
 
 
