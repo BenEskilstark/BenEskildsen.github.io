@@ -32,7 +32,7 @@ svg.append("defs").append("svg:clipPath")
     .attr("id", "clip-circle")
     .attr("cx", 0)
     .attr("cy", 0)
-    .attr("r", 0);
+    .attr("r", 40);
 
 var clipPath = svg.append("g")
   .attr("clip-path", "url(#clip)");
