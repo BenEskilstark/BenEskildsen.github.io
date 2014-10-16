@@ -91,12 +91,15 @@ function zoomed() {
     .attr("d", path);
 
   // adjust images
-  clipPath.selectAll("circle")
-    .translate(zoom.translate())
-    .scale(zoom.scale());
-  imagePath.selectAll("image")
-    .translate(zoom.translate())
-    .scale(zoom.scale());
+  // clipPath.selectAll("circle")
+  //   .attr("cx", function() {
+  //     return projection
+  //       .translate(zoom.translate())
+  //       .scale(zoom.scale());
+  //   })
+  // imagePath.selectAll("image")
+  //   .translate(zoom.translate())
+  //   .scale(zoom.scale());
 }
 
 
