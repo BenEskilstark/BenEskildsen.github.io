@@ -283,7 +283,7 @@ function displayInfo(person) {
     .style("height", "2px")
     .transition().delay(500).duration(500)
       .style("width", "" + (width - 2*xpos) + "px")
-      .style("height", "" + (height - ypos) + "px");
+      .style("height", "" + (height - ypos/2) + "px");
 
   infobox
     .append("center").append("h1").html(person.name);
@@ -292,7 +292,7 @@ function displayInfo(person) {
     infobox
       .append("iframe")
       .attr("src", pdf)
-      .attr("width", (width/2 - 10) + "px")
+      .attr("width", (width/2 - 20) + "px")
       .attr("height", "" + (height - ypos - 10) + "px")
       .style("left", "" + (i * 410 + 10) + "px");
   }
