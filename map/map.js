@@ -199,6 +199,13 @@ function countryCodeToPersons(code) {
   }
   return persons;
 }
+function PersonstoCountryCodes(people) {
+  var codes = [];
+  for (var i = 0, person; person = people[i]; i++) {
+    codes.push(countryToCode(person.country));
+  }
+  return codes;
+}
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -207,6 +214,15 @@ function Person(name, country, image, information) {
   this.country = country;
   this.image = image;
   this.information = information
+}
+
+function groupStyle(codes, attr, style) {
+  for (var i = 0, d; d = codes[i]; i++) {
+    d3.select("#country_" + d).attr(attr, style);
+  }
+}
+function groupUnHighlight(codes) {
+  groupHighlight(codes, "#79A881");
 }
 
 var PEOPLE = [
@@ -219,14 +235,7 @@ var PEOPLE = [
   new Person("Julius Nyerere", "Tanzania", "nyerere.jpeg", "")
 ];
 
-function groupHighlight(codes, color) {
-  for (var i = 0, d; d = codes[i]; i++) {
-    d3.select("#country_" + d).style("fill", color);
-  }
-}
-function groupUnHighlight(codes) {
-  groupHighlight(codes, "#79A881");
-}
+groupStyle(PersonstoCountryCodes(PEOPLE), "style", "opacity: 0.75")
 
 
 
