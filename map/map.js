@@ -149,7 +149,7 @@ function handleClick (d, i) {
     .data(persons)
   .enter().append("image")
     .on("click", function(d, i) {
-      d3.select("image_" + i).transition().duration(500)
+      d3.select("#image_" + i).transition().duration(500)
         .attr("x", 10)
         .attr("y", 10);
     })
