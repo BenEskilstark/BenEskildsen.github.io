@@ -121,8 +121,8 @@ function handleClick (d, i) {
   clipPath.selectAll("circle")
     .data(persons)
   .enter().append("circle")
-    .on("click", function(d,i) {
-      d3.select("#circle_" + i).transition().duration(500)
+    .on("click", function(d, i) {
+      clipPath.select("#circle_" + i).transition().duration(500)
         .attr("cx", 10)
         .attr("cy", 10);
     })
