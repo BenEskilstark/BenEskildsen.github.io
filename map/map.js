@@ -147,6 +147,7 @@ function handleClick (d, i) {
       // remove possible old info box:
       if(d3.select("#image_" + i).attr("x") === 10){
         d3.select(".infobox").remove();
+        return;
       }
       d3.select("#image_" + i).transition().duration(500)
         .attr("x", 10)
