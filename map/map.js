@@ -101,8 +101,12 @@ function handleClick (d, i) {
 
   // setting up clipPaths
   clipPath.selectAll("circle")
+    .data([])
+  .exit().remove();
+
+  clipPath.selectAll("circle")
     .data(persons)
-  .append("circle")
+  .enter().append("circle")
     .attr("id", function(d, i) {return "circle_" + i;})
     .attr("cx", countryCenter[0])
     .attr("cy", countryCenter[1])
