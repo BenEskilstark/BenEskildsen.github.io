@@ -236,7 +236,8 @@ var PEOPLE = [
   new Person("Tito", "Slovenia", "tito.jpeg", ""),
   new Person("Tito", "Serbia", "tito.jpeg", ""),
   new Person("Tito", "Montenegro", "tito.jpeg", ""),
-  new Person("Tito", "Bosnia and Herzegovina", "tito.jpeg", "")
+  new Person("Tito", "Bosnia and Herzegovina", "tito.jpeg", ""),
+  new Person("Nehru", "India", "nehru.jpeg", "")
 ];
 
 
