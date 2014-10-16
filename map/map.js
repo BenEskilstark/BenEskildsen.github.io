@@ -144,6 +144,8 @@ function handleClick (d, i) {
     .data(persons)
   .enter().append("image")
     .on("click", function(d, i) {
+      // remove possible old info box:
+      d3.select(".infobox").remove();
       d3.select("#image_" + i).transition().duration(500)
         .attr("x", 10)
         .attr("y", 10);
@@ -268,7 +270,7 @@ function displayInfo(person) {
     .style("top", "144px")
     .style("width", "2px")
     .style("height", "2px")
-    .transition().duration(500)
+    .transition().delay(500).duration(500)
       .style("width", "" + (width - 160) + "px")
       .style("height", "" + (height - 144) + "px");
 }

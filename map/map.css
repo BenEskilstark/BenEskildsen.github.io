@@ -17,7 +17,7 @@ svg {
 }
 
 .infobox {
-  fill: #F8F0E5;
+  background-color: #F8F0E5;
   opacity: 0.85;
   border: 2px solid gray;
   position: absolute;
