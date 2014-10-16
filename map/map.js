@@ -151,8 +151,8 @@ function handleClick (d, i) {
         return;
       }
       d3.select("#image_" + i).transition().duration(500)
-        .attr("x", 1)
-        .attr("y", 1);
+        .attr("x", 0)
+        .attr("y", 0);
       d3.select("#circle_" + i).transition().duration(500)
         .attr("cx", 38)
         .attr("cy", 31);
