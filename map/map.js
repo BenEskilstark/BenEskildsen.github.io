@@ -292,7 +292,7 @@ function displayInfo(person) {
       .attr("src", pdf)
       .attr("width", "400px")
       .attr("height", "" + (height - 180) + "px")
-      .attr("left", "" + (i * 405) + "px");
+      .style("left", "" + (i * 405) + "px");
   }
 }
 
