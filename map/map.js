@@ -116,6 +116,7 @@ function countryToCode(country) {
   return "";
 }
 function countryCodeToName(code) {
+  code = ""+code;
   for (var i = 0, obj; obj = countryCodes[i]; i++) {
     if (obj.countryCode === code) {
       return obj.name;
