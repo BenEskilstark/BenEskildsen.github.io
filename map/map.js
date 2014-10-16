@@ -273,27 +273,27 @@ var PEOPLE = [
 function displayInfo(person) {
   console.log("displaying info on: " + person.name);
   var infobox = d3.select("body").select("#maincontent").append("div");
+  var xpos = 40;
+  var ypos = 150;
   infobox
     .attr("class", "infobox")
-    .style("left", "80px")
-    .style("top", "144px")
+    .style("left", xpos + "px")
+    .style("top", ypos + "px")
     .style("width", "2px")
     .style("height", "2px")
     .transition().delay(500).duration(500)
-      .style("width", "" + (width - 160) + "px")
-      .style("height", "" + (height - 144) + "px");
+      .style("width", "" + (width - 2*xpos) + "px")
+      .style("height", "" + (height - ypos) + "px");
 
   infobox
     .append("center").append("h1").html(person.name);
 
   for(var i = 0, pdf; pdf = person.information[i]; i++) {
-    var a = infobox
-      .append("a")
-        .attr("href", pdf);
-    a.append("iframe")
+    infobox
+      .append("iframe")
       .attr("src", pdf)
-      .attr("width", "400px")
-      .attr("height", "" + (height - 180) + "px")
+      .attr("width", (width/2 - 10) + "px")
+      .attr("height", "" + (height - ypos - 10) + "px")
       .style("left", "" + (i * 410 + 10) + "px");
   }
 }
