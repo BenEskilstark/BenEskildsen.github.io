@@ -157,6 +157,7 @@ function handleClick (d, i) {
 
 function countryToCode(country) {
   console.log(country);
+  console.log(countryCodes);
   for (var i = 0, obj; obj = countryCodes[i]; i++) {
     console.log(obj.name);
     if (obj.name === country) {
