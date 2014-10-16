@@ -113,7 +113,8 @@ function handleClick (d, i) {
 
 
   svg.selectAll("circle")
-    .exit().remove();
+    .data(persons)
+  .exit().remove();
 
 }
 
