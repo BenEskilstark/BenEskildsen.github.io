@@ -110,8 +110,8 @@ function handleClick (d, i) {
     .data(persons)
   .enter().append("circle")
     .attr("id", function(d, i) {return "circle_" + i;})
-    .attr("cx", countryCenter[0])
-    .attr("cy", countryCenter[1])
+    .attr("cx", countryCenter[0] + 20)
+    .attr("cy", countryCenter[1] + 20)
     .attr("r", 2)
   .transition().duration(500)
     .attr("cx", function(d, i) {
