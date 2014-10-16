@@ -73,7 +73,7 @@ d3.json(WORLD110JSON, function(error, world) {
       tooltip.classed("hidden", true);
     });
 
-  groupStyle(PersonstoCountryCodes(PEOPLE), "opacity", "0.75");
+  groupStyle(PersonstoCountryCodes(PEOPLE), "opacity", "1");
 });
 
 // unpack country codes:
