@@ -79,6 +79,7 @@ d3.json(WORLD110JSON, function(error, world) {
 d3.json(COUNTRYCODESJSON, function(error, json) {
   if (error) return console.error(error);
   countryCodes = json;
+  console.log(PEOPLE);
   groupStyle(PersonstoCountryCodes(PEOPLE), "style", "opacity: 0.75")
 });
 
