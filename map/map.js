@@ -264,13 +264,13 @@ function displayInfo(person) {
   console.log("displaying info on: " + person.name);
   d3.select("body").select("#maincontent").append("div")
     .attr("class", "infobox")
-    .attr("x", "80px")
-    .attr("y", "72px")
+    .attr("left", "80px")
+    .attr("top", "72px")
     .attr("width", "2px")
     .attr("height", "2px")
     .transition().duration(500)
-      .attr("width", width - 160 + "px")
-      .attr("height", height - 144 + "px");
+      .attr("width", "" + (width - 160) + "px")
+      .attr("height", "" + (height - 144) + "px");
 }
 
 
