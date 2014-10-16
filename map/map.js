@@ -264,8 +264,8 @@ var PEOPLE = [
   new Person("Josep Broz Tito", "Montenegro", "tito.jpeg", ""),
   new Person("Josep Broz Tito", "Bosnia and Herzegovina", "tito.jpeg", ""),
   new Person("Jawaharlal Nehru", "India", "nehru.jpeg", ""),
-  new Person("Fidel Castro", "Cuba", "fidel.jpeg", ""),
-  new Person("Sun Yat-Sen", "China", "yatsen.jpeg", "")
+  new Person("Fidel Castro", "Cuba", "fidel.jpeg", "")
+  // new Person("Sun Yat-Sen", "China", "yatsen.jpeg", "")
   // new Person("Walt Whitman Rostow", "United States", "rostow.jpeg", ""),
   // new Person("John Lewis Gaddis", "United States", "gaddis.jpeg", "")
 ];
