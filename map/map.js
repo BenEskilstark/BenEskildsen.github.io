@@ -263,7 +263,8 @@ var PEOPLE = [
   new Person("Josep Broz Tito", "Serbia", "tito.jpeg", ""),
   new Person("Josep Broz Tito", "Montenegro", "tito.jpeg", ""),
   new Person("Josep Broz Tito", "Bosnia and Herzegovina", "tito.jpeg", ""),
-  new Person("Jawaharlal Nehru", "India", "nehru.jpeg", "")
+  new Person("Jawaharlal Nehru", "India", "nehru.jpeg", ""),
+  new Person("Fidel Castro", "Cuba", "fidel.jpeg", "")
 ];
 
 function displayInfo(person) {
