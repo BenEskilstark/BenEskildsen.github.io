@@ -151,11 +151,11 @@ function handleClick (d, i) {
         return;
       }
       d3.select("#image_" + i).transition().duration(500)
-        .attr("x", 10)
-        .attr("y", 10);
+        .attr("x", 1)
+        .attr("y", 1);
       d3.select("#circle_" + i).transition().duration(500)
-        .attr("cx", 47)
-        .attr("cy", 40);
+        .attr("cx", 38)
+        .attr("cy", 31);
       displayInfo(d);
     })
     .attr("id", function(d, i) {return "image_" + i;})
@@ -273,8 +273,8 @@ var PEOPLE = [
 function displayInfo(person) {
   console.log("displaying info on: " + person.name);
   var infobox = d3.select("body").select("#maincontent").append("div");
-  var xpos = 40;
-  var ypos = 142;
+  var xpos = 10;
+  var ypos = 132;
   infobox
     .attr("class", "infobox")
     .style("left", xpos + "px")
@@ -289,12 +289,13 @@ function displayInfo(person) {
     .append("center").append("h1").html(person.name);
 
   for(var i = 0, pdf; pdf = person.information[i]; i++) {
+    var pdfWidth = ((width-2*xpos)/((i+1)/person.information.length) - 20)
     infobox
       .append("iframe")
       .attr("src", pdf)
-      .attr("width", ((width-2*xpos)/2 - 20) + "px")
-      .attr("height", "" + (height - ypos - 10) + "px")
-      .style("left", "" + (i * 410 + 10) + "px");
+      .attr("width", pdfWidth + "px")
+      .attr("height", "" + (height - ypos) + "px")
+      .style("left", "" + (i * pdfWidth + 10) + "px");
   }
 }
 
