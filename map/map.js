@@ -114,20 +114,21 @@ function handleClick (d, i) {
   .enter().append("image")
     .attr("id", function(d, i) {return d.name;})
     .attr("xlink:href", function(d, i) {return d.image;})
-    .attr("x", countryCenter[0])
-    .attr("y", countryCenter[1])
-    .attr("width", 2)
-    .attr("height", 2)
-    .attr("class", "person")
-  .transition().duration(500)
-    .attr("x", function(d, i) {
-      var ratio = (i + 1) / persons.length;
-      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0];
-    })
-    .attr("y", function(d, i) {
-      var ratio = (i + 1) / persons.length;
-      return Math.sin(ratio * Math.PI) * 40 + countryCenter[1];
-    })
+    .attr("x", 50).attr("y", 50)
+  //   .attr("x", countryCenter[0])
+  //   .attr("y", countryCenter[1])
+  //   .attr("width", 2)
+  //   .attr("height", 2)
+  //   .attr("class", "person")
+  // .transition().duration(500)
+  //   .attr("x", function(d, i) {
+  //     var ratio = (i + 1) / persons.length;
+  //     return Math.cos(ratio * Math.PI) * 40 + countryCenter[0];
+  //   })
+  //   .attr("y", function(d, i) {
+  //     var ratio = (i + 1) / persons.length;
+  //     return Math.sin(ratio * Math.PI) * 40 + countryCenter[1];
+  //   })
     .attr("width", 80)
     .attr("height", 80);  
 
