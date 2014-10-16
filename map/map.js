@@ -116,7 +116,7 @@ function handleClick (d, i) {
   .transition().duration(500)
     .attr("cx", function(d, i) {
       var ratio = (i + 1) / persons.length;
-      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0] + 30;
+      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0] + 35;
     })
     .attr("cy", function(d, i) {
       var ratio = (i + 1) / persons.length;
