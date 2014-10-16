@@ -121,8 +121,8 @@ function handleClick (d, i) {
   clipPath.selectAll("circle")
     .data(persons)
   .enter().append("circle")
-    .on("click", function() {
-      this.transition().duration(500)
+    .on("click", function(d,i) {
+      d3.select("#circle_" + i).transition().duration(500)
         .attr("cx", 10)
         .attr("cy", 10);
     })
@@ -148,12 +148,12 @@ function handleClick (d, i) {
   imagePath.selectAll("image")
     .data(persons)
   .enter().append("image")
-    .on("click", function() {
-      this.transition().duration(500)
+    .on("click", function(d, i) {
+      d3.select("image_" + i).transition().duration(500)
         .attr("x", 10)
         .attr("y", 10);
     })
-    .attr("id", function(d, i) {return d.name;})
+    .attr("id", function(d, i) {return "image_" + i;})
     .attr("xlink:href", function(d, i) {return d.image;})
     .attr("x", countryCenter[0])
     .attr("y", countryCenter[1])
