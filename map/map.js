@@ -156,6 +156,7 @@ function handleClick (d, i) {
 // conversion between country names and codes
 
 function countryToCode(country) {
+  console.log(country);
   for (var i = 0, obj; obj = countryCodes[i]; i++) {
     if (obj.name === country) {
       return obj.countryCode;
@@ -202,8 +203,6 @@ function countryCodeToPersons(code) {
 function PersonstoCountryCodes(people) {
   var codes = [];
   for (var i = 0, person; person = people[i]; i++) {
-    console.log(person.country);
-    console.log(countryToCode(person.country));
     codes.push(countryToCode(person.country));
   }
   return codes;
