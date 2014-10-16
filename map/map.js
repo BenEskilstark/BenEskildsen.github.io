@@ -115,10 +115,10 @@ function handleClick (d, i) {
     .attr("r", 2)
   .transition().duration(500)
     .attr("cx", function(d, i) {
-      return Math.cos(i * Math.PI) * 40 + countryCenter[0] + 7;
+      return Math.sin(i * Math.PI) * 40 + countryCenter[0] + 7;
     })
     .attr("cy", function(d, i) {
-      return Math.sin(i * Math.PI) * 40 + countryCenter[1] + 10;
+      return Math.cos(i * Math.PI) * 40 + countryCenter[1] + 10;
     })
     .attr("r", 28);
 
@@ -138,10 +138,10 @@ function handleClick (d, i) {
     .attr("class", "person")
   .transition().duration(500)
     .attr("x", function(d, i) {
-      return Math.cos(i * Math.PI) * 40 + countryCenter[0] - 30;
+      return Math.sin(i * Math.PI) * 40 + countryCenter[0] - 30;
     })
     .attr("y", function(d, i) {
-      return Math.sin(i * Math.PI) * 40 + countryCenter[1] - 20;
+      return Math.cos(i * Math.PI) * 40 + countryCenter[1] - 20;
     })
     .attr("width", 80)
     .attr("height", 80);  
