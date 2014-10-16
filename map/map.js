@@ -73,14 +73,13 @@ d3.json(WORLD110JSON, function(error, world) {
       tooltip.classed("hidden", true);
     });
 
+  groupStyle(PersonstoCountryCodes(PEOPLE), "opacity", "0.75");
 });
 
 // unpack country codes:
 d3.json(COUNTRYCODESJSON, function(error, json) {
   if (error) return console.error(error);
   countryCodes = json;
-  console.log(PEOPLE);
-  groupStyle(PersonstoCountryCodes(PEOPLE), "opacity", "0.75")
 });
 
 function zoomed() {
@@ -219,10 +218,7 @@ function Person(name, country, image, information) {
 }
 
 function groupStyle(codes, prop, detail) {
-  console.log(codes);
   for (var i = 0, d; d = codes[i]; i++) {
-    console.log("#country_" + d);
-    console.log(g.select("#country_" + d));
     g.select("#country_" + d).style(prop, detail);
   }
 }
