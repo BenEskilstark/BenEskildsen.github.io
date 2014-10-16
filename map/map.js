@@ -236,11 +236,11 @@ function PersonstoCountryCodes(people) {
 
 ////////////////////////////////////////////////////////////////////////////
 
-function Person(name, country, image, information) {
+function Person(name, country, image, pdfs) {
   this.name = name;
   this.country = country;
   this.image = image;
-  this.information = information
+  this.information = pdfs;
 }
 
 function groupStyle(codes, prop, detail) {
@@ -250,24 +250,24 @@ function groupStyle(codes, prop, detail) {
 }
 
 var PEOPLE = [
-  new Person("Che Guevara", "Cuba", "Che.jpeg", ""),
-  new Person("Zhou Enlai", "China", "zhouenlai.jpeg", ""),
-  new Person("Lin Biao", "China", "linbiao.jpeg", ""),
-  new Person("Mao Zedong", "China", "mao.jpeg", ""),
-  new Person("Sukarno", "Indonesia", "sukarno.jpeg", ""),
-  new Person("Kwame Nkrumah", "Ghana", "kwame.jpeg", ""),
-  new Person("Julius Nyerere", "Tanzania", "nyerere.jpeg", ""),
-  new Person("Gamal Abdel Nasser", "Egypt", "nasser.jpeg", ""),
-  new Person("Amilcar Cabral", "Guinea-Bissau", "cabral.jpeg", ""),
-  new Person("Josep Broz Tito", "Slovenia", "tito.jpeg", ""),
-  new Person("Josep Broz Tito", "Serbia", "tito.jpeg", ""),
-  new Person("Josep Broz Tito", "Montenegro", "tito.jpeg", ""),
-  new Person("Josep Broz Tito", "Bosnia and Herzegovina", "tito.jpeg", ""),
-  new Person("Jawaharlal Nehru", "India", "nehru.jpeg", ""),
-  new Person("Fidel Castro", "Cuba", "fidel.jpeg", "")
-  // new Person("Sun Yat-Sen", "China", "yatsen.jpeg", "")
-  // new Person("Walt Whitman Rostow", "United States", "rostow.jpeg", ""),
-  // new Person("John Lewis Gaddis", "United States", "gaddis.jpeg", "")
+  new Person("Che Guevara", "Cuba", "Che.jpeg", ["CheGuevara.pdf"]),
+  new Person("Zhou Enlai", "China", "zhouenlai.jpeg", []),
+  new Person("Lin Biao", "China", "linbiao.jpeg", []),
+  new Person("Mao Zedong", "China", "mao.jpeg", []),
+  new Person("Sukarno", "Indonesia", "sukarno.jpeg", []),
+  new Person("Kwame Nkrumah", "Ghana", "kwame.jpeg", []),
+  new Person("Julius Nyerere", "Tanzania", "nyerere.jpeg", []),
+  new Person("Gamal Abdel Nasser", "Egypt", "nasser.jpeg", ["Nassernonalignment.pdf", "NasserPhilosophyofRevolution.pdf"]),
+  new Person("Amilcar Cabral", "Guinea-Bissau", "cabral.jpeg", []),
+  new Person("Josep Broz Tito", "Slovenia", "tito.jpeg", []),
+  new Person("Josep Broz Tito", "Serbia", "tito.jpeg", []),
+  new Person("Josep Broz Tito", "Montenegro", "tito.jpeg", []),
+  new Person("Josep Broz Tito", "Bosnia and Herzegovina", "tito.jpeg", []),
+  new Person("Jawaharlal Nehru", "India", "nehru.jpeg", []),
+  new Person("Fidel Castro", "Cuba", "fidel.jpeg", [])
+  // new Person("Sun Yat-Sen", "China", "yatsen.jpeg", [])
+  // new Person("Walt Whitman Rostow", "United States", "rostow.jpeg", []),
+  // new Person("John Lewis Gaddis", "United States", "gaddis.jpeg", [])
 ];
 
 function displayInfo(person) {
@@ -286,10 +286,14 @@ function displayInfo(person) {
   infobox
     .append("center").append("h1").html(person.name);
 
-  infobox.append("iframe")
-    .attr("src", "CheGuevara.pdf")
-    .attr("width", "400px")
-    .attr("height", "" + (height - 180) + "px");
+  for(var i = 0, pdf; pdf = person.information[i]; i++) {
+    infobox.append("iframe")
+      .style("position", "absolute")
+      .attr("src", pdf)
+      .attr("width", "400px")
+      .attr("height", "" + (height - 180) + "px")
+      .attr("left", "" + (i * 405) + "px");
+  }
 }
 
 
