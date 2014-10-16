@@ -102,18 +102,20 @@ function handleClick (d, i) {
     .data(persons)
   .enter().append("image")
     .attr("id", function(d, i) {return d.name;})
-    .attr("x", countryCenter[0])
-    .attr("y", countryCenter[1])
-    .attr("width", 2)
-    .attr("height", 2)
-    .attr("class", "person")
-  .transition().duration(500)
-    .attr("x", function(d, i) {
-      return countryCenter[0] + i * 50 + 50;
-    })
-    .attr("y", function(d, i) {
-      return countryCenter[1] + i * 50 + 50;
-    })
+    .attr("x", 50)
+    .attr("y", 50)
+    // .attr("x", countryCenter[0])
+    // .attr("y", countryCenter[1])
+  //   .attr("width", 2)
+  //   .attr("height", 2)
+  //   .attr("class", "person")
+  // .transition().duration(500)
+  //   .attr("x", function(d, i) {
+  //     return countryCenter[0] + i * 50 + 50;
+  //   })
+  //   .attr("y", function(d, i) {
+  //     return countryCenter[1] + i * 50 + 50;
+  //   })
     .attr("width", 80)
     .attr("height", 80);  
 
