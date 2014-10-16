@@ -230,7 +230,9 @@ var PEOPLE = [
   new Person("Mao Zedong", "China", "mao.jpeg", ""),
   new Person("Sukarno", "Indonesia", "sukarno.jpeg", ""),
   new Person("Kwame Nkrumah", "Ghana", "kwame.jpeg", ""),
-  new Person("Julius Nyerere", "Tanzania", "nyerere.jpeg", "")
+  new Person("Julius Nyerere", "Tanzania", "nyerere.jpeg", ""),
+  new Person("Gamal Nasser", "Egypt", "nasser.jpeg", ""),
+  new Person("Amilcar Cabral", "Guinea-Bissau", "cabral.jpeg", "")
 ];
 
 
