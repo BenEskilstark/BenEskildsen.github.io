@@ -232,7 +232,11 @@ var PEOPLE = [
   new Person("Kwame Nkrumah", "Ghana", "kwame.jpeg", ""),
   new Person("Julius Nyerere", "Tanzania", "nyerere.jpeg", ""),
   new Person("Gamal Nasser", "Egypt", "nasser.jpeg", ""),
-  new Person("Amilcar Cabral", "Guinea-Bissau", "cabral.jpeg", "")
+  new Person("Amilcar Cabral", "Guinea-Bissau", "cabral.jpeg", ""),
+  new Person("Tito", "Slovenia", "tito.jpeg", ""),
+  new Person("Tito", "Serbia", "tito.jpeg", ""),
+  new Person("Tito", "Montenegro", "tito.jpeg", ""),
+  new Person("Tito", "Bosnia and Herzegovina", "tito.jpeg", "")
 ];
 
 
