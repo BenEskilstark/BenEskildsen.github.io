@@ -113,7 +113,9 @@ function handleClick (d, i) {
     .attr("cy", function(d, i) {
       return countryCenter[1] + i * 50 + 50;
     })
-    .attr("r", 40);
+    .attr("r", 40)
+    .append("image")
+      .attr("xlink", function(d, i) {return d.image;});
 
 
   
@@ -178,7 +180,7 @@ function Person(name, country, image, information) {
 }
 
 var PEOPLE = [
-  new Person("Che Guevara", "Cuba", "", ""),
+  new Person("Che Guevara", "Cuba", "Che.jpeg", ""),
   new Person("Zhou Enlai", "China", "", ""),
   new Person("Lin Biao", "China", "", "")
 ];
