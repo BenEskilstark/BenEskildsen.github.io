@@ -289,7 +289,7 @@ function displayInfo(person) {
     .append("center").append("h1").html(person.name);
 
   for(var i = 0, pdf; pdf = person.information[i]; i++) {
-    var pdfWidth = ((width-2*xpos) * ((i+1)/person.information.length) - 20)
+    var pdfWidth = ((width-2*xpos) / person.information.length) - 20)
     infobox
       .append("iframe")
       .attr("src", pdf)
