@@ -145,6 +145,7 @@ function handleClick (d, i) {
   .enter().append("image")
     .on("click", function(d, i) {
       // remove possible old info box:
+      console.log(d3.select("#image_" + i).attr("x"));
       if(d3.select("#image_" + i).attr("x") === 10){
         console.log("we here");
         d3.select(".infobox").remove();
@@ -268,7 +269,8 @@ var PEOPLE = [
 
 function displayInfo(person) {
   console.log("displaying info on: " + person.name);
-  d3.select("body").select("#maincontent").append("div")
+  var infobox = d3.select("body").select("#maincontent").append("div");
+  infobox
     .attr("class", "infobox")
     .style("left", "80px")
     .style("top", "144px")
@@ -276,7 +278,8 @@ function displayInfo(person) {
     .style("height", "2px")
     .transition().delay(500).duration(500)
       .style("width", "" + (width - 160) + "px")
-      .style("height", "" + (height - 144) + "px");
+      .style("height", "" + (height - 144) + "px")
+      .append("h1", person.name);
 }
 
 
