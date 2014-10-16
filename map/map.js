@@ -96,8 +96,6 @@ function zoomed() {
 // show the leader's images on clicks
 function handleClick (d, i) {
   d3.select(".selected").classed("selected", false);
-  console.log("ddddddd");
-  console.log(d.id);
   d3.select("#country_" + d.id).classed("selected", true);
 
   var persons = countryCodeToPersons(d.id);
@@ -124,7 +122,7 @@ function handleClick (d, i) {
     })
     .attr("cy", function(d, i) {
       var ratio = 2 * i * Math.PI / persons.length;
-      return Math.cos(ratio) * 50 + countryCenter[1] + 10;
+      return -1*Math.cos(ratio) * 50 + countryCenter[1] + 10;
     })
     .attr("r", 28);
 
@@ -149,7 +147,7 @@ function handleClick (d, i) {
     })
     .attr("y", function(d, i) {
       var ratio = 2 * i * Math.PI / persons.length;
-      return Math.cos(ratio) * 50 + countryCenter[1] - 20;
+      return -1*Math.cos(ratio) * 50 + countryCenter[1] - 20;
     })
     .attr("width", 80)
     .attr("height", 80);  
