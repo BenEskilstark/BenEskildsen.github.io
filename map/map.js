@@ -110,17 +110,17 @@ function handleClick (d, i) {
     .data(persons)
   .enter().append("circle")
     .attr("id", function(d, i) {return "circle_" + i;})
-    .attr("cx", countryCenter[0] + 20)
-    .attr("cy", countryCenter[1] + 20)
+    .attr("cx", countryCenter[0])
+    .attr("cy", countryCenter[1])
     .attr("r", 2)
   .transition().duration(500)
     .attr("cx", function(d, i) {
       var ratio = (i + 1) / persons.length;
-      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0];
+      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0] + 20;
     })
     .attr("cy", function(d, i) {
       var ratio = (i + 1) / persons.length;
-      return Math.sin(ratio * Math.PI) * 40 + countryCenter[1];
+      return Math.sin(ratio * Math.PI) * 40 + countryCenter[1] + 20;
     })
     .attr("r", 40);
 
