@@ -145,7 +145,7 @@ function handleClick (d, i) {
   .enter().append("image")
     .on("click", function(d, i) {
       // remove possible old info box:
-      if(d3.select("#image_" + i).attr("x") === "10"){
+      if(d3.select("#image_" + i).attr("x") === "0"){
         d3.select(".infobox").remove();
         d3.select("#image_" + i).remove();
         return;
@@ -289,7 +289,7 @@ function displayInfo(person) {
     .append("center").append("h1").html(person.name);
 
   for(var i = 0, pdf; pdf = person.information[i]; i++) {
-    var pdfWidth = ((width-2*xpos)/((i+1)/person.information.length) - 20)
+    var pdfWidth = ((width-2*xpos) * ((i+1)/person.information.length) - 20)
     infobox
       .append("iframe")
       .attr("src", pdf)
