@@ -26,6 +26,17 @@ var svg = d3.select("body").select("#maincontent").append("svg")
 
 var g = svg.append("g");
 
+svg.append("defs").append("svg:clipPath")
+  .attr("id", "clip")
+  .append("svg:circle")
+    .attr("id", "clip-circle")
+    .attr("cx", 0)
+    .attr("cy", 0)
+    .attr("r", 0);
+
+var clipPath = svg.append("g")
+  .attr("clip-path", "url(#clip)");
+
 var tooltip = d3.select("body").select("#maincontent")
   .append("div").attr("class", "tooltip hidden");
 
@@ -94,11 +105,11 @@ function handleClick (d, i) {
   var mouse = d3.mouse(svg.node()).map(function(d){return parseInt(d);});
   var countryCenter = [mouse[0], mouse[1]];
 
-  svg.selectAll("image")
+  clipPath.selectAll("image")
     .data([])
   .exit().remove();
 
-  svg.selectAll("image")
+  clipPath.selectAll("image")
     .data(persons)
   .enter().append("image")
     .attr("id", function(d, i) {return d.name;})
