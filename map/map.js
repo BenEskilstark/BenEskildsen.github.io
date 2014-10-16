@@ -79,6 +79,7 @@ d3.json(WORLD110JSON, function(error, world) {
 d3.json(COUNTRYCODESJSON, function(error, json) {
   if (error) return console.error(error);
   countryCodes = json;
+  console.log(countryCodes);
 });
 
 function zoomed() {
@@ -157,7 +158,6 @@ function handleClick (d, i) {
 
 function countryToCode(country) {
   console.log(country);
-  console.log(countryCodes);
   for (var i = 0, obj; obj = countryCodes[i]; i++) {
     console.log(obj.name);
     if (obj.name === country) {
