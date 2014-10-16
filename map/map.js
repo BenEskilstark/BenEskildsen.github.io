@@ -89,6 +89,14 @@ function zoomed() {
 
   g.selectAll("path")
     .attr("d", path);
+
+  // adjust images
+  clipPath.selectAll("circle")
+    .translate(zoom.translate())
+    .scale(zoom.scale());
+  imagePath.selectAll("image")
+    .translate(zoom.translate())
+    .scale(zoom.scale());
 }
 
 
