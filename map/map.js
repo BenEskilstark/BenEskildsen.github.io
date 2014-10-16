@@ -115,14 +115,12 @@ function handleClick (d, i) {
     .attr("r", 2)
   .transition().duration(500)
     .attr("cx", function(d, i) {
-      var ratio = (i + 1) / persons.length;
-      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0] + 35;
+      return Math.cos(i * Math.PI) * 40 + countryCenter[0] + 37;
     })
     .attr("cy", function(d, i) {
-      var ratio = (i + 1) / persons.length;
-      return Math.sin(ratio * Math.PI) * 40 + countryCenter[1] + 30;
+      return Math.sin(i * Math.PI) * 40 + countryCenter[1] + 30;
     })
-    .attr("r", 30);
+    .attr("r", 28);
 
   imagePath.selectAll("image")
     .data([])
@@ -140,12 +138,10 @@ function handleClick (d, i) {
     .attr("class", "person")
   .transition().duration(500)
     .attr("x", function(d, i) {
-      var ratio = (i + 1) / persons.length;
-      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0];
+      return Math.cos(i * Math.PI) * 40 + countryCenter[0];
     })
     .attr("y", function(d, i) {
-      var ratio = (i + 1) / persons.length;
-      return Math.sin(ratio * Math.PI) * 40 + countryCenter[1];
+      return Math.sin(i * Math.PI) * 40 + countryCenter[1];
     })
     .attr("width", 80)
     .attr("height", 80);  

@@ -18,6 +18,10 @@ svg {
   opacity: 0.75;
 }
 
+circle {
+  border: 1px solid gray;
+}
+
 div.tooltip {
   color: #222; 
   background: #fff; 
