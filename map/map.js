@@ -274,7 +274,7 @@ function displayInfo(person) {
   console.log("displaying info on: " + person.name);
   var infobox = d3.select("body").select("#maincontent").append("div");
   var xpos = 40;
-  var ypos = 150;
+  var ypos = 142;
   infobox
     .attr("class", "infobox")
     .style("left", xpos + "px")
@@ -292,7 +292,7 @@ function displayInfo(person) {
     infobox
       .append("iframe")
       .attr("src", pdf)
-      .attr("width", (width/2 - 20) + "px")
+      .attr("width", ((width-2*xpos)/2 - 20) + "px")
       .attr("height", "" + (height - ypos - 10) + "px")
       .style("left", "" + (i * 410 + 10) + "px");
   }
