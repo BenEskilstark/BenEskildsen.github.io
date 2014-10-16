@@ -116,11 +116,11 @@ function handleClick (d, i) {
   .transition().duration(500)
     .attr("cx", function(d, i) {
       var ratio = 2 * i * Math.PI / persons.length;
-      return Math.sin(ratio) * 40 + countryCenter[0] + 7;
+      return Math.sin(ratio) * 50 + countryCenter[0] + 7;
     })
     .attr("cy", function(d, i) {
       var ratio = 2 * i * Math.PI / persons.length;
-      return Math.cos(ratio) * 40 + countryCenter[1] + 10;
+      return Math.cos(ratio) * 50 + countryCenter[1] + 10;
     })
     .attr("r", 28);
 
@@ -141,11 +141,11 @@ function handleClick (d, i) {
   .transition().duration(500)
     .attr("x", function(d, i) {
       var ratio = 2 * i * Math.PI / persons.length;
-      return Math.sin(ratio) * 40 + countryCenter[0] - 30;
+      return Math.sin(ratio) * 50 + countryCenter[0] - 30;
     })
     .attr("y", function(d, i) {
       var ratio = 2 * i * Math.PI / persons.length;
-      return Math.cos(ratio) * 40 + countryCenter[1] - 20;
+      return Math.cos(ratio) * 50 + countryCenter[1] - 20;
     })
     .attr("width", 80)
     .attr("height", 80);  
