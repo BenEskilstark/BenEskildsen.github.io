@@ -121,6 +121,11 @@ function handleClick (d, i) {
   clipPath.selectAll("circle")
     .data(persons)
   .enter().append("circle")
+    .on("click", function() {
+      this.transition().duration(500)
+        .attr("cx", 10)
+        .attr("cy", 10);
+    })
     .attr("id", function(d, i) {return "circle_" + i;})
     .attr("cx", countryCenter[0])
     .attr("cy", countryCenter[1])
@@ -134,12 +139,7 @@ function handleClick (d, i) {
       var ratio = 2 * i * Math.PI / persons.length;
       return -1*Math.cos(ratio) * 50 + countryCenter[1] + 10;
     })
-    .attr("r", 28)
-    .on("click", function() {
-      this.transition().duration(500)
-        .attr("cx", 10)
-        .attr("cy", 10);
-    });
+    .attr("r", 28);
 
   imagePath.selectAll("image")
     .data([])
@@ -148,6 +148,11 @@ function handleClick (d, i) {
   imagePath.selectAll("image")
     .data(persons)
   .enter().append("image")
+    .on("click", function() {
+      this.transition().duration(500)
+        .attr("x", 10)
+        .attr("y", 10);
+    })
     .attr("id", function(d, i) {return d.name;})
     .attr("xlink:href", function(d, i) {return d.image;})
     .attr("x", countryCenter[0])
@@ -165,12 +170,7 @@ function handleClick (d, i) {
       return -1*Math.cos(ratio) * 50 + countryCenter[1] - 20;
     })
     .attr("width", 80)
-    .attr("height", 80)
-    .on("click", function() {
-      this.transition().duration(500)
-        .attr("x", 10)
-        .attr("y", 10);
-    });  
+    .attr("height", 80);  
 
 }
 
