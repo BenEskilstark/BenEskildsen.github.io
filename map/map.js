@@ -222,7 +222,7 @@ function groupStyle(codes, prop, detail) {
   console.log(codes);
   for (var i = 0, d; d = codes[i]; i++) {
     console.log("#country_" + d);
-    console.log(d3.select("#country_" + d));
+    console.log(g.select("#country_" + d));
     g.select("#country_" + d).style(prop, detail);
   }
 }
