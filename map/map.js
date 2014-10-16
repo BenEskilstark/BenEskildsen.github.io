@@ -134,7 +134,12 @@ function handleClick (d, i) {
       var ratio = 2 * i * Math.PI / persons.length;
       return -1*Math.cos(ratio) * 50 + countryCenter[1] + 10;
     })
-    .attr("r", 28);
+    .attr("r", 28)
+    .on("click", function() {
+      this.transition().duration(500)
+        .attr("cx", 10)
+        .attr("cy", 10);
+    });
 
   imagePath.selectAll("image")
     .data([])
@@ -160,7 +165,12 @@ function handleClick (d, i) {
       return -1*Math.cos(ratio) * 50 + countryCenter[1] - 20;
     })
     .attr("width", 80)
-    .attr("height", 80);  
+    .attr("height", 80)
+    .on("click", function() {
+      this.transition().duration(500)
+        .attr("x", 10)
+        .attr("y", 10);
+    });  
 
 }
 
