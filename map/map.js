@@ -115,7 +115,7 @@ function handleClick (d, i) {
     .attr("r", 2)
   .transition().duration(500)
     .attr("cx", function(d, i) {
-      return Math.cos(i * Math.PI) * 40 + countryCenter[0] + 37;
+      return Math.cos(i * Math.PI) * 40 + countryCenter[0] + 17;
     })
     .attr("cy", function(d, i) {
       return Math.sin(i * Math.PI) * 40 + countryCenter[1] + 30;
@@ -138,7 +138,7 @@ function handleClick (d, i) {
     .attr("class", "person")
   .transition().duration(500)
     .attr("x", function(d, i) {
-      return Math.cos(i * Math.PI) * 40 + countryCenter[0];
+      return Math.cos(i * Math.PI) * 40 + countryCenter[0] - 20;
     })
     .attr("y", function(d, i) {
       return Math.sin(i * Math.PI) * 40 + countryCenter[1];
