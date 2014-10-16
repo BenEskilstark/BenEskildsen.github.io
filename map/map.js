@@ -24,12 +24,14 @@ var svg = d3.select("body").select("#maincontent").append("svg")
   .attr("width", width)
   .attr("height", height);
 
+var g = svg.append("g");
+
 var clipPath = svg.append("defs").append("svg:clipPath")
   .attr("id", "clip");
 var imagePath = svg.append("g")
   .attr("clip-path", "url(#clip)");
 
-var g = svg.append("g");
+
 
 var tooltip = d3.select("body").select("#maincontent")
   .append("div").attr("class", "tooltip hidden");
@@ -120,7 +122,7 @@ function handleClick (d, i) {
       var ratio = (i + 1) / persons.length;
       return Math.sin(ratio * Math.PI) * 40 + countryCenter[1];
     })
-    .attr("r", 80);
+    .attr("r", 40);
 
   imagePath.selectAll("image")
     .data([])
