@@ -37,6 +37,10 @@ div.tooltip {
   position: absolute;
 }
 
+iframe {
+  margin-left: 10px;
+}
+
 .selected {
   fill: #755888;
 }
