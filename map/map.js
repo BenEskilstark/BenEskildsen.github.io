@@ -97,8 +97,11 @@ function handleClick (d, i) {
     .attr("id", function(d, i) {return d.name;})
     .attr("cx", 50)
     .attr("cy", 50)
-    .attr("r", 50)
+    .attr("r", 30)
     .attr("class", "person");
+
+  svg.selectAll("circle")
+    .exit().remove();
 
 }
 
