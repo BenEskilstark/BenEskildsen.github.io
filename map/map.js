@@ -68,33 +68,6 @@ d3.json(WORLD110JSON, function(error, world) {
 
 });
 
-// display info window:
-var SHOWINGINFO = false;
-var rectWidth = 50;
-var infoWindow = svg.append("g");
-infoWindow.append("rect")
-  .attr("id", "infoRect")
-  .attr("x", width - rectWidth)
-  .attr("width", "" + rectWidth)
-  .attr("height", height)
-  .attr("style", "fill:#F8F0E5; opacity:0.85")
-  .on("click", function() {
-    var rect = d3.select("#infoRect")
-    if(!SHOWINGINFO) {
-      rect.transition().duration(500)
-        .attr("width", width/2)
-        .attr("x", width/2);
-        SHOWINGINFO = true;
-        timeline(YEAR);
-    } else {
-      infoWindow.selectAll("text").remove();
-      rect.transition().duration(500)
-        .attr("width", rectWidth)
-        .attr("x", width - rectWidth);
-      SHOWINGINFO = false;
-    }
-  });
-
 // unpack country codes:
 d3.json(COUNTRYCODESJSON, function(error, json) {
   if (error) return console.error(error);
