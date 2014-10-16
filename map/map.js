@@ -91,17 +91,24 @@ function handleClick (d, i) {
 
   var persons = countryCodeToPersons(d.id);
 
+  var mouse = d3.mouse(svg.node()).map(function(d){return parseInt(d);});
+  var countryCenter = [mouse[0], mouse[1]];
+
   svg.selectAll("circle")
     .data(persons)
   .enter().append("circle")
     .attr("id", function(d, i) {return d.name;})
-    .attr("cx", 50)
-    .attr("cy", 50)
+    .attr("cx", countryCenter[0])
+    .attr("cy", countryCenter[1])
     .attr("r", 5)
     .attr("class", "person")
   .transition().duration(500)
-    .attr("cx", 250)
-    .attr("cy", 250)
+    .attr("cx", function(d, i) {
+      return countryCenter[0] + i * 50 + 50;
+    })
+    .attr("cy", function(d, i) {
+      return countryCenter[1] + i * 50 + 50;
+    });
     .attr("r", 40)
 
 
