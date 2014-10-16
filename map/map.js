@@ -100,9 +100,9 @@ function handleClick (d, i) {
   var countryCenter = [mouse[0], mouse[1]];
 
   // setting up clipPaths
-  clipPath.selectAll("svg:circle")
+  clipPath.selectAll("circle")
     .data(persons)
-  .append("svg:circle")
+  .append("circle")
     .attr("id", function(d, i) {return "circle_" + i;})
     .attr("cx", countryCenter[0])
     .attr("cy", countryCenter[1])
