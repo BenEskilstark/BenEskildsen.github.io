@@ -287,12 +287,14 @@ function displayInfo(person) {
     .append("center").append("h1").html(person.name);
 
   for(var i = 0, pdf; pdf = person.information[i]; i++) {
-    infobox.append("iframe")
-      .style("position", "absolute")
+    var a = infobox
+      .append("a")
+        .attr("href", pdf);
+    a.append("iframe")
       .attr("src", pdf)
       .attr("width", "400px")
       .attr("height", "" + (height - 180) + "px")
-      .style("left", "" + (i * 405) + "px");
+      .style("left", "" + (i * 410 + 10) + "px");
   }
 }
 

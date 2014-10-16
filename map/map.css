@@ -24,7 +24,6 @@ svg {
   z-index: 10;
   display: block;
   overflow: hidden;
-  /*position: relative;*/
 }
 
 div.tooltip {
