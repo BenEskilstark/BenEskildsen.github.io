@@ -150,6 +150,7 @@ function handleClick (d, i) {
       d3.select("#circle_" + i).transition().duration(500)
         .attr("cx", 47)
         .attr("cy", 40);
+      displayInfo(d);
     })
     .attr("id", function(d, i) {return "image_" + i;})
     .attr("xlink:href", function(d, i) {return d.image;})
@@ -259,7 +260,18 @@ var PEOPLE = [
   new Person("Nehru", "India", "nehru.jpeg", "")
 ];
 
-
+function displayInfo(person) {
+  console.log("displaying info on: " + person.name);
+  d3.select("body").select("#maincontent").append("div")
+    .attr("class", "infobox")
+    .attr("x", 80)
+    .attr("y", 72)
+    .attr("width", 2)
+    .attr("height", 2)
+    .transition().duration(500)
+      .attr("width", width - 160)
+      .attr("height", height - 144);
+}
 
 
 

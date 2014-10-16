@@ -15,8 +15,10 @@ svg {
   opacity: 0.7;
 }
 
-circle {
-  border: 1px solid gray;
+.infoBox {
+  opacity: 0.85;
+  border: 2px solid gray;
+  position: absolute;
 }
 
 div.tooltip {
