@@ -91,12 +91,11 @@ function handleClick (d, i) {
   country.classed("selected", true);
 
   var persons = countryCodeToPersons(d.id);
-  console.log(persons);
 
   country.selectAll("circle")
     .data(persons)
   .enter().append("circle")
-    .attr("id", d.name)
+    .attr("id", function(d, i) {return d.name;})
     .attr("cx", 50)
     .attr("cy", 50)
     .attr("r", 50)
@@ -116,7 +115,7 @@ function countryToCode(country) {
   return "";
 }
 function countryCodeToName(code) {
-  code = ""+code;
+  code = "" + code; // convert to string just in case
   for (var i = 0, obj; obj = countryCodes[i]; i++) {
     if (obj.countryCode === code) {
       return obj.name;
@@ -142,12 +141,9 @@ function countryCodesToNames(codes) {
 
 //convert between country code and Person
 function countryCodeToPersons(code) {
-  console.log(code);
   var countryName = countryCodeToName(code);
-  console.log(countryName);
   var persons = [];
   for (var i = 0, person; person = PEOPLE[i]; i++) {
-    console.log(person.country);
     if (person.country === countryName) {
       persons.push(person);
     }
