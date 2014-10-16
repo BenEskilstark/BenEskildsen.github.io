@@ -219,7 +219,9 @@ function Person(name, country, image, information) {
 }
 
 function groupStyle(codes, prop, detail) {
+  console.log(codes);
   for (var i = 0, d; d = codes[i]; i++) {
+    console.log(d3.select("#country_" + d));
     d3.select("#country_" + d).style(prop, detail);
   }
 }
