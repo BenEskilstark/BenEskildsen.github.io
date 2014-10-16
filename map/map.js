@@ -157,9 +157,7 @@ function handleClick (d, i) {
 // conversion between country names and codes
 
 function countryToCode(country) {
-  console.log(country);
   for (var i = 0, obj; obj = countryCodes[i]; i++) {
-    console.log(obj.name);
     if (obj.name === country) {
       return obj.countryCode;
     }
@@ -220,7 +218,6 @@ function Person(name, country, image, information) {
 }
 
 function groupStyle(codes, attr, style) {
-  console.log(codes);
   for (var i = 0, d; d = codes[i]; i++) {
     d3.select("#country_" + d).attr(attr, style);
   }
