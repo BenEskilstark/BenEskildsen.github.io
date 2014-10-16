@@ -79,7 +79,7 @@ d3.json(WORLD110JSON, function(error, world) {
 d3.json(COUNTRYCODESJSON, function(error, json) {
   if (error) return console.error(error);
   countryCodes = json;
-  console.log(countryCodes);
+  groupStyle(PersonstoCountryCodes(PEOPLE), "style", "opacity: 0.75")
 });
 
 function zoomed() {
@@ -238,8 +238,6 @@ var PEOPLE = [
   new Person("Kwame Nkrumah", "Ghana", "kwame.jpeg", ""),
   new Person("Julius Nyerere", "Tanzania", "nyerere.jpeg", "")
 ];
-
-groupStyle(PersonstoCountryCodes(PEOPLE), "style", "opacity: 0.75")
 
 
 
