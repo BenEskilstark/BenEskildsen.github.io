@@ -110,10 +110,12 @@ function handleClick (d, i) {
     .attr("class", "person")
   .transition().duration(500)
     .attr("x", function(d, i) {
-      return countryCenter[0] + i * 50 + 50;
+      var ratio = (i + 1) / persons.length;
+      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0];
     })
     .attr("y", function(d, i) {
-      return countryCenter[1] + i * 50 + 50;
+      var ratio = (i + 1) / persons.length;
+      return Math.sin(ratio * Math.PI) * 40 + countryCenter[1];
     })
     .attr("width", 80)
     .attr("height", 80);  
@@ -179,8 +181,8 @@ function Person(name, country, image, information) {
 
 var PEOPLE = [
   new Person("Che Guevara", "Cuba", "Che.jpeg", ""),
-  new Person("Zhou Enlai", "China", "", ""),
-  new Person("Lin Biao", "China", "", "")
+  new Person("Zhou Enlai", "China", "zhouenlai.jpeg", ""),
+  new Person("Lin Biao", "China", "linbiao.jpeg", "")
 ];
 
 function groupHighlight(codes, color) {
