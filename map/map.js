@@ -87,7 +87,21 @@ function zoomed() {
 // show the leader's images on clicks
 function handleClick (d, i) {
   d3.select(".selected").classed("selected", false);
-  d3.select("#country_" + d.id).classed("selected", true);
+  var country = d3.select("#country_" + d.id);
+  country.classed("selected", true);
+
+  var persons = countryCodeToPersons(d.id);
+  console.log(persons);
+
+  country.selectAll("circle")
+    .data(persons)
+  .enter().append("circle")
+    .attr("id", person.name)
+    .attr("cx", 50)
+    .attr("cy", 50)
+    .attr("r", 50)
+    .attr("class", "person");
+
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -124,6 +138,18 @@ function countryCodesToNames(codes) {
   }
   return names;
 }
+
+//convert between country code and Person
+function countryCodeToPersons(code) {
+  var persons = [];
+  for (var i = 0, person; person = PEOPLE[i]; i++) {
+    if (person.country === countryCodeToName(code)) {
+      persons.push(person);
+    }
+  }
+  return persons;
+}
+
 ////////////////////////////////////////////////////////////////////////////
 
 function Person(name, country, image, information) {
@@ -132,6 +158,12 @@ function Person(name, country, image, information) {
   this.image = image;
   this.information = information
 }
+
+var PEOPLE = [
+  new Person("Che Guevara", "Cuba", "", ""),
+  new Person("Zhou Enlai", "China", "", ""),
+  new Person("Lin Biao", "China", "", "")
+];
 
 function groupHighlight(codes, color) {
   for (var i = 0, d; d = codes[i]; i++) {
