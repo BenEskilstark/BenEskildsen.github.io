@@ -12,11 +12,7 @@ svg {
 .country {
   fill: #79A881;
   stroke: #141414;
-  opacity: 0.75;
-}
-
-.country:hover {
-  opacity: 0.75;
+  opacity: 0.7;
 }
 
 circle {
