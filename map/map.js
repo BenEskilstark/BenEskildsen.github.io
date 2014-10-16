@@ -122,6 +122,7 @@ function handleClick (d, i) {
     .data(persons)
   .enter().append("circle")
     .on("click", function(d, i) {
+      console.log(clipPath.select("#circle_" + i));
       clipPath.select("#circle_" + i).transition().duration(500)
         .attr("cx", 10)
         .attr("cy", 10);
