@@ -214,7 +214,9 @@ var PEOPLE = [
   new Person("Zhou Enlai", "China", "zhouenlai.jpeg", ""),
   new Person("Lin Biao", "China", "linbiao.jpeg", ""),
   new Person("Mao Zedong", "China", "mao.jpeg", ""),
-  new Person("Sukarno", "Indonesia", "sukarno.jpeg", "")
+  new Person("Sukarno", "Indonesia", "sukarno.jpeg", ""),
+  new Person("Kwame Nkrumah", "Ghana", "kwame.jpeg", ""),
+  new Person("Julius Nyerere", "Tanzania", "nyerere.jpeg", "")
 ];
 
 function groupHighlight(codes, color) {
