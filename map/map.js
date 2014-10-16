@@ -87,12 +87,11 @@ function zoomed() {
 // show the leader's images on clicks
 function handleClick (d, i) {
   d3.select(".selected").classed("selected", false);
-  var country = d3.select("#country_" + d.id);
-  country.classed("selected", true);
+  d3.select("#country_" + d.id).classed("selected", true);
 
   var persons = countryCodeToPersons(d.id);
 
-  country.selectAll("circle")
+  svg.selectAll("circle")
     .data(persons)
   .enter().append("circle")
     .attr("id", function(d, i) {return d.name;})
