@@ -277,7 +277,9 @@ function displayInfo(person) {
     .transition().delay(500).duration(500)
       .style("width", "" + (width - 160) + "px")
       .style("height", "" + (height - 144) + "px")
-      .append("h1").html(person.name);
+
+  infobox
+    .append("center").append("h1").html(person.name);
 }
 
 
