@@ -55,7 +55,7 @@ d3.json(WORLD110JSON, function(error, world) {
       });
 
   g.selectAll(".country")
-    // .on("click", handleClick)
+    .on("click", handleClick)
     .on("mousemove", function(d, i) {
       var mouse = d3.mouse(svg.node()).map(function(d){return parseInt(d);});
       tooltip.classed("hidden", false)
@@ -110,6 +110,8 @@ function zoomed() {
     .attr("d", path);
 }
 
+
+// show the leader's images on clicks
 function handleClick (d, i) {
   d3.select(".selected").classed("selected", false);
   d3.select("#country_" + d.id).classed("selected", true);
@@ -151,22 +153,11 @@ function countryCodesToNames(codes) {
 }
 ////////////////////////////////////////////////////////////////////////////
 
-function updateYear(year) {
-  YEAR = year;
-  d3.select("#yearBox").html(year);
-  timeline(year);
-}
-
-function updateInfo(info) {
-  d3.select("#infoBox").html(info);
-}
-
-function Event(name, year, countries, color, information) {
+function Person(name, country, image, information) {
   this.name = name;
-  this.year = year;
-  this.countries = countries; // list of country names
-  this.color = color;
-  this.information = information;
+  this.country = country;
+  this.image = image;
+  this.information = information
 }
 
 function groupHighlight(codes, color) {
@@ -176,70 +167,6 @@ function groupHighlight(codes, color) {
 }
 function groupUnHighlight(codes) {
   groupHighlight(codes, "#79A881");
-}
-
-var EVENTS = [
-  new Event(
-    "NATO formed", 
-    "1949", 
-    ["United States",
-    "United Kingdom",
-    "Portugal",
-    "Norway",
-    "Netherlands",
-    "Luxembourg",
-    "Italy",
-    "Iceland",
-    "France",
-    "Denmark",
-    "Canada",
-    "Belgium"], 
-    "#2412AA",
-    "NATO is created"
-  ),
-  new Event(
-    "NATO adds Greece and Turkey",
-    "1952",
-    ["Greece",
-    "Turkey"],
-    "#2412AA",
-    "Turkey and Greece added to NATO in solidarity with their anti-communist movements"
-  ),
-  new Event(
-    "Warsaw Pact formed",
-    "1955",
-    ["Russian Federation",
-    "Bulgaria",
-    "Hungary",
-    "Poland",
-    "Romania",
-    "Albania"],
-    "#CC3131",
-    "Soviet Union makes Warsaw Pact in respone to West Germany being added to NATO"
-  )
-];
-
-function timeline(year) {
-  if (SHOWINGINFO) {
-    infoWindow.selectAll("text").remove();
-  }
-  updateInfo("");
-  for (i = 0, event; event = EVENTS[i]; i++) {
-    if (year == event.year) {
-      updateInfo(event.name);
-      groupHighlight(countriesToCodes(event.countries), event.color);
-      if (SHOWINGINFO) {
-        infoWindow.append("text")
-          .attr("width", width/2)
-          .attr("height", height)
-          .attr("x", width/2 + 5)
-          .attr("y", 30)
-          .html(event.information);
-      } 
-    } else {
-      groupUnHighlight(countriesToCodes(event.countries));
-    }
-  }
 }
 
 
