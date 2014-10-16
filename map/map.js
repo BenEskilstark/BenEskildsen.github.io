@@ -96,7 +96,7 @@ function handleClick (d, i) {
   country.selectAll("circle")
     .data(persons)
   .enter().append("circle")
-    .attr("id", person.name)
+    .attr("id", d.name)
     .attr("cx", 50)
     .attr("cy", 50)
     .attr("r", 50)
@@ -141,9 +141,13 @@ function countryCodesToNames(codes) {
 
 //convert between country code and Person
 function countryCodeToPersons(code) {
+  console.log(code);
+  var countryName = countryCodeToName(code);
+  console.log(countryName);
   var persons = [];
   for (var i = 0, person; person = PEOPLE[i]; i++) {
-    if (person.country === countryCodeToName(code)) {
+    console.log(person.country);
+    if (person.country === countryName) {
       persons.push(person);
     }
   }
