@@ -208,7 +208,9 @@ function Person(name, country, image, information) {
 var PEOPLE = [
   new Person("Che Guevara", "Cuba", "Che.jpeg", ""),
   new Person("Zhou Enlai", "China", "zhouenlai.jpeg", ""),
-  new Person("Lin Biao", "China", "linbiao.jpeg", "")
+  new Person("Lin Biao", "China", "linbiao.jpeg", ""),
+  new Person("Mao Zedong", "China", "mao.jpeg", ""),
+  new Person("Sukarno", "Indonesia", "sukarno.jpeg", "")
 ];
 
 function groupHighlight(codes, color) {
