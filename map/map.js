@@ -286,7 +286,7 @@ function displayInfo(person) {
   infobox
     .append("center").append("h1").html(person.name);
 
-  infobox.append("embed")
+  infobox.append("iframe")
     .attr("src", "CheGuevara.pdf")
     .attr("width", "400px")
     .attr("height", "" + (height - 180) + "px");
