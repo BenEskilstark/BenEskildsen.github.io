@@ -104,6 +104,7 @@ function handleClick (d, i) {
     .attr("id", function(d, i) {return d.name;})
     .attr("x", 50)
     .attr("y", 50)
+    .attr("xlink", function(d, i) {return d.image;})
     // .attr("x", countryCenter[0])
     // .attr("y", countryCenter[1])
   //   .attr("width", 2)
