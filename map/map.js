@@ -94,31 +94,28 @@ function handleClick (d, i) {
   var mouse = d3.mouse(svg.node()).map(function(d){return parseInt(d);});
   var countryCenter = [mouse[0], mouse[1]];
 
-  svg.selectAll("circle")
+  svg.selectAll("image")
     .data([])
   .exit().remove();
 
-  svg.selectAll("circle")
+  svg.selectAll("image")
     .data(persons)
-  .enter().append("circle")
+  .enter().append("image")
     .attr("id", function(d, i) {return d.name;})
-    .attr("cx", countryCenter[0])
-    .attr("cy", countryCenter[1])
-    .attr("r", 5)
+    .attr("x", countryCenter[0])
+    .attr("y", countryCenter[1])
+    .attr("width", 2)
+    .attr("height", 2)
     .attr("class", "person")
   .transition().duration(500)
-    .attr("cx", function(d, i) {
+    .attr("x", function(d, i) {
       return countryCenter[0] + i * 50 + 50;
     })
-    .attr("cy", function(d, i) {
+    .attr("y", function(d, i) {
       return countryCenter[1] + i * 50 + 50;
     })
-    .attr("r", 40)
-    .append("image")
-      .attr("xlink", function(d, i) {return d.image;});
-
-
-  
+    .attr("width", 80)
+    .attr("height", 80);  
 
 }
 
