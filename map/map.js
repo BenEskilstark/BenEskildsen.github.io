@@ -145,9 +145,7 @@ function handleClick (d, i) {
   .enter().append("image")
     .on("click", function(d, i) {
       // remove possible old info box:
-      console.log(d3.select("#image_" + i).attr("x"));
-      if(d3.select("#image_" + i).attr("x") === 10){
-        console.log("we here");
+      if(d3.select("#image_" + i).attr("x") === "10"){
         d3.select(".infobox").remove();
         return;
       }
@@ -279,7 +277,7 @@ function displayInfo(person) {
     .transition().delay(500).duration(500)
       .style("width", "" + (width - 160) + "px")
       .style("height", "" + (height - 144) + "px")
-      .append("h1", person.name);
+      .append("h1").html(person.name);
 }
 
 
