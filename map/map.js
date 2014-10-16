@@ -80,7 +80,7 @@ d3.json(COUNTRYCODESJSON, function(error, json) {
   if (error) return console.error(error);
   countryCodes = json;
   console.log(PEOPLE);
-  groupStyle(PersonstoCountryCodes(PEOPLE), "style", "opacity: 0.75")
+  groupStyle(PersonstoCountryCodes(PEOPLE), "opacity", "0.75")
 });
 
 function zoomed() {
@@ -218,9 +218,9 @@ function Person(name, country, image, information) {
   this.information = information
 }
 
-function groupStyle(codes, attr, style) {
+function groupStyle(codes, prop, detail) {
   for (var i = 0, d; d = codes[i]; i++) {
-    d3.select("#country_" + d).attr(attr, style);
+    d3.select("#country_" + d).style(prop, detail);
   }
 }
 function groupUnHighlight(codes) {
