@@ -24,18 +24,12 @@ var svg = d3.select("body").select("#maincontent").append("svg")
   .attr("width", width)
   .attr("height", height);
 
-var g = svg.append("g");
-
-svg.append("defs").append("svg:clipPath")
-  .attr("id", "clip")
-  .append("svg:circle")
-    .attr("id", "clip-circle")
-    .attr("cx", 50)
-    .attr("cy", 50)
-    .attr("r", 40);
-
-var clipPath = svg.append("g")
+var clipPath = svg.append("defs").append("svg:clipPath")
+  .attr("id", "clip");
+var imagePath = svg.append("g")
   .attr("clip-path", "url(#clip)");
+
+var g = svg.append("g");
 
 var tooltip = d3.select("body").select("#maincontent")
   .append("div").attr("class", "tooltip hidden");
@@ -105,30 +99,48 @@ function handleClick (d, i) {
   var mouse = d3.mouse(svg.node()).map(function(d){return parseInt(d);});
   var countryCenter = [mouse[0], mouse[1]];
 
-  clipPath.selectAll("image")
+  // setting up clipPaths
+  clipPath.selectAll("svg:circle")
+    .data(persons)
+  .append("svg:circle")
+    .attr("id", function(d, i) {return "circle_" + i;})
+    .attr("cx", countryCenter[0])
+    .attr("cy", countryCenter[1])
+    .attr("r", 2)
+  .transition().duration(500)
+    .attr("cx", function(d, i) {
+      var ratio = (i + 1) / persons.length;
+      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0];
+    })
+    .attr("cy", function(d, i) {
+      var ratio = (i + 1) / persons.length;
+      return Math.sin(ratio * Math.PI) * 40 + countryCenter[1];
+    })
+    .attr("r", 80);
+
+  imagePath.selectAll("image")
     .data([])
   .exit().remove();
 
-  clipPath.selectAll("image")
+  imagePath.selectAll("image")
     .data(persons)
   .enter().append("image")
     .attr("id", function(d, i) {return d.name;})
     .attr("xlink:href", function(d, i) {return d.image;})
-    .attr("x", 50).attr("y", 50)
-  //   .attr("x", countryCenter[0])
-  //   .attr("y", countryCenter[1])
-  //   .attr("width", 2)
-  //   .attr("height", 2)
-  //   .attr("class", "person")
-  // .transition().duration(500)
-  //   .attr("x", function(d, i) {
-  //     var ratio = (i + 1) / persons.length;
-  //     return Math.cos(ratio * Math.PI) * 40 + countryCenter[0];
-  //   })
-  //   .attr("y", function(d, i) {
-  //     var ratio = (i + 1) / persons.length;
-  //     return Math.sin(ratio * Math.PI) * 40 + countryCenter[1];
-  //   })
+    .attr("x", countryCenter[0])
+    .attr("y", countryCenter[1])
+    .attr("width", 2)
+    .attr("height", 2)
+    .attr("class", "person")
+  .transition().duration(500)
+    .attr("x", function(d, i) {
+      var ratio = (i + 1) / persons.length;
+      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0];
+    })
+    .attr("y", function(d, i) {
+      var ratio = (i + 1) / persons.length;
+      return Math.sin(ratio * Math.PI) * 40 + countryCenter[1];
+    })
     .attr("width", 80)
     .attr("height", 80);  
 
