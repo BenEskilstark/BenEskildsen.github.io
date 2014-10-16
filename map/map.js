@@ -116,13 +116,13 @@ function handleClick (d, i) {
   .transition().duration(500)
     .attr("cx", function(d, i) {
       var ratio = (i + 1) / persons.length;
-      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0] + 20;
+      return Math.cos(ratio * Math.PI) * 40 + countryCenter[0] + 25;
     })
     .attr("cy", function(d, i) {
       var ratio = (i + 1) / persons.length;
-      return Math.sin(ratio * Math.PI) * 40 + countryCenter[1] + 20;
+      return Math.sin(ratio * Math.PI) * 40 + countryCenter[1] + 25;
     })
-    .attr("r", 40);
+    .attr("r", 35);
 
   imagePath.selectAll("image")
     .data([])
