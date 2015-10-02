@@ -1,0 +1,52 @@
+body {
+    background-color: black;
+}
+
+.left {
+    margin-top: 15px;
+    width: 33%;
+    float: left;
+}
+.middle {
+    display: inline-block;
+    margin-top: 15px;
+    padding-left: 10px;
+    width: 33%;
+}
+.right {
+    margin-top: 15px;
+    width: 30%;
+    float: right;
+}
+
+.settings {
+    float: right;
+    background-color: white;
+    padding: 5px;
+    width: 150px;
+}
+
+.control {
+    background-color: white;
+    width: 175px;
+    float: left;
+    margin-right: 200px;
+    margin-top: 10px;
+    padding: 5px;
+}
+.control:first-child {
+    margin-top: 0px;
+}
+
+.pt {
+    width: 50px;
+    margin: 2px;
+}
+
+h1 {
+    color: white;
+    font-size: 64pt;
+    margin-bottom: 0px;
+    text-align: center;
+}
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="description" content="Displays my Blog">
+		<meta name="author" content="Ben Eskildsen">
+		<link rel="stylesheet" type="text/css" href="driving.css">
+	</head>
+	<body>
+		<div id="header">
+			<div id="header_image_container">
+				<img id="header_img" src="../header_img.png">
+			</div>
+		</div>
+
+		<div id="maincontent">
+
+		<script src="driving.js"></script>
+
+		<canvas id="game_canvas" width="800px" height="590px"></canvas>
+		<script>running = false; setup ()</script>
+		<input type="button" name="single" value="Singleplayer" onClick="run_game ('single');">
+		<input type="button" name="multiplayer" value="Multiplayer" onClick="run_game ('multi');">
+		<input type="button" name="stop" value="Stop" onClick="clearInterval(instancef);">
+
+
+		</div>
+
+		<a href="http://beneskildsen.github.io">Back to Blog</a>
+	</body>
+</html>

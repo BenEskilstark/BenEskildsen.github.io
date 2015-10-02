@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="./css/lightbulb.css" />
+    </head>
+    <body>
+        <h1>Conic Section Room</h1>
+        <div class="left">
+            <div class="settings" id="settings">
+                <b>Settings</b>
+                <br>Number of Rays (4 - 1000)
+                <br><input type="range" id="numrays" value="50" min="4" max="1000" onchange="updateSliders()">
+                <br>Bounces per Ray (1 - 20)
+                <br><input type="range" id="numbounces" value="5" min="1" max="20" onchange="updateSliders()">
+            </div>
+        </div>
+
+        <div class="middle">
+            <canvas id="room" width="500px" height="500px"></canvas>
+        </div>
+
+        <div class="right">
+            <div class="control">
+                <b>Add Line</b>
+                <br>X1: <input class="pt" type="number" id="linex1"> Y1: <input id="liney1" class="pt" type="number">
+                <br>X2: <input class="pt" type="number" id="linex2"> Y2: <input class="pt" type="number" id="liney2">
+                <br><input type="button" id="addLine" value="Add Line" onclick="addLine()">
+            </div>
+
+            <div class="control">
+                <b>Add Circle</b>
+                <br>X: <input class="pt" type="number" id="circlex"> Y: <input id="circley" class="pt" type="number">
+                <br>R: <input class="pt" type="number" id="circleradius">
+                <br><input type="button" id="addCircle" value="Add Circle" onclick="addCircle()">
+            </div>
+
+            <div class="control">
+                <b>Add Ellipse</b>
+                <br>X: <input class="pt" type="number" id="ellipsex"> Y: <input class="pt" type="number" id="ellipsey">
+                <br>A: <input class="pt" type="number" id="ellipsea"> B: <input id="ellipseb" class="pt" type="number">
+                <br><input type="button" id="addEllipse" value="Add Ellipse" onclick="addEllipse()">
+            </div>
+
+            <div class="control">
+                <b>Add Parabola</b>
+                <br>X: <input class="pt" type="number" id="parabolax"> Y: <input id="parabolay" class="pt" type="number">
+                <br>A: <input class="pt" type="number" id="parabolaa">
+                <br><input type="button" id="addParabola" value="Add Parabola" onclick="addParabola()">
+            </div>
+
+            <div class="control">
+                <b>Add Hyperbola</b>
+                <br>X: <input class="pt" type="number" id="hyperbolax"> Y: <input class="pt" type="number" id="hyperbolay">
+                <br>A: <input class="pt" type="number" id="hyperbolaa"> B: <input id="hyperbolab" class="pt" type="number">
+                <br><input type="button" id="addHyperbola" value="Add Hyperbola" onclick="addHyperbola()">
+            </div>
+        </div>
+
+        <script src="js/lightbulb.js"></script>
+        <script>
+            setup();
+        </script>
+    </body>
+</html>
