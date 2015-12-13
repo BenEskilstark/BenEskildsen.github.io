@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <title>Ant Simulator</title>
+    <link rel="stylesheet" type="text/css" href="css/ants.css">
+  </head>
+  <body>
+  	<script src="js/ant.js"></script>
+    <script src="js/world.js"></script>
+    <script src="js/shaders.js"></script>
+    <script src="js/3D/js/spidergl.js"></script>
+    <script src="js/3D/js/spidergl-config.js"></script>
+    <script src="js/3D/js/cube.js"></script>
+    <script src="js/3D/js/sphere_latlong.js"></script>
+    <script src="js/3D/js/cylinder.js"></script>
+    <script src="js/character.js"></script>
+    <script src="js/simulation.js"></script>
+    <script src="js/main.js"></script>
+
+    <div class="left-column">
+        <div class="menu">
+            <b>Global Simulation Parameters</b>
+            <br>(After changing things in this column you must restart the simulation)
+            <br><input type="button" id="start" onClick="simulation = main(simulation)" value="Start">
+            <input type="button" onClick="toggleSimulation(simulation)" id="toggle" value="Pause">
+        </div>
+        <div class="menu">
+            <b>Simulation Dimensions</b>
+            <br>
+            X: <input type="number" min="1" max="1000" id="width" value="10">
+            Y: <input type="number" min="1" max="1000" id="height" value="10">
+            Z: <input type="number" min="1" max="1000" id="depth" value="10">
+        </div>
+        <div class="menu">
+            Number of Ants: <input type="number" min="1" max="100" id="numAnts" value="1">
+            <br>Depth of Dirt: <input type="number" min="1" max="100" id="numDirt" value="5">
+        </div>
+    </div>
+
+    <div class="center-column">
+        <canvas id="canvas" width="700" height="500"> </canvas>
+    </div>
+
+    <div class="right-column">
+        <div class="menu">
+            <b>Camera Location</b>
+            <br>
+            X: <input type="range" min="0" max="20" id="cameraX" value="5">
+            Y: <input type="range" min="0" max="20" id="cameraY" value="13">
+            Z: <input type="range" min="0" max="20" id="cameraZ" value="10">
+
+            <br><b>Camera Pointing At</b>
+            <br>
+            X: <input type="range" min="0" max="20" id="lookAtX" value="5">
+            Y: <input type="range" min="0" max="20" id="lookAtY" value="5">
+            Z: <input type="range" min="0" max="20" id="lookAtZ" value="5">
+
+            <br><b>Zoom Level</b>
+            <input type="range" min="0" max="10" id="zoomLevel" value="1">
+
+            <br><b>Simulation Speed</b>
+            <input type="range" min="0" max="200" id="speed" value="80">
+
+            <br><b>Ant Resolution</b>
+            <input type="range" min="0" max="1" id="antResolution" value="1">
+        </div>
+    </div>
+  </body>
+</html>

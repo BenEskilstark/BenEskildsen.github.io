@@ -1,0 +1,10 @@
+#container {
+    right: 300px;
+}
+
+.world {
+    border: 1px solid black;
+    margin-left: 285px;
+    position: relative;
+    background-color: #A0522D;
+}

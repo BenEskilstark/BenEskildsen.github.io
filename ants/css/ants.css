@@ -1,0 +1,30 @@
+input {
+    width: 55px;
+}
+canvas {
+    border: 1px solid black;
+}
+
+.left-column {
+    float: left;
+    width: 25%
+}
+.right-column {
+    float: right;
+    width: 25%;
+}
+.center-column {
+    display: inline-block;
+    width: 50%;
+}
+
+.menu {
+    box-shadow: 3px 3px 2px #888888;
+    text-align: left;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 255px;
+    margin-bottom: 10px;
+    margin-left: 35px;
+}
