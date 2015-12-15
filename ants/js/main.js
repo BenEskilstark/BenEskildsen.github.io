@@ -55,7 +55,7 @@ function main(simulation) {
 }
 
 function run() {
-    var framesPerStep = 200 - parseInt(document.getElementById("speed").value) + 1;
+    var framesPerStep = 200 - (100 + parseInt(document.getElementById("speed").value)) + 1;
     if (this.stepCount == 0) {
         this.step();
         // console.log("FPS: " + this.fps + "steps per sec: " + this.fps/20);
@@ -77,6 +77,7 @@ function render(pathFrac) {
 	gl.viewport(0, 0, width, height);
 
     var antResolution = parseInt(document.getElementById("antResolution").value);
+    var toggleDirt = parseInt(document.getElementById("toggleDirt").value);
 
 	// Clear the framebuffer
 	gl.clearColor(0.4, 0.6, 0.8, 1.0);
@@ -99,12 +100,12 @@ function render(pathFrac) {
 	stack.loadIdentity(); //line 238}
 
     // camera
-    var cameraX = parseInt(document.getElementById("cameraX").value) / 20 * x;
-    var cameraY = parseInt(document.getElementById("cameraY").value) / 20 * y;
-    var cameraZ = parseInt(document.getElementById("cameraZ").value) / 20 * z;
-    var lookAtX = parseInt(document.getElementById("lookAtX").value) / 20 * x;
-    var lookAtY = parseInt(document.getElementById("lookAtY").value) / 20 * y;
-    var lookAtZ = parseInt(document.getElementById("lookAtZ").value) / 20 * z;
+    var cameraX = (parseInt(document.getElementById("cameraX").value) / 10 - 1) * x;
+    var cameraY = (parseInt(document.getElementById("cameraY").value) / 10 - 1) * y;
+    var cameraZ = (parseInt(document.getElementById("cameraZ").value) / 10 - 1) * z;
+    var lookAtX = (parseInt(document.getElementById("lookAtX").value) / 10 - 1) * x;
+    var lookAtY = (parseInt(document.getElementById("lookAtY").value) / 10 - 1) * y;
+    var lookAtZ = (parseInt(document.getElementById("lookAtZ").value) / 10 - 1) * z;
 
 	var invV = SglMat4.lookAt(
         [lookAtX + cameraX, lookAtY + cameraY, lookAtZ + cameraZ], // camera location
@@ -116,18 +117,24 @@ function render(pathFrac) {
 	stack.push();//line 242
 	stack.pop();
 
-	var dirt = this.dirt;
-	for (var t in dirt) {
-        stack.push();
-        stack.multiply(SglMat4.translation([
-            dirt[t].x, dirt[t].y, dirt[t].z
-        ]));
-        gl.uniformMatrix4fv(
-            this.uniformShader.uModelViewMatrixLocation, false, stack.matrix
-        );
-		this.drawObject(gl, this.cube, [0.3, 0.2, 0.2, 1.0], [0, 0, 0, 1.0]);
-        stack.pop();
-	}
+    if (toggleDirt) {
+        var dirt = [];
+        var occupiableCells = this.world.getOccupiableDirtCells();
+        for (var i = 0; i < occupiableCells.length; i++) {
+            dirt.push(occupiableCells[i].position);
+        }
+        for (var t in dirt) {
+            stack.push();
+            stack.multiply(SglMat4.translation([
+                dirt[t].x, dirt[t].y, dirt[t].z
+            ]));
+            gl.uniformMatrix4fv(
+                this.uniformShader.uModelViewMatrixLocation, false, stack.matrix
+            );
+            this.drawObject(gl, this.cube, [0.3, 0.2, 0.2, 1.0], [0, 0, 0, 1.0]);
+            stack.pop();
+        }
+    }
     // create the ants
 	for (var i = 0; i < this.ants.length; i++) {
         var prevPos = this.ants[i].previousCell.position;
@@ -150,10 +157,19 @@ function render(pathFrac) {
         } else if (antResolution == 1) {
             // point the ant in its direction of motion:
             var deg = 0;
-            if (curPos.z - prevPos.z == 1)  { deg = 90; }
-            if (curPos.x - prevPos.x == 1)  { deg = 180; }
-            if (curPos.z - prevPos.z == -1) { deg = -90; }
-            if (pathFrac < 0.25) {
+            var stayingPut = false;
+            if (curPos === prevPos) {
+                stayingPut = true;
+                deg = this.ants[i].prevDeg;
+            } else {
+                deg = 180 * Math.atan((curPos.x - prevPos.x) / (curPos.z - prevPos.z))
+                    / Math.PI + 90;
+                if (curPos.z - prevPos.z < 0) {
+                    deg -= 180;
+                }
+            }
+            this.ants[i].prevDeg = deg;
+            if (pathFrac < 0.25 && !stayingPut && deg != this.ants[i].prevDeg) {
                 deg *= 4 * pathFrac;
             }
             stack.multiply(SglMat4.translation([0.5, 0.5, 0.5]));
@@ -190,11 +206,6 @@ function createObjects() {
     this.cylinder = new Cylinder(15);
     this.sphere = new SphereLatLong(15,15);
 
-    this.dirt = [];
-    var occupiableCells = this.world.getOccupiableDirtCells();
-	for (var i = 0; i < occupiableCells.length; i++) {
-        this.dirt.push(occupiableCells[i].position);
-	}
 };
 
 function createBuffers(gl) {

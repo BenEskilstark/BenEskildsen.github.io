@@ -28,13 +28,13 @@
         <div class="menu">
             <b>Simulation Dimensions</b>
             <br>
-            X: <input type="number" min="1" max="1000" id="width" value="10">
-            Y: <input type="number" min="1" max="1000" id="height" value="10">
-            Z: <input type="number" min="1" max="1000" id="depth" value="10">
+            X: <input type="number" min="1" max="1000" id="width" value="30">
+            Y: <input type="number" min="1" max="1000" id="height" value="50">
+            Z: <input type="number" min="1" max="1000" id="depth" value="30">
         </div>
         <div class="menu">
-            Number of Ants: <input type="number" min="1" max="100" id="numAnts" value="1">
-            <br>Depth of Dirt: <input type="number" min="1" max="100" id="numDirt" value="5">
+            Number of Ants: <input type="number" min="1" max="100" id="numAnts" value="100">
+            <br>Depth of Dirt: <input type="number" min="1" max="100" id="numDirt" value="40">
         </div>
     </div>
 
@@ -46,24 +46,27 @@
         <div class="menu">
             <b>Camera Location</b>
             <br>
-            X: <input type="range" min="0" max="20" id="cameraX" value="5">
-            Y: <input type="range" min="0" max="20" id="cameraY" value="13">
-            Z: <input type="range" min="0" max="20" id="cameraZ" value="10">
+            X: <input type="range" min="0" max="20" id="cameraX" value="15">
+            Y: <input type="range" min="0" max="20" id="cameraY" value="18">
+            Z: <input type="range" min="0" max="20" id="cameraZ" value="15">
 
             <br><b>Camera Pointing At</b>
             <br>
-            X: <input type="range" min="0" max="20" id="lookAtX" value="5">
-            Y: <input type="range" min="0" max="20" id="lookAtY" value="5">
-            Z: <input type="range" min="0" max="20" id="lookAtZ" value="5">
+            X: <input type="range" min="0" max="20" id="lookAtX" value="10">
+            Y: <input type="range" min="0" max="20" id="lookAtY" value="10">
+            Z: <input type="range" min="0" max="20" id="lookAtZ" value="10">
 
             <br><b>Zoom Level</b>
-            <input type="range" min="0" max="10" id="zoomLevel" value="1">
+            <input type="range" min="0" max="10" id="zoomLevel" value="3">
 
             <br><b>Simulation Speed</b>
-            <input type="range" min="0" max="200" id="speed" value="80">
+            <input type="range" min="0" max="100" id="speed" value="95">
 
             <br><b>Ant Resolution</b>
             <input type="range" min="0" max="1" id="antResolution" value="1">
+
+            <br><b>Toggle Dirt</b>
+            <input type="range" min="0" max="1" id="toggleDirt" value="1">
         </div>
     </div>
   </body>

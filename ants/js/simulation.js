@@ -1,4 +1,4 @@
-// A simulation consists of a world, an array of ants, a step function that updates the state of
+// A simulation consists of a world, an array of ants, a step function that updates the task of
 // the world by having each ant decide what to do next, a render function that decides how to
 // display the simulation on screen, and the run function that decides when to step and when to
 // render.
@@ -17,14 +17,17 @@ function createSimulation(dimensions) {
             for (var i = 0, ant; ant = this.ants[i]; i++) {
                 var currentCell = ant.cell;
                 // make stencils for this cell
-                var stencils = getStencils(ant, currentCell, this.world.grid);
+                var vectors = getVectors(ant, currentCell, this);
                 // have the ant decide where to go next
-                var nextCell = indexToCell(ant.decide(stencils), currentCell);
+                var nextCell = vectorToCell(ant.decide(vectors), currentCell, this);
                 // update the cells to reflect new position of the ant
                 ant.previousCell = ant.cell;
                 ant.cell = nextCell;
                 nextCell.ant = ant;
-                currentCell.ant = null;
+                if (nextCell !== currentCell) {
+                    currentCell.ant = null;
+                }
+                // update pheromone levels
                 currentCell.pheromone += ant.pheromone;
             }
         },
@@ -45,67 +48,125 @@ function createSimulation(dimensions) {
 
         seedWithAnts: function(numAnts) {
             for (var i = 0; i < numAnts; i++) {
-                this.ants.push(createTestAnt("ant:"+i, this.world.getRandomOccupiableCell()));
+                var ant = createTestAnt("ant:"+i, this.world.getRandomOccupiableCell(), this);
+                this.ants.push(ant);
+                ant.cell.ant = ant;
             }
         },
 
         seedWithDirt: function(depth) {
             this.world.seedWithDirt(depth);
+            this.nest = {
+                x: dimensions.x / 2,
+                y: depth - 1,
+                z: dimensions.z / 2
+            };
         }
     };
 }
 
-// stencils always go in the order: [current location, left neighbor, right neighbor,
-// top neighbor, bottom neighbor, front neighbor, back neighbor]
-function getStencils(ant, cell, grid) {
-    var stencils = [];
+function getVectors(ant, cell, simulation) {
+    var vectors = [];
 
-    // stencil for cells that are possible to move to:
-    var occupiable = [];
-    occupiable.push(1); // ant's current location must be occupiable
-    for (var i = 0; i < cell.neighbors.length; i++) {
-        if (cell.neighbors[i].occupiable() &&
-            !isWrappedAround(cell.position, cell.neighbors[i].position)) {
-            occupiable.push(1);
-        } else {
-            occupiable.push(0);
-        }
+    // 1. Vector pointing in a random 2D direction. "noise"
+    vectors.push([2*Math.random() - 1, 0, 2*Math.random() - 1]);
+
+    // 2. Vector pointing in a random 3D direction.
+    vectors.push([2*Math.random() - 1, 2*Math.random() - 1, 2*Math.random() - 1]);
+
+    // 3. Vector for continuing in a straight line.
+    var curr = ant.cell.position;
+    var prev = ant.previousCell.position;
+    vectors.push([curr.x - prev.x, curr.y -  prev.y, curr.z - prev.z]);
+
+    // 4. Vector for pointing away from the nest entrance
+    var nest = simulation.nest;
+    var dist = Math.sqrt(
+        (curr.x - nest.x) * (curr.x - nest.x) +
+        (curr.y - nest.y) * (curr.y - nest.y) +
+        (curr.z - nest.z) * (curr.z - nest.z));
+    if (dist == 0) {
+        dist += 0.01
     }
-    stencils.push(occupiable);
+    vectors.push([(curr.x - nest.x)/dist, (curr.y - nest.y)/dist, (curr.z - nest.z)/dist]);
 
-    // stencil for pheromone levels
-    var pheromones = [];
-    pheromones.push(0); // don't go to your current location
-    for (var i = 0; i < cell.neighbors.length; i++) {
-        pheromones.push(cell.neighbors[i].pheromone);
+    // 5. Vector for pointing down in order to dig
+    vectors.push([0, -1, 0]);
+
+    // 6. Vector for pointing to a cell the ant cares about
+    var goalPos = ant.goalCell.position;
+    var goalDist = Math.sqrt(
+        (curr.x - goalPos.x) * (curr.x - goalPos.x) +
+        (curr.y - goalPos.y) * (curr.y - goalPos.y) +
+        (curr.z - goalPos.z) * (curr.z - goalPos.z));
+    if (goalDist == 0) {
+        goalDist += 0.01
     }
-    stencils.push(pheromones);
+    vectors.push([
+        (goalPos.x - curr.x)/goalDist,
+        (goalPos.y - curr.y)/goalDist,
+        (goalPos.z - curr.z)/goalDist
+    ]);
 
-    // stencil for keeping the ant going straight
-    var goStraight = [];
-    goStraight.push(0.2);
-    for (var i = 0; i < cell.neighbors.length; i++) {
-        var xDist = Math.abs(cell.neighbors[i].position.x - ant.previousCell.position.x);
-        var yDist = Math.abs(cell.neighbors[i].position.y - ant.previousCell.position.y);
-        var zDist = Math.abs(cell.neighbors[i].position.z - ant.previousCell.position.z);
-        if (xDist + yDist + zDist == 0) {
-            goStraight.push(0);
-        } else if (xDist == 2 || yDist == 2 || zDist == 2) {
-            goStraight.push(1);
-        } else {
-            goStraight.push(0.5);
-        }
-    }
-    stencils.push(goStraight);
-
-    // stencil for pointing to the direction of the colony
-
-    return stencils;
+    return vectors;
 }
 
-function indexToCell(index, cell) {
-    if (index === 0) {
+// Will convert the ant's chosen vector into the next cell that the ant will move to
+// This is more than simple math because if the ant wants to go somewhere illegal then
+// this function will decide which cell the ant will get to move to instead.
+// There are 4 cases where an ant would want to go somewhere illegal:
+// 1. Move off the map      -- stay put
+// 2. Move into dirt        -- dig through the dirt if that cell would be occupiable w/o dirt
+// 3. Move into another ant -- stay put
+// 4. Move into open air    -- turn the vector downwards until it points to a legal cell
+function vectorToCell(vector, cell, simulation) {
+    // Find the largest component of the vector
+    var maxComp = -Infinity;
+    for (var i = 0; i < vector.length; i++) {
+        if (Math.abs(vector[i]) > maxComp) {
+            maxComp = Math.abs(vector[i]);
+        }
+    }
+    // scale the vector down based on largest component
+    for (var i = 0; i < vector.length; i++) {
+        vector[i] = Math.round(vector[i] / maxComp);
+    }
+
+    var nextCell = cell.neighbors[9 * (vector[0]+1) + 3 * (vector[1]+1) + (vector[2]+1)];
+
+    // handle case 1:
+    if (isWrappedAround(cell.position, nextCell.position)) {
         return cell;
     }
-    return cell.neighbors[index - 1];
+
+    // handle case 2:
+    if (nextCell.type == "dirt") {
+        nextCell.type = "empty";
+        if (!cell.ant.hasDirt && nextCell.occupiable() && !cell.ant.dontDig) {
+            cell.ant.hasDirt = true;
+            simulation.world.dirtToRenderCache = null;
+            return nextCell;
+        } else {
+            nextCell.type = "dirt";
+            return cell;
+        }
+    }
+
+    // handle case 3:
+    // if (nextCell.ant) {
+    //     return cell;
+    // }
+
+    // handle case 4:
+    if (!nextCell.occupiable()) {
+        while (vector[1] >= -1 && !nextCell.occupiable()) {
+            vector[1] -= 1;
+            var nextCell = cell.neighbors[9*(vector[0]+1) + 3*(vector[1]+1) + (vector[2]+1)];
+        }
+        if (vector[1] < -1) {
+            return cell;
+        }
+    }
+
+    return nextCell;
 }

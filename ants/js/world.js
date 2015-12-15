@@ -1,5 +1,5 @@
 function createWorld(dimensions) {
-    // dimensions looks like {x: width, y: height, z: depth}Õ
+    // dimensions looks like {x: width, y: height, z: depth}
     return {
         dimensions: dimensions,
 
@@ -17,22 +17,24 @@ function createWorld(dimensions) {
                 }
                 grid.push(row);
             }
-            // Point the cell at its neighbors, where neighbors are cells that share a face
-            // with the cell. (there are 6). The grid wraps so that stencils will
+            // Point the cell at its neighbors -- all cells sharing a face, edge or vertex
+            // with the cell. (there are 26). The grid wraps so that stencils will
             // always line up, but in practice I might put some invisible barrier around
             // the edge to prevent ants from going around.
             for (var x = 0; x < dimensions.x; x++) {
             for (var y = 0; y < dimensions.y; y++) {
             for (var z = 0; z < dimensions.z; z++) {
                 var cell = grid[x][y][z];
-                cell.neighbors.push(grid[(x + grid.length - 1) % grid.length][y][z]);
-                cell.neighbors.push(grid[(x + grid.length + 1) % grid.length][y][z]);
-
-                cell.neighbors.push(grid[x][(y + grid.length - 1) % grid[0].length][z]);
-                cell.neighbors.push(grid[x][(y + grid.length + 1) % grid[0].length][z]);
-
-                cell.neighbors.push(grid[x][y][(z + grid.length - 1) % grid[0][0].length]);
-                cell.neighbors.push(grid[x][y][(z + grid.length + 1) % grid[0][0].length]);
+                cell.neighbors = [];
+                for (var i = -1; i <= 1; i++) {
+                for (var j = -1; j <= 1; j++) {
+                for (var k = -1; k <= 1; k++) {
+                    cell.neighbors.push(grid[(x+i + dimensions.x) % dimensions.x]
+                                            [(y+j + dimensions.y) % dimensions.y]
+                                            [(z+k + dimensions.z) % dimensions.z]);
+                }
+                }
+                }
             }
             }
             }
@@ -79,8 +81,11 @@ function createWorld(dimensions) {
             for (var z = 0; z < dimensions.z; z++) {
                 var cell = this.grid[x][y][z];
                 if (cell.type === "dirt") {
-                    for (var i = 0; i < cell.neighbors.length; i++) {
-                        if (cell.neighbors[i].occupiable()) {
+                    var closeNeighbors = [4, 10, 12, 14, 16, 22];
+                    for (var i = 0; i < closeNeighbors.length; i++) {
+                        var dirtCell = cell.neighbors[closeNeighbors[i]];
+                        if (dirtCell.occupiable() &&
+                            !isWrappedAround(cell.position, dirtCell.position)) {
                             occupiable.push(cell);
                         }
                     }
@@ -93,6 +98,7 @@ function createWorld(dimensions) {
         },
 
         seedWithDirt: function(depth) {
+            this.depth = depth;
             for (var x = 0; x < dimensions.x; x++) {
                 for (var y = 0; y < depth; y++) {
                     for (var z = 0; z < dimensions.z; z++) {
@@ -114,10 +120,10 @@ function createCell(point) {
         // a cell is occupiable if it is empty AND it neighbors
         // something solid like dirt or rock.
         occupiable: function () {
-            if (this.type === "empty" || this.type === "food") {
+            if (this.type === "empty") {
                 for (var i = 0; i < this.neighbors.length; i++) {
                     if (isWrappedAround(this.neighbors[i].position, this.position)) {
-                        continue;
+                       continue;
                     }
                     if (this.neighbors[i].type === "dirt" ||
                         this.neighbors[i].type === "rock") {
@@ -126,7 +132,7 @@ function createCell(point) {
                 }
             }
             return false;
-        },
+        }
     };
 
     return cell;
