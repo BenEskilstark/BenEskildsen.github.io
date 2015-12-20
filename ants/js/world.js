@@ -120,7 +120,7 @@ function createCell(point) {
         // a cell is occupiable if it is empty AND it neighbors
         // something solid like dirt or rock.
         occupiable: function () {
-            if (this.type === "empty") {
+            if (this.type === "empty" || this.type === "food") {
                 for (var i = 0; i < this.neighbors.length; i++) {
                     if (isWrappedAround(this.neighbors[i].position, this.position)) {
                        continue;

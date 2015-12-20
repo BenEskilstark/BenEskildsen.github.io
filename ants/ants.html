@@ -9,33 +9,31 @@
   	<script src="js/ant.js"></script>
     <script src="js/world.js"></script>
     <script src="js/shaders.js"></script>
-    <script src="js/3D/js/spidergl.js"></script>
-    <script src="js/3D/js/spidergl-config.js"></script>
-    <script src="js/3D/js/cube.js"></script>
-    <script src="js/3D/js/sphere_latlong.js"></script>
-    <script src="js/3D/js/cylinder.js"></script>
-    <script src="js/character.js"></script>
+    <script src="js/trackball.js"></script>
+    <script src="js/3D/spidergl.js"></script>
+    <script src="js/3D/spidergl-config.js"></script>
+    <script src="js/3D/cube.js"></script>
+    <script src="js/3D/sphere_latlong.js"></script>
+    <script src="js/3D/cylinder.js"></script>
+    <script src="js/3D/character.js"></script>
     <script src="js/simulation.js"></script>
     <script src="js/main.js"></script>
 
     <div class="left-column">
         <div class="menu">
             <b>Global Simulation Parameters</b>
-            <br>(After changing things in this column you must restart the simulation)
-            <br><input type="button" id="start" onClick="simulation = main(simulation)" value="Start">
+            <br>(After changing things in this box you must restart the simulation)<br>
+            <input type="button" id="start" onClick="simulation=main(simulation)" value="Start">
             <input type="button" onClick="toggleSimulation(simulation)" id="toggle" value="Pause">
-        </div>
-        <div class="menu">
-            <b>Simulation Dimensions</b>
+            <br><br><b>Simulation Dimensions</b>
             <br>
-            X: <input type="number" min="1" max="1000" id="width" value="30">
+            X: <input type="number" min="1" max="1000" id="width" value="40">
             Y: <input type="number" min="1" max="1000" id="height" value="50">
-            Z: <input type="number" min="1" max="1000" id="depth" value="30">
+            Z: <input type="number" min="1" max="1000" id="depth" value="40"><br>
+            <br>Number of Ants: <input type="number" min="1" max="100" id="numAnts" value="25">
+            <br>Depth of Dirt:  <input type="number" min="1" max="100" id="numDirt" value="40">
         </div>
-        <div class="menu">
-            Number of Ants: <input type="number" min="1" max="100" id="numAnts" value="100">
-            <br>Depth of Dirt: <input type="number" min="1" max="100" id="numDirt" value="40">
-        </div>
+
     </div>
 
     <div class="center-column">
@@ -44,29 +42,19 @@
 
     <div class="right-column">
         <div class="menu">
-            <b>Camera Location</b>
-            <br>
-            X: <input type="range" min="0" max="20" id="cameraX" value="15">
-            Y: <input type="range" min="0" max="20" id="cameraY" value="18">
-            Z: <input type="range" min="0" max="20" id="cameraZ" value="15">
-
-            <br><b>Camera Pointing At</b>
-            <br>
-            X: <input type="range" min="0" max="20" id="lookAtX" value="10">
-            Y: <input type="range" min="0" max="20" id="lookAtY" value="10">
-            Z: <input type="range" min="0" max="20" id="lookAtZ" value="10">
-
-            <br><b>Zoom Level</b>
-            <input type="range" min="0" max="10" id="zoomLevel" value="3">
+            <b>Current Settings</b>
 
             <br><b>Simulation Speed</b>
-            <input type="range" min="0" max="100" id="speed" value="95">
+            <input type="range" min="60" max="100" id="speed" value="95">
 
             <br><b>Ant Resolution</b>
             <input type="range" min="0" max="1" id="antResolution" value="1">
 
             <br><b>Toggle Dirt</b>
             <input type="range" min="0" max="1" id="toggleDirt" value="1">
+
+            <br><b>Toggle Surface Dirt</b>
+            <input type="range" min="0" max="1" id="toggleSurfaceDirt" value="1">
         </div>
     </div>
   </body>

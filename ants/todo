@@ -1,0 +1,14 @@
+I realized yesterday that I've made a big mistake in how I set this up. Using the stencils
+consisting of the 6 neighboring cells is no good because the ant can dig down but can never get out of the tunnel it just dug because for a moment it would have to float above the hole. No matter what
+I need to go back in and make the neighborhood of possible next-cells larger. But honestly the
+whole stencil idea seems not very good: multiple behaviors are being pigeon-holed into stencils
+when they are really just trying to get the ant to move in a certain direction. So I'm going to go
+back in and tear out the stencils and replace them with vectors. Every ant will decide where to go
+next by summing a bunch of vectors and moving to the neighboring cell (in the larger, 26-cube
+neighborhood) which the vector goes through. In order to implement this switch I will need to:
+
+-- Add stuff for not colliding with other ants and for not going off the screen or hitting dirt/
+digging.
+-- Fix my documentation/comments to reflect this change
+
+Lez go

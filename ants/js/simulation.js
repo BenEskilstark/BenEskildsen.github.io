@@ -19,7 +19,7 @@ function createSimulation(dimensions) {
                 // make stencils for this cell
                 var vectors = getVectors(ant, currentCell, this);
                 // have the ant decide where to go next
-                var nextCell = vectorToCell(ant.decide(vectors), currentCell, this);
+                var nextCell = vectorToCell(ant.decide(vectors), ant, currentCell, this);
                 // update the cells to reflect new position of the ant
                 ant.previousCell = ant.cell;
                 ant.cell = nextCell;
@@ -44,6 +44,17 @@ function createSimulation(dimensions) {
             this.rate = newRate;
             this.stop();
             this.start();
+        },
+
+        seedWithFood: function(amount, density) {
+            this.food = this.food || [];
+            for (var i = 0; i < amount; i++) {
+                var cell = this.world.getRandomOccupiableCell();
+                cell.type = "food";
+                cell.foodDensity = density;
+                cell.startingFoodDensity = density;
+                this.food.push(cell);
+            }
         },
 
         seedWithAnts: function(numAnts) {
@@ -94,19 +105,26 @@ function getVectors(ant, cell, simulation) {
     vectors.push([0, -1, 0]);
 
     // 6. Vector for pointing to a cell the ant cares about
-    var goalPos = ant.goalCell.position;
-    var goalDist = Math.sqrt(
-        (curr.x - goalPos.x) * (curr.x - goalPos.x) +
-        (curr.y - goalPos.y) * (curr.y - goalPos.y) +
-        (curr.z - goalPos.z) * (curr.z - goalPos.z));
-    if (goalDist == 0) {
-        goalDist += 0.01
+    if (ant.goalCells.length > 0) {
+        var goalPos = ant.goalCells[ant.goalIndex].position;
+        var goalDist = Math.sqrt(
+            (curr.x - goalPos.x) * (curr.x - goalPos.x) +
+            (curr.y - goalPos.y) * (curr.y - goalPos.y) +
+            (curr.z - goalPos.z) * (curr.z - goalPos.z));
+        if (goalDist == 0) {
+            goalDist += 0.01
+        }
+        vectors.push([
+            (goalPos.x - curr.x)/goalDist,
+            (goalPos.y - curr.y)/goalDist,
+            (goalPos.z - curr.z)/goalDist
+        ]);
     }
-    vectors.push([
-        (goalPos.x - curr.x)/goalDist,
-        (goalPos.y - curr.y)/goalDist,
-        (goalPos.z - curr.z)/goalDist
-    ]);
+
+    // 7. Vector for pheromone
+    if (cell.pheromone) {
+        vectors.push(cell.pheromone);
+    }
 
     return vectors;
 }
@@ -114,12 +132,13 @@ function getVectors(ant, cell, simulation) {
 // Will convert the ant's chosen vector into the next cell that the ant will move to
 // This is more than simple math because if the ant wants to go somewhere illegal then
 // this function will decide which cell the ant will get to move to instead.
-// There are 4 cases where an ant would want to go somewhere illegal:
+// There are 5 cases where an ant would want to go somewhere illegal:
 // 1. Move off the map      -- stay put
 // 2. Move into dirt        -- dig through the dirt if that cell would be occupiable w/o dirt
 // 3. Move into another ant -- stay put
 // 4. Move into open air    -- turn the vector downwards until it points to a legal cell
-function vectorToCell(vector, cell, simulation) {
+// 5. Move into food        -- take some of the food and stay put
+function vectorToCell(vector, ant, cell, simulation) {
     // Find the largest component of the vector
     var maxComp = -Infinity;
     for (var i = 0; i < vector.length; i++) {
@@ -129,7 +148,7 @@ function vectorToCell(vector, cell, simulation) {
     }
     // scale the vector down based on largest component
     for (var i = 0; i < vector.length; i++) {
-        vector[i] = Math.round(vector[i] / maxComp);
+        vector[i] = Math.round(vector[i] / maxComp) || 0;
     }
 
     var nextCell = cell.neighbors[9 * (vector[0]+1) + 3 * (vector[1]+1) + (vector[2]+1)];
@@ -142,8 +161,11 @@ function vectorToCell(vector, cell, simulation) {
     // handle case 2:
     if (nextCell.type == "dirt") {
         nextCell.type = "empty";
-        if (!cell.ant.hasDirt && nextCell.occupiable() && !cell.ant.dontDig) {
-            cell.ant.hasDirt = true;
+        if (!ant.hasDirt && nextCell.occupiable() && !ant.dontDig &&
+                ((ant.currentTask.name == "goToCell" &&
+                  ant.cell.position.y >= simulation.world.depth) ||
+                ant.currentTask.name != "goToCell")) {
+            ant.hasDirt = true;
             simulation.world.dirtToRenderCache = null;
             return nextCell;
         } else {
@@ -153,9 +175,15 @@ function vectorToCell(vector, cell, simulation) {
     }
 
     // handle case 3:
-    // if (nextCell.ant) {
-    //     return cell;
-    // }
+    if (nextCell.ant) {
+        if (Math.random() < 0.5 && ant.currentTask.name && !nextCell.ant.recruited) { // recruit
+            nextCell.ant.recruited = true;
+            nextCell.ant.taskStack = ant.taskStack.slice();
+            nextCell.ant.goalCells = ant.goalCells.slice();
+            nextCell.ant.goalIndex = ant.goalIndex;
+            nextCell.ant.currentTask = ant.currentTask;
+        }
+    }
 
     // handle case 4:
     if (!nextCell.occupiable()) {
@@ -166,6 +194,15 @@ function vectorToCell(vector, cell, simulation) {
         if (vector[1] < -1) {
             return cell;
         }
+    }
+
+    // handle case 5:
+    if (nextCell.type == "food") {
+        if (!ant.hasFood) {
+            nextCell.foodDensity -= 1;
+            ant.hasFood = true;
+        }
+        return cell;
     }
 
     return nextCell;
