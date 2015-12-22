@@ -106,6 +106,16 @@ function createWorld(dimensions) {
                     }
                 }
             }
+        },
+
+        clearDirtOffSurface: function() {
+            var y = this.depth;
+            for (var x = 0; x < this.dimensions.x; x++) {
+                for (var z = 0; z < this.dimensions.z; z++) {
+                    this.grid[x][y][z].type = "empty";
+                }
+            }
+            this.dirtToRenderCache = null;
         }
     };
 }

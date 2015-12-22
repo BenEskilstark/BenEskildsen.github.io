@@ -48,9 +48,6 @@
 
             <br><b>Toggle Surface Dirt</b>
             <input type="range" min="0" max="1" id="toggleSurfaceDirt" value="1">
-
-            <br><br>Clear Dirt off the surface:
-            <input type="button" value="Clear" onclick="clearDirt()">
         </div>
 
         <div class="menu">
@@ -73,33 +70,17 @@
             <br><br><b>Expected Task Proportions</b>
             <br>(Make sure these sum to 100%)
             <br>Scout for Food:
-            <input type="number" id="scoutForFood" value="25">%
+            <input type="number" id="scoutForFood" value="25">
             <br>Retrieve Food:
-            <input type="number" id="returnFood" value="50">%
+            <input type="number" id="returnFood" value="50">
             <br>Dig Tunnel:
-            <input type="number" id="digTunnel" value="25">%
+            <input type="number" id="digTunnel" value="25">
             <br>Dig Chamber:
-            <input type="number" id="digChamber" value="0">%
+            <input type="number" id="digChamber" value="0">
 
             <br><br><b>Task switching threshold</b>
-            <br>(How different the expected and measured proportions need to be to switch)
-            <input type="number" id="threshold" min="0" max="100" value="10">
-        </div>
-
-        <div class="menu">
-            <b>Colony Stats:</b>
-
-            <br><br>Total Food Retrieved:
-            <input type="number" id="totalFood" value=0 disabled>
-
-            <br><br>Scouting:
-            <input type="number" id="percentScouting" value=0 disabled>%
-            <br>Retrieving:
-            <input type="number" id="percentRetrieving" value=0 disabled>%
-            <br>Digging Tunnels:
-            <input type="number" id="percentDiggingTunnels" value=0 disabled>%
-            <br>Digging Chambers:
-            <input type="number" id="percentDiggingChambers" value=0 disabled>%
+            <br>(How likely an ant is to switch tasks)
+            <input type="range" id="threshold" min="0" max="100" value="10">
         </div>
     </div>
   </body>

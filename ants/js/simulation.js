@@ -12,9 +12,37 @@ function createSimulation(dimensions) {
         run: undefined,
         render: undefined,
 
+        food: [],
+        pheromones: [],
+        evaporationRate: 0.9,
+        totalFoodReturned: 0,
+        maxAge: 2000,
+
         step: function() {
             // have each ant decide what to do
+            var measuredProportions = {
+                returnFoodTask: 0,
+                digTunnelTask: 0,
+                digChamberTask: 0,
+                scoutForFoodTask: 0,
+            };
             for (var i = 0, ant; ant = this.ants[i]; i++) {
+                // update the ant's expected proportions:
+                var scout = parseInt(document.getElementById("scoutForFood").value) / 100;
+                var retrieve = parseInt(document.getElementById("returnFood").value) / 100;
+                var tunnel = parseInt(document.getElementById("digTunnel").value) / 100;
+                var chamber = parseInt(document.getElementById("digChamber").value) / 100;
+                var threshold = parseInt(document.getElementById("threshold").value) / 100;
+                ant.expectedProportions = {
+                    scoutForFoodTask: scout,
+                    returnFoodTask: retrieve,
+                    digTunnelTask: tunnel,
+                    digChamberTask: chamber
+                }
+                ant.threshold = threshold;
+
+                // update the ant's age
+                ant.age += 1;
                 var currentCell = ant.cell;
                 // make stencils for this cell
                 var vectors = getVectors(ant, currentCell, this);
@@ -26,10 +54,29 @@ function createSimulation(dimensions) {
                 nextCell.ant = ant;
                 if (nextCell !== currentCell) {
                     currentCell.ant = null;
+                    ant.inarow = 0;
+                } else {
+                    ant.inarow += 1;
                 }
-                // update pheromone levels
-                currentCell.pheromone += ant.pheromone;
+
+                var taskName = ant.currentTask.name;
+                if (taskName == "communicationTask") {
+                    taskName = ant.previousTask;
+                }
+                measuredProportions[taskName] += 1;
             }
+
+            // update colony stats:
+            var numAnts = this.ants.length;
+            document.getElementById("totalFood").value = simulation.totalFoodReturned;
+            document.getElementById("percentScouting").value =
+                Math.round(measuredProportions.scoutForFoodTask / numAnts * 100);
+            document.getElementById("percentRetrieving").value =
+                Math.round(measuredProportions.returnFoodTask / numAnts * 100);
+            document.getElementById("percentDiggingTunnels").value =
+                Math.round(measuredProportions.digTunnelTask / numAnts * 100);
+            document.getElementById("percentDiggingChambers").value =
+                Math.round(measuredProportions.digChamberTask / numAnts * 100);
         },
 
         start: function() {
@@ -59,7 +106,8 @@ function createSimulation(dimensions) {
 
         seedWithAnts: function(numAnts) {
             for (var i = 0; i < numAnts; i++) {
-                var ant = createTestAnt("ant:"+i, this.world.getRandomOccupiableCell(), this);
+                var cell = this.world.grid[this.nest.x][this.nest.y][this.nest.z];
+                var ant = createAnt("ant:"+i, cell, this);
                 this.ants.push(ant);
                 ant.cell.ant = ant;
             }
@@ -68,16 +116,21 @@ function createSimulation(dimensions) {
         seedWithDirt: function(depth) {
             this.world.seedWithDirt(depth);
             this.nest = {
-                x: dimensions.x / 2,
-                y: depth - 1,
-                z: dimensions.z / 2
+                x: Math.round(dimensions.x / 2),
+                y: depth,
+                z: Math.round(dimensions.z / 2)
             };
+        },
+
+        clearDirtOffSurface: function() {
+            this.world.clearDirtOffSurface(this.depth);
         }
     };
 }
 
 function getVectors(ant, cell, simulation) {
     var vectors = [];
+    var subtask = ant.currentTask.subtasks[ant.currentTask.currentSubtaskIndex];
 
     // 1. Vector pointing in a random 2D direction. "noise"
     vectors.push([2*Math.random() - 1, 0, 2*Math.random() - 1]);
@@ -105,25 +158,23 @@ function getVectors(ant, cell, simulation) {
     vectors.push([0, -1, 0]);
 
     // 6. Vector for pointing to a cell the ant cares about
-    if (ant.goalCells.length > 0) {
-        var goalPos = ant.goalCells[ant.goalIndex].position;
+    if (subtask.name == "gotoCell" && subtask.cell) {
+        var goalPos = subtask.cell.position;
         var goalDist = Math.sqrt(
             (curr.x - goalPos.x) * (curr.x - goalPos.x) +
             (curr.y - goalPos.y) * (curr.y - goalPos.y) +
             (curr.z - goalPos.z) * (curr.z - goalPos.z));
         if (goalDist == 0) {
-            goalDist += 0.01
+            vectors.push([0, 0, 0]);
+        } else {
+            vectors.push([
+                (goalPos.x - curr.x)/goalDist,
+                (goalPos.y - curr.y)/goalDist,
+                (goalPos.z - curr.z)/goalDist
+            ]);
         }
-        vectors.push([
-            (goalPos.x - curr.x)/goalDist,
-            (goalPos.y - curr.y)/goalDist,
-            (goalPos.z - curr.z)/goalDist
-        ]);
-    }
-
-    // 7. Vector for pheromone
-    if (cell.pheromone) {
-        vectors.push(cell.pheromone);
+    } else {
+        vectors.push([0, 0, 0]);
     }
 
     return vectors;
@@ -139,6 +190,7 @@ function getVectors(ant, cell, simulation) {
 // 4. Move into open air    -- turn the vector downwards until it points to a legal cell
 // 5. Move into food        -- take some of the food and stay put
 function vectorToCell(vector, ant, cell, simulation) {
+    var subtask = ant.currentTask.subtasks[ant.currentTask.currentSubtaskIndex];
     // Find the largest component of the vector
     var maxComp = -Infinity;
     for (var i = 0; i < vector.length; i++) {
@@ -148,7 +200,10 @@ function vectorToCell(vector, ant, cell, simulation) {
     }
     // scale the vector down based on largest component
     for (var i = 0; i < vector.length; i++) {
-        vector[i] = Math.round(vector[i] / maxComp) || 0;
+        vector[i] = Math.round(vector[i] / maxComp);
+        if (!vector[i] && vector[i] !== 0) {
+            console.log(ant.currentTask);
+        }
     }
 
     var nextCell = cell.neighbors[9 * (vector[0]+1) + 3 * (vector[1]+1) + (vector[2]+1)];
@@ -161,10 +216,8 @@ function vectorToCell(vector, ant, cell, simulation) {
     // handle case 2:
     if (nextCell.type == "dirt") {
         nextCell.type = "empty";
-        if (!ant.hasDirt && nextCell.occupiable() && !ant.dontDig &&
-                ((ant.currentTask.name == "goToCell" &&
-                  ant.cell.position.y >= simulation.world.depth) ||
-                ant.currentTask.name != "goToCell")) {
+        if (!ant.hasDirt && nextCell.occupiable() && (subtask.name == "digTunnel" ||
+                subtask.name == "digChamber" || subtask.name == "findAnt")) {
             ant.hasDirt = true;
             simulation.world.dirtToRenderCache = null;
             return nextCell;
@@ -175,14 +228,10 @@ function vectorToCell(vector, ant, cell, simulation) {
     }
 
     // handle case 3:
-    if (nextCell.ant) {
-        if (Math.random() < 0.5 && ant.currentTask.name && !nextCell.ant.recruited) { // recruit
-            nextCell.ant.recruited = true;
-            nextCell.ant.taskStack = ant.taskStack.slice();
-            nextCell.ant.goalCells = ant.goalCells.slice();
-            nextCell.ant.goalIndex = ant.goalIndex;
-            nextCell.ant.currentTask = ant.currentTask;
-        }
+    if (nextCell.ant && ((ant.antsFound.length > 0 &&
+            ant.antsFound[ant.antsFound.length - 1].name != nextCell.ant.name) ||
+                ant.antsFound.length == 0)) {
+        ant.antsFound.push({ant: nextCell.ant, age: 0});
     }
 
     // handle case 4:
@@ -198,9 +247,10 @@ function vectorToCell(vector, ant, cell, simulation) {
 
     // handle case 5:
     if (nextCell.type == "food") {
-        if (!ant.hasFood) {
+        if (!ant.hasFood && (subtask.name == "explore" || subtask.name == "gotoCell")) {
             nextCell.foodDensity -= 1;
             ant.hasFood = true;
+            return nextCell;
         }
         return cell;
     }

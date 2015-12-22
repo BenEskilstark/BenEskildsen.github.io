@@ -1,47 +1,89 @@
-// Ants make decisions on two levels: based on their currentTask and then based on the
-// specific operations of that task. For example, when an ant is in the "wander" task it will
-// choose to move randomly until something triggers it to change tasks (eg. if it found food
-// and entered the "returnToNest" task.
-//
-// At each time the ant decides, it will also examine certain factors to decide if it should
-// change tasks.
-//
-// Order of stencils therefore matters to the order of coefficients given in each task.
-// The zeroeth stencil will always give the cells that are physically possible to move to in the
-// form of 1 or 0. The decide function will then further multiply each cell by the value in
-// the 0th stencil so that it never chooses cells that are impossible to move to.
 
-// tasks is a dictionary mapping task names (like wander) to the task array that represents
-// that behavior. cell points back to the grid location where the ant is. The decide function
-// is called every step and is where the ant uses the stencils to choose a neighboring cell
-// to move to, and decides whether or not to switch tasks. It returns the cell it wants to
-// move to  and updates its own currentTask. decide() will also call behavior as its way to
-// change tasks. This way, any type of ant decision-making can be
-// specified entirely between the tasks available to it and the strategy it uses to switch
-// between tasks (the behavior function).
-function createAnt(name, cell, tasks) {
+
+function createAnt(name, cell, simulation) {
+
+    var tasks = [
+         digTunnelTask,
+         digChamberTask,
+         returnFoodTask,
+         scoutForFoodTask
+    ];
+
     return {
         name: name,
         cell: cell,
-        goalCells: [],
-        goalIndex: 0,
         previousCell: cell,
-        tasks: tasks,
-        taskStack: [],
-        currentTask: tasks.explore,
-        recruited: false,
+        simulation: simulation,
+        age: 0,
+
+        inarow: 0,
+
+        tasks: {
+            digTunnelTask: tasks[0],
+            digChamberTask: tasks[1],
+            returnFoodTask: tasks[2],
+            scoutForFoodTask: tasks[3]
+        },
+        currentTask: tasks[Math.floor(Math.random() * 4)](),
+        previousTask: tasks[Math.floor(Math.random() * 4)],
+
+        expectedProportions: {
+            digTunnelTask:      0.25,
+            digChamberTask:     0.25,
+            returnFoodTask:     0.25,
+            scoutForFoodTask:   0.25
+        },
+        threshold: 0.1,
+
+        hasFood: false,
+        hasDirt: false,
+        antsFound: [],
+        foodCells: [],
+        tunnelCells: [],
 
         decide: function(vectors) {
-            var transition = this.currentTask.transition(this);
-            // if (transition != "placeDirt") {
-            //     console.log(transition, this.hasDirt);
-            // }
-            this.currentTask = this.tasks[transition];
 
+            // update the age of all the ant's information
+            for (var i = 0; i < this.antsFound.length; i++) {
+                this.antsFound[i].age += 1;
+            }
+            for (var i = 0; i < this.foodCells.length; i++) {
+                this.foodCells[i].age += 1;
+            }
+            for (var i = 0; i < this.tunnelCells.length; i++) {
+                this.tunnelCells[i].age += 1;
+            }
+
+            // change tasks if the current task is complete
+            var curr = this.currentTask;
+            var subtask = curr.subtasks[curr.currentSubtaskIndex];
+            if (curr.currentSubtaskIndex == curr.subtasks.length - 1 &&
+                subtask.achievedGoal(this)) {
+                    if (this.currentTask.name !== "communicationTask") {
+                        subtask.sideEffects(this);
+                        this.previousTask = curr.name;
+                        this.currentTask = communicationTask(this);
+                    } else { // else currentTask will be set by delegateTask's side effect
+                        subtask.sideEffects(this);
+                    }
+            }
+
+            // console.log(this.name, subtask);
+            curr = this.currentTask;
+            subtask = curr.subtasks[curr.currentSubtaskIndex];
+            // change subtasks if the current subtask is complete
+            if ((subtask.name == "placeDirt" && subtask.alreadySucceeded) ||
+                (subtask.name != "placeDirt" && subtask.achievedGoal(this))) {
+                subtask.sideEffects(this);
+                curr.currentSubtaskIndex += 1;
+                subtask = curr.subtasks[curr.currentSubtaskIndex];
+            }
+
+            // calculate where to move based on the current subtask
             var finalVector = [0, 0, 0];
-            for (var i = 0; i < this.currentTask.vector.length && i < vectors.length; i++) {
+            for (var i = 0; i < subtask.vector.length && i < vectors.length; i++) {
                 for (var j = 0; j < finalVector.length; j++) {
-                    finalVector[j] += this.currentTask.vector[i] * vectors[i][j];
+                    finalVector[j] += subtask.vector[i] * vectors[i][j];
                 }
             }
             return finalVector;
@@ -50,185 +92,346 @@ function createAnt(name, cell, tasks) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Some specific types of ants
-function createTestAnt(name, cell, simulation) {
-    return createAnt(
-        name,
-        cell,
-        {
-            explore: {
-                vector: [2, 0.1, 1, 0.5, 0, 0, 1],
-                transition: function(ant) {
-                    var pos = ant.cell.position;
-                    if (ant.hasFood) {
-                        return "returnFood";
-                    }
-                    if (ant.hasDirt) {
-                        return "placeDirt";
-                    }
-                    if (pos.x == 0 || pos.z == 0 || pos.x == 29 || pos.z == 29) {
-                        return "comeBack";
-                    }
-                    return "explore";
-                },
-            },
+// Tasks
+function digTunnelTask(ant) {
+    var tunnelCellStart = null;
+    var tunnelCellEnd = null;
+    if (ant && ant.tunnelCells.length > 0) {
+        var i = Math.floor(Math.random() * ant.tunnelCells.length);
+        tunnelCellStart = ant.tunnelCells[i].startCell;
+        tunnelCellEnd = ant.tunnelCells[i].endCell;
+    }
 
-            comeBack: {
-                vector: [2, 0.1, 1, -1, 0, 0],
-                transition: function(ant) {
-                    var pos = ant.cell.position;
-                    var nest = simulation.nest
-                    if (ant.hasFood) {
-                        return "returnFood";
-                    }
-                    if (ant.hasDirt) {
-                        return "placeDirt";
-                    }
-                    if (pos.x == nest.x && pos.y == nest.y && pos.z == nest.z) {
-                        var prevTask = ant.taskStack.pop();
-                        if (prevTask) {
-                            return prevTask
-                        } else {
-                            return "explore";
-                        }
-                    }
-                    return "comeBack";
-                },
-            },
+    return  {
+        name: "digTunnelTask",
+        subtasks: [gotoCell(tunnelCellStart), gotoCell(tunnelCellEnd), digTunnel(), placeDirt()],
+        currentSubtaskIndex: 0,
+    };
+}
 
-            placeDirt: {
-                vector: [0, 2, 1, -0.5, 0, 0],
-                transition: function(ant) {
-                    var pos = ant.cell.position;
-                    var nest = simulation.nest;
-                    var dist = Math.sqrt(
-                        (pos.x - nest.x) * (pos.x - nest.x) +
-                        (pos.y - nest.y) * (pos.y - nest.y) +
-                        (pos.z - nest.z) * (pos.z - nest.z));
-                    if (pos.y > nest.y  &&
-                            (dist > 1 * Math.random() &&
-                            dist < 18 * Math.random())) {
-                        ant.hasDirt = false;
-                        ant.cell.type = "dirt";
-                        var prevTask = ant.taskStack.pop();
-                        if (prevTask) {
-                            return prevTask;
-                        } else if(Math.random() < 0.5) {
-                            ant.recruited = false;
-                            ant.taskStack.push("digTunnel");
-                            ant.goalIndex = 0;
-                            if (ant.goalCells.length == 0) {
-                                ant.goalCells.push(ant.cell);
+function digChamberTask(ant) {
+    var tunnelCellStart = null;
+    var tunnelCellEnd = null;
+    if (ant && ant.tunnelCells.length > 0) {
+        var i = Math.floor(Math.random() * ant.tunnelCells.length);
+        tunnelCellStart = ant.tunnelCells[i].startCell;
+        tunnelCellEnd = ant.tunnelCells[i].endCell;
+    }
+
+    return {
+        name: "digChamberTask",
+        subtasks: [gotoCell(tunnelCellStart), gotoCell(tunnelCellEnd), digChamber(), placeDirt()],
+        currentSubtaskIndex: 0,
+    };
+}
+
+function scoutForFoodTask(ant) {
+    return {
+        name: "scoutForFoodTask",
+        subtasks: [explore(), returnFood()],
+        currentSubtaskIndex: 0,
+    };
+}
+
+function returnFoodTask(ant) {
+    var foodCell = null;
+    for (var i = 0; ant && i < ant.foodCells.length; i++) {
+        if (ant.foodCells[i].density > 0) {
+            foodCell = ant.foodCells[i].cell;
+            break;
+        }
+    }
+
+    var subtasksArray = [explore(), returnFood()];
+    if (foodCell) {
+        subtasksArray = [gotoCell(foodCell), returnFood()];
+    }
+
+    return {
+        name: "returnFoodTask",
+        subtasks: subtasksArray,
+        currentSubtaskIndex: 0,
+    };
+}
+
+function communicationTask(ant) {
+    var start = ant.antsFound.length;
+    return {
+        name: "communicationTask",
+        subtasks: [findAnt(start, 1), delegateTask()],
+        currentSubtaskIndex: 0,
+    };
+}
+///////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////
+// Subtasks
+function findAnt(startIndex, index) {
+    return {
+        name: "findAnt",
+        vector: [4, 1, 1, 0, 0, 0],
+        startIndex: startIndex,
+        index: index,
+        achievedGoal: function (ant) {
+            return ant.antsFound.length >= this.startIndex + this.index;
+        },
+        sideEffects: function (ant) {
+            var antJustSeen = ant.antsFound[ant.antsFound.length - 1].ant;
+
+            // compare food location information:
+            for (var i = 0; i < antJustSeen.foodCells.length; i++) {
+                var seenSameFood = false;
+                for (var j = 0; j < ant.foodCells.length; j++) {
+                    if (antJustSeen.foodCells[i].name == ant.foodCells[j].name) {
+                        seenSameFood = true;
+                        if (ant.foodCells[j].age > antJustSeen.foodCells[i].age) {
+                            ant.foodCells[j] = {
+                                cell: antJustSeen.foodCells[i].cell,
+                                age: antJustSeen.foodCells[i].age,
+                                name: antJustSeen.foodCells[i].name,
+                                density: antJustSeen.foodCells[i].density
                             }
-                            return "goToCell";
-                        } else {
-                            for (var i = 0; i < 10; i++) {
-                                ant.taskStack.push("explore");
-                            }
-                            ant.recruited = false;
-                            return "explore";
                         }
                     }
-                    return "placeDirt";
                 }
-            },
-
-            digTunnel: {
-                vector: [0, 1, 1, 1, 1, 0],
-                transition: function(ant) {
-                    var pos = ant.cell.position;
-                    var nest = simulation.nest;
-                    if (ant.hasDirt) {
-                        if (Math.random() < 0.25 && pos.y < nest.y - 8) {
-                            for (var i = 0; i < 30; i++) {
-                                ant.taskStack.push("digChamber");
-                                ant.taskStack.push("goToCell");
-                            }
-                        } else if (Math.random() < 0.5) {
-                            for (var i = 0; i < 10; i++) {
-                                ant.taskStack.push("explore");
-                            }
-                        } else {
-                            ant.taskStack.push("digTunnel");
-                            ant.taskStack.push("goToCell");
-                        }
-                        ant.goalCells.push(ant.cell);
-                        ant.goalIndex = 0;
-                        return "placeDirt";
-                    }
-                    return "digTunnel";
-                }
-            },
-
-            digChamber: {
-                vector: [0, 4, 1, 1, 0, 0],
-                transition: function(ant) {
-                    if (ant.hasDirt) {
-                        return "placeDirt";
-                    }
-                    return "digChamber";
-                }
-            },
-
-            goToCell: {
-                name: "goToCell",
-                vector: [0, 2, 1, 0, 0, 5],
-                transition: function(ant) {
-                    this.vector[1] += 1 / 100; // increase randomness the longer you're here
-                    var pos = ant.cell.position;
-                    var goalPos = ant.goalCells[ant.goalIndex].position;
-                    if (ant.hasDirt) {
-                        ant.taskStack.push("goToCell");
-                        this.vector[1] = 2;
-                        return "placeDirt";
-                    }
-                    if (pos.x == goalPos.x && pos.y == goalPos.y && pos.z == goalPos.z) {
-                        if (ant.goalIndex < ant.goalCells.length - 1) {
-                            ant.goalIndex += 1;
-                            return "goToCell";
-                        } else {
-                            ant.goalIndex = 0;
-                        }
-                        var prevTask = ant.taskStack.pop();
-                        this.vector[1] = 2;
-                        if (prevTask) {
-                            return prevTask;
-                        } else {
-                            return "explore";
-                        }
-                    }
-                    ant.goTosInARow += 1;
-                    return "goToCell";
-                }
-            },
-
-            returnFood: {
-                name: "returnFood",
-                vector: [1, 0, 1, -2, 0, 0, -1],
-                transition: function(ant) {
-                    if (ant.hasDirt) {
-                        ant.taskStack.push("returnFood");
-                        return "placeDirt";
-                    }
-
-                    var prevPos = ant.previousCell.position;
-                    var pos = ant.cell.position;
-                    // lay down pheromone trail
-                    var ph = [0, 0, 0];
-                    ant.cell.pheromone = [
-                        prevPos.x-pos.x + ph[0], prevPos.y-pos.y + ph[1], prevPos.z-pos.z + ph[2]
-                    ];
-
-                    var nest = simulation.nest
-                    if (pos.x == nest.x && pos.y == nest.y && pos.z == nest.z) {
-                        ant.hasFood = false;
-                        console.log("food returned");
-                        return "explore";
-                    }
-                    return "returnFood";
+                if (!seenSameFood) {
+                    ant.foodCells.push({
+                        cell: antJustSeen.foodCells[i].cell,
+                        age: antJustSeen.foodCells[i].age,
+                        name: antJustSeen.foodCells[i].name,
+                        density: antJustSeen.foodCells[i].density
+                    });
                 }
             }
 
+            // compare tunnel location information:
+            for (var i = 0; i < antJustSeen.tunnelCells.length; i++) {
+                seenSameTunnel = false;
+                for (var j = 0; j < ant.tunnelCells.length; j++) {
+                    if (antJustSeen.tunnelCells[i].name == ant.tunnelCells[j].name) {
+                        seenSameTunnel = true;
+                        if (ant.tunnelCells[j].age > antJustSeen.tunnelCells[i].age) {
+                            ant.tunnelCells[j] = {
+                                startCell: antJustSeen.tunnelCells[i].startCell,
+                                endCell: antJustSeen.tunnelCells[i].endCell,
+                                age: antJustSeen.tunnelCells[i].age,
+                                name: antJustSeen.tunnelCells[i].name,
+                            }
+                        }
+                    }
+                }
+                if (!seenSameTunnel) {
+                    ant.tunnelCells.push({
+                        startCell: antJustSeen.tunnelCells[i].startCell,
+                        endCell: antJustSeen.tunnelCells[i].endCell,
+                        age: antJustSeen.tunnelCells[i].age,
+                        name: antJustSeen.tunnelCells[i].name,
+                    });
+                }
+
+                if (ant.hasDirt) {
+                    ant.hasDirt = false;
+                    ant.cell.type = "dirt";
+                }
+            }
         }
-    );
+    };
 }
+
+function delegateTask() {
+    return {
+        name: "delegateTask",
+        vector: [0, 1, 0, 0, 0, 0],
+        achievedGoal: function (ant) {
+            return true;
+        },
+        sideEffects: function (ant) {
+            // compute measured proportions of tasks
+            var measuredProportions = {
+                returnFoodTask: 0,
+                digTunnelTask: 0,
+                scoutForFoodTask: 0,
+                digChamberTask: 0
+            };
+            for (var i = 0; i < ant.antsFound.length; i++) {
+                var taskName = ant.antsFound[i].ant.currentTask.name;
+                if (taskName == "communicationTask") {
+                    taskName = ant.antsFound[i].ant.previousTask;
+                }
+                measuredProportions[taskName] +=
+                    1 / (ant.antsFound[i].age + 1);
+            }
+
+            var totalProportions = 0.000001; // prevent divide-by-zero error
+            for (task in measuredProportions) {
+                totalProportions += measuredProportions[task];
+            }
+            for (task in measuredProportions) {
+                measuredProportions[task] = measuredProportions[task] / totalProportions;
+            }
+
+            // compare measured proportions to expected proportions
+            var mostDifferent = measuredProportions.returnFoodTask;
+            var biggestDifference = 0;
+            for (task in measuredProportions) {
+                var difference = ant.expectedProportions[task] - measuredProportions[task];
+                if (difference > biggestDifference) {
+                    biggestDifference = difference;
+                    mostDifferent = task;
+                }
+            }
+
+            // reassign task based on comparison
+            if (biggestDifference > ant.threshold) {
+                // console.log("switched tasks");
+                ant.currentTask = ant.tasks[mostDifferent](ant);
+            } else {
+                // console.log("stayed the same task");
+                ant.currentTask = ant.tasks[ant.previousTask](ant);
+            }
+        }
+    };
+}
+
+function gotoCell(cell) {
+    return {
+        name: "gotoCell",
+        cell: cell,
+        vector: [0, 3, 1, 0, 0, 5],
+        achievedGoal: function (ant) {
+            if (this.cell === null) {
+                return true;
+            }
+            return (ant.cell == this.cell) || ant.inarow > 100;
+        },
+        sideEffects: function (ant) {
+            if (!ant.hasFood) { // if the ant expected food but there wasn't any
+                for (var i = 0; i < ant.foodCells.length; i++) {
+                    if (ant.cell == ant.foodCells[i].cell) {
+                        ant.foodCells[i].density = 0;
+                    }
+                }
+            }
+        },
+    };
+}
+
+function digTunnel(tunnelName) {
+    return {
+        name: "digTunnel",
+        vector: [0, 1, 1, 1, 1, 1],
+        achievedGoal: function (ant) {
+            return ant.hasDirt;
+        },
+        sideEffects: function (ant) {
+            ant.hasDirt = true;
+            if (!tunnelName) {
+                ant.tunnelCells.push({
+                    startCell: ant.cell,
+                    endCell: ant.cell,
+                    age: 0,
+                    name: ant.name + "" + ant.age,
+                });
+            } else {
+                for (var i = 0; i < ant.tunnelCells.length; i++) {
+                    if (ant.tunnelCells[i].name == tunnelName) {
+                        ant.tunnelCells[i].endCell = ant.cell;
+                    }
+                }
+            }
+        },
+    };
+}
+
+function placeDirt() {
+    return {
+        name: "placeDirt",
+        vector: [0, 2, 1, -0.5, 0, 0],
+        alreadySucceeded: false,
+        achievedGoal: function (ant) {
+            if (this.alreadySucceeded) {
+                return true;
+            }
+            var pos = ant.cell.position;
+            var nest = ant.simulation.nest;
+            var dist = Math.sqrt(
+                (pos.x - nest.x) * (pos.x - nest.x) +
+                (pos.y - nest.y) * (pos.y - nest.y) +
+                (pos.z - nest.z) * (pos.z - nest.z));
+            var cellUnderneath = ant.simulation.world.grid[pos.x][pos.y - 1][pos.z];
+            if (pos.y >= nest.y &&
+                    dist > 1 * Math.random() &&
+                    dist < 18 * Math.random() && cellUnderneath.type == "dirt") {
+                this.alreadySucceeded = true;
+                return true;
+            }
+            return false;
+        },
+        sideEffects: function (ant) {
+            ant.hasDirt = false;
+            ant.cell.type = "dirt";
+        },
+    };
+}
+
+function digChamber() {
+    return {
+        name: "digChamber",
+        vector: [0, 4, 1, 1, 0, 0],
+        achievedGoal: function (ant) {
+            return ant.hasDirt;
+        },
+        sideEffects: function (ant) {
+            ant.hasDirt = true;
+        },
+    };
+}
+
+function explore() {
+    return {
+        name: "explore",
+        vector: [3, 1, 0.5, 0.5, 0, 0],
+        achievedGoal: function (ant) {
+            var pos = ant.cell.position;
+            var width = ant.simulation.world.dimensions.x - 1;
+            var length = ant.simulation.world.dimensions.z - 1;
+            return ant.hasFood || pos.x == 0 || pos.y == 0 || pos.x == width || pos.y == length;
+        },
+        sideEffects: function (ant) {
+            if (ant.hasFood) {
+                ant.foodCells.push({
+                    cell: ant.cell,
+                    age: 0,
+                    name: ant.name + "" + ant.age,
+                    density: ant.cell.foodDensity
+                });
+            }
+        }
+    };
+}
+
+function returnFood() {
+    return {
+        name: "returnFood",
+        vector: [2, 0.1, 1, -2, 0, 0],
+        achievedGoal: function (ant) {
+            var pos = ant.cell.position;
+            var nest = ant.simulation.nest;
+            var dist = Math.sqrt(
+                (pos.x - nest.x) * (pos.x - nest.x) +
+                (pos.y - nest.y) * (pos.y - nest.y) +
+                (pos.z - nest.z) * (pos.z - nest.z));
+            return dist < 2 || ant.inarow > 100;
+        },
+        sideEffects: function (ant) {
+            if (ant.hasFood) {
+                ant.simulation.totalFoodReturned += 1;
+                ant.hasFood = false;
+            }
+        }
+    };
+}
+///////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////
+

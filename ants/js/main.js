@@ -38,7 +38,6 @@ function main(simulation) {
     // seed the world:
     simulation.seedWithDirt(numDirt);
     simulation.seedWithAnts(numAnts);
-    simulation.seedWithFood(5, 10);
 
     // initialize shader stuff:
     simulation.stack = new SglMatrixStack();
@@ -271,6 +270,16 @@ function initializeObjects(gl) {
 
 function dispatch(obj, methodName) {
 	return function () { obj[methodName].apply(obj, arguments); };
+}
+
+function spawnFood() {
+    var amount = 1;
+    var density = parseInt(document.getElementById("foodDensity").value);
+    simulation.seedWithFood(amount, density);
+}
+
+function clearDirt() {
+    simulation.clearDirtOffSurface();
 }
 
 function prepareLambertianShader(gl, simulation, P) {
