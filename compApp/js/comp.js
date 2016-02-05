@@ -28,19 +28,28 @@ function makeClimb(climbs, num) {
     var color = document.createElement("div");
     var attempts = document.createElement("div");
     attempts.id = "attempts";
-    var button = document.createElement("button");
+    var button1 = document.createElement("button");
+    var button2 = document.createElement("button");
 
     points.appendChild(document.createTextNode(climb.points));
     color.appendChild(document.createTextNode(climb.color));
     attempts.appendChild(document.createTextNode(climb.attempts));
-    button.appendChild(document.createTextNode("Add Attempt"));
+    button1.appendChild(document.createTextNode("Fall"));
+    button2.appendChild(document.createTextNode("Send"));
 
-    button.onclick = buttonClick(climbs, num);
+    button1.onclick = attemptClick(climbs, num);
+    button2.onclick = sendClick(climbs, num);
 
     li.appendChild(points);
     li.appendChild(color);
     li.appendChild(attempts);
-    li.appendChild(button);
+    li.appendChild(button1);
+    li.appendChild(button2);
+
+    if (climb.sent) {
+        console.log("was sent");
+        li.style.backgroundColor = "green";
+    }
 
     return li;
 }
@@ -51,8 +60,17 @@ function clearClimbs(climbs) {
     }
 }
 
-function buttonClick(climbs, num) {
+function attemptClick(climbs, num) {
     return function() {
+        climbs[num].attempts += 1;
+        clearClimbs(climbs);
+        loadClimbs(climbs);
+    }
+}
+
+function sendClick(climbs, num) {
+    return function() {
+        climbs[num].sent = true;
         climbs[num].attempts += 1;
         clearClimbs(climbs);
         loadClimbs(climbs);

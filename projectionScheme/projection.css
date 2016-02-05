@@ -1,0 +1,21 @@
+body {
+    background-color: black;
+    position: relative;
+}
+
+.hold {
+    background-color: gray;
+    border-radius: 50%;
+    position: absolute;
+    float: center;
+    height: 5px;
+    width: 5px;
+}
+
+.hold:hover {
+    margin-left: -12px;
+    margin-top: -12px;
+    width: 30px;
+    height: 30px;
+}
+
