@@ -23,28 +23,31 @@ function loadClimbs(climbs) {
 function makeClimb(climbs, num) {
     var climb = climbs[num];
     var li = document.createElement("li");
+    li = li.appendChild(document.createElement("button"));
+    li.onclick = attemptClick(climbs, num);
     li.id = num;
     var points = document.createElement("div");
     var color = document.createElement("div");
     var attempts = document.createElement("div");
     attempts.id = "attempts";
-    var button1 = document.createElement("button");
-    var button2 = document.createElement("button");
 
     points.appendChild(document.createTextNode(climb.points));
     color.appendChild(document.createTextNode(climb.color));
-    attempts.appendChild(document.createTextNode(climb.attempts));
-    button1.appendChild(document.createTextNode("Fall"));
-    button2.appendChild(document.createTextNode("Send"));
-
-    button1.onclick = attemptClick(climbs, num);
-    button2.onclick = sendClick(climbs, num);
+    var attemptTallies = "";
+    for (var i = 0; i < climb.attempts; i++) {
+        if (i % 5 == 0) {
+            attemptTallies += " ";
+        }
+        attemptTallies += "|";
+    }
+    if (!attemptTallies) {
+        attemptTallies = "0";
+    }
+    attempts.appendChild(document.createTextNode(attemptTallies));
 
     li.appendChild(points);
     li.appendChild(color);
     li.appendChild(attempts);
-    li.appendChild(button1);
-    li.appendChild(button2);
 
     if (climb.sent) {
         console.log("was sent");
