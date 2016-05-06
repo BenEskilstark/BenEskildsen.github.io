@@ -1,0 +1,88 @@
+#container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1110; /* ipad dimensions */
+    height: 750;
+}
+
+.sideBar {
+    display: inline-block;
+    overflow-y: auto;
+    position: absolute;
+    height: 100%;
+    width: 225px;
+}
+
+.mainImagePane {
+    overflow: hidden;
+    display: inline-block;
+    margin-left: 20%;
+    height: 100%;
+    width: 643px;
+}
+
+.photoReel {
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 34px;
+    max-height: 80px;
+    overflow: scroll;
+}
+
+.photo {
+    padding-right: 1px;
+    cursor: pointer;
+    padding-bottom: 1px;
+}
+
+.highlightedSubRegionTab {
+    text-align: left;
+    padding: 5px;
+    width: 100%;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.tabText {
+    display: inline-block;
+    vertical-align: top;
+    max-width: 110px;
+    max-height: 80px;
+    margin-left: 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.mainText {
+    margin-left: 5px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 10pt;
+}
+
+h1 {
+    text-align: center;
+    margin: 15px;
+}
+
+.subRegionTab {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    margin-top: 5px;
+    margin-left: 3px;
+    width: 205px;
+    display: block;
+    color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #C1C1C1;
+    background: rgba(158,158,158,.1);
+    box-shadow: 0px 2px 4px #888888;
+    border-radius: 3px;
+    padding: 5px;
+    transition: background 0.3s linear;
+    cursor: pointer;
+    outline: none;
+}
+
+.subRegionTab:hover {
+    background: rgba(158,158,158,.3);
+    color: rgba(0, 0, 0, 0.6);
+}
