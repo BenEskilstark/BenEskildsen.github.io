@@ -1,0 +1,187 @@
+body {
+    overflow: hidden;
+}
+
+.header {
+    background-color: #183D4E;
+    color: white;
+    overflow: hidden;
+    box-shadow:0px 2px 4px #888888;
+    width: 1500px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 109px;
+    z-index: 1;
+}
+
+.header h1 {
+    font-size: 30px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: lighter;
+    margin-bottom: 9px;
+}
+
+.header h2 {
+    font-size: 22px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: lighter;
+    text-align: center;
+    color: white;
+}
+
+h2 {
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 9px;
+    margin: 5px;
+    text-align: center;
+}
+
+#container {
+    position: absolute;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 300;
+    font-size: 14;
+    position: absolute;
+    top: 109px;
+    left: 0;
+    width: 100%;
+    height: 700;
+    overflow-y: hidden;
+    z-index: 0;
+}
+
+.sideBarPane {
+    background-color: #F7F7F7;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border-right: 1px solid black;
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
+    left: 0;
+    top: 0;
+    max-width: 375px;
+}
+
+.renderArea {
+    display: inline-block;
+    margin-left: 5px;
+    height: 700px;
+    width: auto;
+    float: right;
+}
+
+.menu {
+    text-align: left;
+    border-bottom: 1px solid black;
+    padding: 5px;
+    width: auto;
+}
+
+input {
+    width: 90px;
+}
+
+.sliderNumber {
+    width: 50px;
+    background: none;
+    border: none;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 200;
+}
+
+.primitive {
+    display: block;
+    margin: 5px;
+}
+.primitiveLHS {
+    float: left;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.production {
+    float: right;
+}
+
+.productionRule {
+    width: 555;
+    margin: 5px;
+}
+.arrow{
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    top: -57px;
+}
+.productionRHS {
+    display: inline-block;
+    float: right;
+    text-align: left;
+    margin-left: 5px;
+    margin-top: -5px;
+}
+
+.miniCanvas {
+    background-color: white;
+    display: inline-block;
+    border: 1px solid black;
+    width: 150px;
+    height: 150px;
+}
+
+.collapseButton {
+    display: block;
+}
+
+.fancyButton {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    margin-top: 5px;
+    width: 100%;
+    display: block;
+    color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #C1C1C1;
+    background: rgba(158,158,158,.1);
+    border-radius: 3px;
+    padding: 5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: background 0.3s linear;
+    cursor: pointer;
+    outline: none;
+}
+
+.fancyButton:hover {
+    background: rgba(158,158,158,.3);
+    color: rgba(0, 0, 0, 0.6);
+}
+
+select {
+    -webkit-appearance: none;
+    background-color: none;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    padding: 2px 0;
+    margin-right: 5px;
+    font-size: 14px;
+    border-bottom: solid 1px #ccc;
+    color: #333;
+    outline: none;
+}
+
+.divider {
+    float: center;
+    width: 66%;
+    margin: 0 auto;
+    border-top: 1px solid rgba(158, 158, 158, 0.6);
+
+}
+
+.play {
+    border-radius: 47px;
+    float: left;
+    cursor: pointer;
+}
