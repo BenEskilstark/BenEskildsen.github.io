@@ -29,7 +29,6 @@ var MiniCanvasProduction = React.createClass({
 
         // Draw the production
         var toDraw = this.props.rule.productions;
-        console.log(toDraw);
         for (var i = 0; i < toDraw.length; i++) {
             var mat = toDraw[i].matrix;
             context.save();
