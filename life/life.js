@@ -8,7 +8,7 @@ function life_instance () {
     this.createpop = 0;
     this.underpop = 0;
     this.overpop = 0;
-    
+
     this.num_cols = 320;
     this.num_rows = 160;
 
@@ -17,7 +17,7 @@ function life_instance () {
     this.divid = ""; // canvas id
     this.speed = 75; // milliseconds per redraw
     this.kill = true;
-    
+
     this.age = 0;
 
     this.grid = [];
@@ -52,7 +52,7 @@ function run (life, iterations) {
     }
     if (!life.kill && life.age <= iterations) {
         setTimeout (function () {
-            update (life); 
+            update (life);
             draw_life (life);
             run (life, iterations);
         }, life.speed);
@@ -82,10 +82,10 @@ function update (life)
     for (var r = 0; r < life.num_rows; r++) {
         for (var c = 0; c < life.num_cols; c++) {
             // stay alive or be born or spawn
-            if ((life.grid[r][c] >= ALIVE && 
-                num_neighbors (life,r,c) >= life.underpop && 
-                num_neighbors (life,r,c) <= life.overpop) || 
-                (life.grid[r][c] == DEAD && 
+            if ((life.grid[r][c] >= ALIVE &&
+                num_neighbors (life,r,c) >= life.underpop &&
+                num_neighbors (life,r,c) <= life.overpop) ||
+                (life.grid[r][c] == DEAD &&
                 num_neighbors (life,r,c) == life.createpop) ||
                 (life.grid[r][c] == DEAD && Math.random () < life.probability)){
                     new_grid[r][c] = life.grid[r][c]+1; // age by 1
@@ -96,7 +96,7 @@ function update (life)
     life.grid = new_grid;
 }
 
-function num_neighbors (life, row, col) 
+function num_neighbors (life, row, col)
 {
     var neighbors = 0;
     if (life.grid[row][col] >= ALIVE) { neighbors = -1;}
@@ -111,7 +111,7 @@ function num_neighbors (life, row, col)
     return neighbors;
 }
 
-function draw_life (instance) 
+function draw_life (instance)
 {
     var g2=document.getElementById(instance.divid).getContext("2d");
     var width = instance.canvas_width;
@@ -187,11 +187,11 @@ function create_graph_instance (graph, has_probability, form)
                 i.underpop = parseInt (form.starve.value);
             }
             if (form.suffocate.value == "y") {
-                i.overpop = y; 
+                i.overpop = y;
             } else {
                 i.overpop = parseInt (form.suffocate.value);
             }
-                
+
 
             row.push(i)
         }
@@ -213,7 +213,7 @@ function draw_graph (graph)
             var d = density (graph.instance_grid[y][x]);
             var fill_string = "rgb(0," + Math.round (d*255) + ",0)";
             g2.fillStyle = fill_string;
-        
+
             var px_width = width / Math.round((graph.max-graph.min)/graph.step);
             var px_height = height / 8;
 
