@@ -1,0 +1,19 @@
+YA2048Clone: February 2018
+
+compile clientside js into bin/, ran out of bundle.js with:
+> ./compile.bash
+
+run the app locally with:
+> npm start
+then in the browser go to:
+  localhost:8000
+
+
+ONCE GIT AND HEROKU ARE SET UP:
+deploy the code by git pushing to master.
+Check the logs at:
+  https://dashboard.heroku.com/apps/knots-game/logs
+to make sure the app deploys successfully.
+
+View the app running at:
+  https://knots-game.herokuapp.com/
