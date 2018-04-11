@@ -1,0 +1,6 @@
+BeesRTS: January 2018
+
+run the app locally with:
+> python -m SimpleHTTPServer
+then in the browser go to:
+  localhost:8000
