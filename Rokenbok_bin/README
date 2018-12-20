@@ -1,0 +1,21 @@
+Rokenbok: December 2018
+
+compile with
+ > ./compile.bash
+files in js get babelified into bin and then browser-side-required into bundle.js
+
+run with
+ > python -m SimpleHTTPServer
+or
+ > npm start
+and then go to localhost:8000 in the browser
+
+clone with
+ > cp -rf Rokenbok/ NEWGAME
+ > sudo rm -rf node_modules
+ > ./template.bash
+installs this project's node dependencies
+make sure you have a
+  .babelrc
+to get actual babel support *sigh*
+and also make sure to have copied over the scripts field of package.json

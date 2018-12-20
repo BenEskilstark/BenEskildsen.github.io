@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+}
+
+.container {
+  font-family: "Courier New", sans-serif;
+  font-weight: 300;
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  margin-top: 5px;
+  width: 100%;
+  display: block;
+  color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #C1C1C1;
+  background: rgba(158,158,158,.1);
+  border-radius: 3px;
+  padding: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: background 0.3s linear;
+  cursor: pointer;
+  outline: none;
+}
+
+.memory {
+  width: 560px;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.memoryRow:last-child > .memoryCell {
+  border-bottom: 0.5px solid lightgray;
+}
+
+.memoryCell {
+  display: inline-block;
+  line-height: 50px;
+  height: 50px;
+  width: 50px;
+  border-left: 0.5px solid lightgray;
+  border-top: 0.5px solid lightgray;
+  text-align: center;
+}
+
+.memoryCell:last-child {
+  border-right: 0.5px solid lightgray;
+}
+
+.axisCell {
+  display: inline-block;
+  line-height: 50px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+}
+
+p {
+  display: block;
+}
+
+.sideBar {
+  text-align: center;
+  margin-top: 60px;
+  width: 300px;
+  float: left;
+}

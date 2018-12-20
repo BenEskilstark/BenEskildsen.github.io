@@ -1,0 +1,38 @@
+
+ - - - - - - TODO - - - - - -
+ - Better performance
+   - progressive seeding ?
+
+
+ - - - - - - PROBABLY DON'T ACTUALLY NEED (UPON FURTHER REFLECTION) - - - - - -
+ - use a lookup table for collisions with boks instead of comparing to each
+ - Implement buying/placing as a queue instead of a single value
+ - store selection on the state, not the entities
+ - marker where your recording started
+
+
+ - - - - - - DONE - - - - - -
+ - detect collisions
+ - only re-render boks when they change (pan/zoom)
+ - seed function for bok initial positions
+ - zoom can save canvas to bitmap and zoom the image instead of re-rendering everything
+ - panning while zoomed in moves the view more than 1-to-1
+ - write selector to convert canvas coord to world coord
+ - detect what was clicked on when selecting
+ - render which direction trucks/miners are facing
+ - 'base' entity that miners move relative to
+ - miners need UI/UX for setting direction away from base
+ - miners should pick up boks they hit and turn around
+ - miners should stop and wait at base then drop off/pick up at trucks/factories
+ - visualize what trucks/miners are carrying
+ - UI for tracking collected boks
+ - UI for buying more trucks/miners/bases
+ - placing selects the new entity
+ - UI card explaining how selected miners work
+ - Implement buying automating trucks
+ - UI + data structure for recording truck movements and playing back
+ - Implement timer in background
+ - Correct implementation of hours place of milestones
+ - separate entities for boks
+ - Better hints for automation
+   - button that returns you to your original theta

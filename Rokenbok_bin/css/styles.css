@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  font-family: "Courier New", sans-serif;
+  font-weight: 300;
+}
+
+canvas {
+  border: 1px solid black;
+  width: 800px;
+  height: 600px;
+  float: left;
+  margin: 5px;
+}
+
+.sidebar {
+  border: 1px solid black;
+  width: 300px;
+  height: 600px;
+  display: inline-block;
+  margin-top: 5px;
+  overflow: scroll;
+}
+
+.card {
+  width: 278px;
+  margin-left: 2px;
+  margin-top: 2px;
+  border: 1px solid black;
+  padding: 8px;
+}
+
+button {
+  font: inherit;
+  margin-top: 4px;
+  float: center;
+}
+
+p {
+  margin: unset;
+}
+
