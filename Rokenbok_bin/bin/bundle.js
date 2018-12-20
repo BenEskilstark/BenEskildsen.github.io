@@ -1632,7 +1632,7 @@ module.exports = {
   CAB_COLOR: '#2f4f4f',
   TRUCK_CAPACITY: 16,
   TRUCK_COST: 80,
-  AUTOMATION_COST: 0,
+  AUTOMATION_COST: 120,
 
   BOK_SIZE: 5,
   BOK_COLOR: 'brown',
