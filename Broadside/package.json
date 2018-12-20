@@ -1,0 +1,32 @@
+{
+  "name": "broadside",
+  "version": "1.0.0",
+  "description": "Broadside: April 2018",
+  "main": "index.js",
+  "scripts": {
+    "flow": "flow",
+    "babel": "babel",
+    "browserify": "browserify",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "python -m SimpleHTTPServer"
+  },
+  "author": "ben eskildsen",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "flow-bin": "^0.70.0"
+  },
+  "dependencies": {
+    "babel-preset-flow": "^6.23.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "redux": "^4.0.0"
+  },
+  "bin": {
+    "broadside": "index.js"
+  }
+}

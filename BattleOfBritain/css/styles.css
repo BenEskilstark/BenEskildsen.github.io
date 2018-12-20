@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  background-color: #dfdac3;
+}
+
+.container {
+  font-family: "Courier New", sans-serif;
+  font-weight: 300;
+  width: 918px;
+  height: 100%;
+  margin: auto;
+}
+
+.titleBar {
+  text-align: center;
+  font-size: 40px;
+  padding: 5px;
+  padding-top: 15px;
+}
+
+.dateBar {
+  text-align: center;
+  font-size: 25px;
+  padding: 5px;
+  padding-bottom: 15px;
+}
+
+.topBar {
+  margin: 1px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.column {
+  width: 300px;
+  margin: 2px;
+  display: inline-block;
+  height: 500px;
+  float: left;
+}
+
+.columnHeader {
+  font-size: 20px;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.cardTitle {
+  text-align: center;
+  font-size: 15px;
+}
+
+.card {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 4px;
+}
+
+p {
+  margin: unset;
+}
+
+button {
+  font: inherit;
+  margin-top: 4px;
+}
+
+select {
+  font: inherit;
+}
+

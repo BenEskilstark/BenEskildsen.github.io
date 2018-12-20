@@ -1,0 +1,5 @@
+The most basic set of files to get a react-based UI up and running for a game.
+
+run with
+ > python -m SimpleHTTPServer
+and then go to localhost:8000 in the browser
