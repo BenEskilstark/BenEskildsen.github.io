@@ -2059,9 +2059,14 @@ var Maze = function (_React$Component) {
 
       return React.createElement(
         'div',
-        { id: 'grid', className: 'grid', onMouseDown: function onMouseDown(ev) {
+        { id: 'grid', className: 'grid',
+          onTouchStart: function onTouchStart(ev) {
             return _this4.onMouseDown(ev);
-          } },
+          },
+          onMouseDown: function onMouseDown(ev) {
+            return _this4.onMouseDown(ev);
+          }
+        },
         this.renderButtons(),
         this.renderTarget(this.props.target.pos),
         this.renderAgents(),

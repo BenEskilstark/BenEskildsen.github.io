@@ -167,7 +167,10 @@ class Maze extends React.Component {
 
   render() {
     return (
-      <div id="grid" className="grid" onMouseDown={(ev) => this.onMouseDown(ev)}>
+      <div id="grid" className="grid"
+        onTouchStart={(ev) => this.onMouseDown(ev)}
+        onMouseDown={(ev) => this.onMouseDown(ev)}
+      >
         {this.renderButtons()}
         {this.renderTarget(this.props.target.pos)}
         {this.renderAgents()}
