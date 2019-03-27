@@ -1,0 +1,73 @@
+
+ - - - - - - TODO - - - - - -
+ - edit Vance's level to be workable
+ - put on github
+
+ - - - - - - WISH - - - - - -
+ - support levels with variable widths
+ - level selection menu to pick from levels you've unlocked
+ - undo/redo for editor actions
+ - more intuitive picker for buttons in editor
+
+ - - - - - - REFACTOR - - - - - -
+ - pull out modal/button creation
+
+ - - - - - - DONE - - - - -
+ - level editor
+  - select grid squares
+  - (slightly) better styling for highlighting selected grid square
+  - actions and (unstyled) buttons for adding walls to each side of selected square
+  - actions for adding doors and buttons as well
+  - drop in and play level at any time (set start location, reset level state)
+  - output finished level as json or something
+  - add doors to maze via buttons and checkbox
+  - sidebar with options for walls and buttons
+  - set finish location
+  - set step limit in editor
+  - disable modal to next level in editor
+  - better styling for sidebar
+  - need to be able to lose focus on the button selector dropdown too...
+  - ability to delete walls/doors/buttons somehow
+ - outer wall of starting maze is already filled
+ - rumble when you try to make an impossible move
+ - indication when you lose
+ - modal system for instructions, telling you when you lose..
+ - prevent focus from going to RESET button et al
+ - limited number of steps to make it through the maze the first time
+ - prevent going back in time on top of another agent
+ - detect when you can't move or reverse time and pop "you lose" modal
+ - motivation to reverse time in the first place (finish location?)
+ - finish location should beat out running out of steps
+ - prevent moving while modal is showing
+ - prevent reversing time before the first time you make it through the maze
+ - render the target as... something
+ - display which level you're on
+ - progress to next level on completion
+ - don't collide with where an agent currently is, only where they will be
+ - indicate that you must press space to "go back in time" (<-- and use that wording!)
+ - fix button creation dropdown to display all options
+ - handle case on level 3 where you can just pass through yourself because you never
+   occupy the same spot (that should be a case handled separately)
+ - add a reset button
+ - fix getting stuck detection
+ - better indicator for which player you are
+ - modal for introducing the game
+ - better way of choosing levels
+ - modal for when you beat the last level
+ - modal on first level when you reach the button telling you to move
+ - modal on second level when you get stuck reminding to reverse time
+ - split out the systems in index.js
+ - multiple levels
+ - animation when you reverse time (like a growing and rotating hourglass)
+ - better styling for modals
+ - better styling for main menu
+ - add favicon
+ - paste level json somewhere to play custom level
+ - cookie to track level progress
+ - pass moveReducer and reverseTimeReducer the full state
+ - Back to Main Menu button next to reset
+ - show agents moving backwards when you reverse time
+ - fix bug where you go back to main menu and it's trying to reverse time over and over
+ - fix tutorial modals to work with reversing time animation
+ - selector for player agent, etc.
+ - playable on mobile

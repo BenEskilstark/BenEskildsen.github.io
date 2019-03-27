@@ -1,0 +1,14 @@
+Time Travel Understander: Jan/Feb/Mar 2019
+
+compile with
+ > ./compile.bash
+files in js get babelified into the bin directory,
+and then browser-side-required into bundle.js
+
+run the app locally with:
+ > npm start
+or
+ > python -m SimpleHTTPServer
+then in the browser go to:
+  localhost:8000
+

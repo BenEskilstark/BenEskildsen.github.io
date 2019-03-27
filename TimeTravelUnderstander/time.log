@@ -1,0 +1,83 @@
+Time spent log
+
+Date  Time Started  Time Spent  Work Completed
+----  ------------  ----------  --------------
+1/4     7:50am        30 min     Made this log, rearranged files
+        10:30am       60 min     Added main menu, level editor stub, level architecture
+
+1/9     9:40am        40 min     Adjusted styling for editor, added TODO
+
+1/15    9:25am        50 min     Added ability to select grid cells in editor
+
+1/16    9:40pm        40 min     Buttons for adding walls to any side of selected grid square
+
+1/21    3:35pm        60 min     Buttons for reset, set start, output level to console.
+                                 Start level with walls around the edges
+        8:15pm        40 min     Checkbox for doors, fixed RESET and SET_START_LOCATION
+                                 to actually work after reversing time
+
+1/23    6:10pm        50 min     Added dropdown for adding buttons to the maze in the editor
+                                 But you can't re-style <option> tags in chrome... wtf (6hr10min)
+
+1/26    10:15am       60 min     Rumble system for when you try to make impossible moves
+
+1/27    1:25pm        50 min     Add a system for displaying modals with text and buttons
+                                 Prevent buttons from stealing focus when you click them (8hr)
+
+1/30    9:45am        85 min     Tried to add step limit to level editor >.<
+
+1/31    9:30am        35 min     Pop "you lose" modal when step limit exceeded
+
+                    ----------
+                     = 10 hrs
+
+2/9     4:45pm        45 min     Prevent going back in time on top of another agent
+                                 When every move has been exhausted, pop "you lose" modal
+
+2/10    4:50pm        15 min     Started adding target location and advancing to the next level
+        7:20pm        50 min     Added a target (not rendered as anything yet), advance to the
+                                 next level on complete, can't reverse time til first time through
+
+2/16    4:20pm        10 min     Render unicode hourglass at target location
+
+2/18    9:20am        30 min     Buttons for add target location and set step limit
+                                 Add dismiss options to the modals when in the editor
+        6:20pm        60 min     Designed two levels, fixed advancing levels, render agent
+                                 above target.
+
+2/19    8:30pm        45 min     Created level 3, changed wording in some modals
+
+2/20    7:00pm        90 min     Created level 4, fixed selector dropdown (kinda) (5hr 45min)
+
+2/24    10:30am       45 min     Fix passing through eachother being allowed incorrectly
+                                 Add reset button. Fix reset modal for when you lose
+                                 Border around player you are controlling (6hr 30min)
+                      60 min     Designed another level with Vance. Removed numbers from agents
+
+2/26    8:10pm        80 min     Designed, made, and tested level 6 (8hr 50min)
+
+2/27    7:00pm        70 min     Designed and made level 7
+
+                    ----------
+                     = 10 hrs
+
+3/2     10:50am       30 min     Modal when you finish the last level, simpler array for
+                                 selecting the level. Rename game to Time Travel Understander
+
+3/3     12:25pm       90 min     Added two more easy levels, added modals on level 1 and 2 to
+                                 help explain what you should be doing. Split out the systems
+                                 into their own directory and out of index.js
+
+3/9     9:35am        70 min     Animation when you reverse time
+
+3/10    10:50am       60 min     Better styling for buttons and menu, add favicon, add button
+                                 to paste and play custom level (4hr 10min)
+
+3/25    8:15pm        60 min     Button color dropdown is de-selectable, ability to delete walls
+                                 and doors added, store level progress in local storage.
+                                 Added Back to Main Menu button to levels + editor. (5hr 10min)
+
+3/27    11:10am       65 min     Reverse time animation shows agents moving backwards.
+                                 Level 2 tutorial displays on rumble.
+                                 Fixed return to main menu keeping level state. (6hr 15min)
+        3:10pm
