@@ -1,6 +1,7 @@
 // @flow
 
 const {initEmptyLevel} = require('../state/emptyLevel.js');
+const {vanceLevel} = require('../state/vanceLevel.js');
 
 import type {State, Action} from '../types';
 

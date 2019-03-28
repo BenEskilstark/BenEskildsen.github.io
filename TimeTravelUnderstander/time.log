@@ -80,4 +80,5 @@ Date  Time Started  Time Spent  Work Completed
 3/27    11:10am       65 min     Reverse time animation shows agents moving backwards.
                                  Level 2 tutorial displays on rumble.
                                  Fixed return to main menu keeping level state. (6hr 15min)
-        3:10pm
+        3:10pm        45 min     Made it playable on mobile! And uploaded to github (7hr)
+        8:40pm        60 min     Fixed up Vance's level. Don't close doors til end of animation

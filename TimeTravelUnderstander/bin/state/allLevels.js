@@ -24,18 +24,21 @@ var _require7 = require('./level7'),
 var _require8 = require('./level8'),
     level8 = _require8.level8;
 
-var _require9 = require('./level10'),
-    level10 = _require9.level10;
+var _require9 = require('./level9'),
+    level9 = _require9.level9;
 
-var _require10 = require('./testLevel'),
-    testLevel = _require10.testLevel;
+var _require10 = require('./level10'),
+    level10 = _require10.level10;
 
-var _require11 = require('./vanceLevel'),
-    vanceLevel = _require11.vanceLevel;
+var _require11 = require('./testLevel'),
+    testLevel = _require11.testLevel;
 
-var _require12 = require('./emptyLevel'),
-    initEmptyLevel = _require12.initEmptyLevel;
+var _require12 = require('./vanceLevel'),
+    vanceLevel = _require12.vanceLevel;
 
-var levels = [level1, level2, level3, level4, level5, level6, level7, level8, level10];
+var _require13 = require('./emptyLevel'),
+    initEmptyLevel = _require13.initEmptyLevel;
+
+var levels = [level1, level2, level3, level4, level5, level6, level7, level8, level9, level10];
 
 module.exports = { levels: levels };

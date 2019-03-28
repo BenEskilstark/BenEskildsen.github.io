@@ -1,7 +1,8 @@
 
  - - - - - - TODO - - - - - -
- - edit Vance's level to be workable
- - put on github
+ - Fix flickering when tapping on mobile
+ - More levels
+ - Deleting buttons
 
  - - - - - - WISH - - - - - -
  - support levels with variable widths
@@ -71,3 +72,6 @@
  - fix tutorial modals to work with reversing time animation
  - selector for player agent, etc.
  - playable on mobile
+ - put on github
+ - edit Vance's level to be workable
+ - Don't close doors until the end of the reverse time animation

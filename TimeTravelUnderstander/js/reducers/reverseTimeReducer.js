@@ -31,6 +31,10 @@ const reverseTimeReducer = (state: State, action: Action): State => {
       };
     case 'REVERSE_TIME_ANIMATION': {
       if (!state.level.reverseTime || state.level.reverseTime.count == 0) {
+        // close all doors
+        const {walls} = state.level;
+        walls.forEach(wall => wall.isOpen = false);
+
         return {
           ...state,
           level: {
@@ -81,17 +85,12 @@ function reverseTimeFn(level) {
     }
   }
 
-  // close all doors
-  const {walls} = level;
-  walls.forEach(wall => wall.isOpen = false);
-
   return {
     ...level,
     prevTime: level.time,
     // time: 0, // the animation does this
     numReversals: level.numReversals + 1,
     agents: [{history: [latestPos]}, ...level.agents],
-    walls,
     reverseTime: {
       shouldAnimate: true,
       count: -1,

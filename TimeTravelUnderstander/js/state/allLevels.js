@@ -8,6 +8,7 @@ const {level5} = require('./level5');
 const {level6} = require('./level6');
 const {level7} = require('./level7');
 const {level8} = require('./level8');
+const {level9} = require('./level9');
 const {level10} = require('./level10');
 const {testLevel} = require('./testLevel');
 const {vanceLevel} = require('./vanceLevel');
@@ -22,6 +23,7 @@ const levels = [
   level6,
   level7,
   level8,
+  level9,
   level10,
 ];
 

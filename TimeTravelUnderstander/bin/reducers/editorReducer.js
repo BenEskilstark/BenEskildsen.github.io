@@ -5,6 +5,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _require = require('../state/emptyLevel.js'),
     initEmptyLevel = _require.initEmptyLevel;
 
+var _require2 = require('../state/vanceLevel.js'),
+    vanceLevel = _require2.vanceLevel;
+
 var editorReducer = function editorReducer(state, action) {
   switch (action.type) {
     case 'EDITOR':
