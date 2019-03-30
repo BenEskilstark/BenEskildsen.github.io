@@ -15,12 +15,13 @@ class Maze extends React.Component {
     return positions.map((pos, i) => {
       const num = positions.length - i;
       const isUserAgent = i == 0;
+      const isLast = i == positions.length - 1;
       if (!pos) return null;
-      return this.drawTweenedAgent(pos, num, true, isUserAgent);
+      return this.drawTweenedAgent(pos, num, true, isUserAgent, isLast);
     });
   }
 
-  drawTweenedAgent(pos, num, shouldTween, isUserAgent) {
+  drawTweenedAgent(pos, num, shouldTween, isUserAgent, isLast) {
     return (
       <Motion
         key={'motion_' + num}
@@ -30,12 +31,12 @@ class Maze extends React.Component {
           y: (shouldTween) ? spring(pos.y) : pos.y,
         }}
       >
-        {motionVal => this.drawAgent(motionVal, num, isUserAgent)}
+        {motionVal => this.drawAgent(motionVal, num, isUserAgent, isLast)}
       </Motion>
     );
   }
 
-  drawAgent(pos, num, isUserAgent) {
+  drawAgent(pos, num, isUserAgent, isLast) {
     return (
       <div
         key={'agent_' + num}
@@ -48,8 +49,11 @@ class Maze extends React.Component {
           opacity: isUserAgent ? 1 : 0.5,
           width: isUserAgent ? 62 : 70,
           border: isUserAgent ? '4px solid orange' : '0px',
+          fontSize: 15,
+          textAlign: 'right',
         }}
       >
+        {isLast ? null : '\u231B'}
       </div>
     );
   }

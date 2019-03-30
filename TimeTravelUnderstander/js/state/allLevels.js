@@ -1,6 +1,6 @@
 // @flow
 
-const {level1} = require('./level1');
+const {level1} = require('./level1v2');
 const {level2} = require('./level2');
 const {level3} = require('./level3');
 const {level4} = require('./level4');

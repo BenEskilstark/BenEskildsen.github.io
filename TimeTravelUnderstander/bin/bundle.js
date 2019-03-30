@@ -839,7 +839,7 @@ module.exports = selectors;
 },{}],11:[function(require,module,exports){
 'use strict';
 
-var _require = require('./level1'),
+var _require = require('./level1v2'),
     level1 = _require.level1;
 
 var _require2 = require('./level2'),
@@ -881,7 +881,7 @@ var _require13 = require('./emptyLevel'),
 var levels = [level1, level2, level3, level4, level5, level6, level7, level8, level9, level10];
 
 module.exports = { levels: levels };
-},{"./emptyLevel":12,"./level1":15,"./level10":16,"./level2":17,"./level3":18,"./level4":19,"./level5":20,"./level6":21,"./level7":22,"./level8":23,"./level9":24,"./testLevel":25,"./vanceLevel":26}],12:[function(require,module,exports){
+},{"./emptyLevel":12,"./level10":15,"./level1v2":16,"./level2":17,"./level3":18,"./level4":19,"./level5":20,"./level6":21,"./level7":22,"./level8":23,"./level9":24,"./testLevel":25,"./vanceLevel":26}],12:[function(require,module,exports){
 'use strict';
 
 var initEmptyLevel = function initEmptyLevel() {
@@ -952,16 +952,6 @@ module.exports = { initState: initState };
 },{}],15:[function(require,module,exports){
 "use strict";
 
-var level1 = function level1() {
-  return {
-    "level": 0, "prevTime": -1, "time": 0, "numReversals": 0, "agents": [{ "history": [{ "x": 0, "y": 0 }] }], "walls": [{ "orientation": "horizontal", "start": { "x": 0, "y": 0 }, "end": { "x": 7, "y": 0 }, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 0, "y": 7 }, "end": { "x": 7, "y": 7 }, "isOpen": false }, { "orientation": "vertical", "start": { "x": 0, "y": 0 }, "end": { "x": 0, "y": 7 }, "isOpen": false }, { "orientation": "vertical", "start": { "x": 7, "y": 0 }, "end": { "x": 7, "y": 7 }, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 5, "y": 6 }, "end": { "x": 6, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 4, "y": 6 }, "end": { "x": 5, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 3, "y": 6 }, "end": { "x": 4, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 2, "y": 6 }, "end": { "x": 3, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 1, "y": 6 }, "end": { "x": 2, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 5 }, "end": { "x": 1, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 4 }, "end": { "x": 1, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 3 }, "end": { "x": 1, "y": 4 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 2 }, "end": { "x": 1, "y": 3 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 1 }, "end": { "x": 1, "y": 2 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 0 }, "end": { "x": 1, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 5 }, "end": { "x": 6, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 4 }, "end": { "x": 6, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 3 }, "end": { "x": 6, "y": 4 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 2 }, "end": { "x": 6, "y": 3 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 1 }, "end": { "x": 6, "y": 2 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 5, "y": 1 }, "end": { "x": 6, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 4, "y": 1 }, "end": { "x": 5, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 3, "y": 1 }, "end": { "x": 4, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 2, "y": 1 }, "end": { "x": 3, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 6 }, "end": { "x": 6, "y": 7 }, "doorID": 1, "invisible": false, "isOpen": true }, { "orientation": "horizontal", "start": { "x": 1, "y": 1 }, "end": { "x": 2, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }], "buttons": [{ "position": { "x": 1, "y": 0 }, "doorID": 1, "pressed": false }], "stepLimit": 12, "target": { "reached": 0, "pos": { "x": 6, "y": 6 } }, "rumble": { "shouldRumble": false, "offset": { "x": 0, "y": 0 }, "count": 0 }, "moveAttempts": { "left": false, "right": false, "up": false, "down": false, "revTime": false }
-  };
-};
-
-module.exports = { level1: level1 };
-},{}],16:[function(require,module,exports){
-"use strict";
-
 var level10 = function level10() {
   return {
     "level": 7, "prevTime": -1, "time": 0, "numReversals": 0, "agents": [{ "history": [{ "x": 3, "y": 0 }] }], "walls": [{ "orientation": "horizontal", "start": { "x": 0, "y": 0 }, "end": { "x": 7, "y": 0 } }, { "orientation": "horizontal", "start": { "x": 0, "y": 7 }, "end": { "x": 7, "y": 7 } }, { "orientation": "vertical", "start": { "x": 0, "y": 0 }, "end": { "x": 0, "y": 7 } }, { "orientation": "vertical", "start": { "x": 7, "y": 0 }, "end": { "x": 7, "y": 7 } }, { "orientation": "vertical", "start": { "x": 3, "y": 0 }, "end": { "x": 3, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 4, "y": 0 }, "end": { "x": 4, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 4, "y": 1 }, "end": { "x": 5, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 5, "y": 1 }, "end": { "x": 6, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 1 }, "end": { "x": 6, "y": 2 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 6, "y": 2 }, "end": { "x": 7, "y": 2 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 6, "y": 3 }, "end": { "x": 7, "y": 3 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 5, "y": 3 }, "end": { "x": 6, "y": 3 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 4, "y": 3 }, "end": { "x": 5, "y": 3 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 2, "y": 1 }, "end": { "x": 2, "y": 2 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 2, "y": 1 }, "end": { "x": 3, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 1, "y": 2 }, "end": { "x": 2, "y": 2 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 1, "y": 3 }, "end": { "x": 2, "y": 3 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 0, "y": 2 }, "end": { "x": 1, "y": 2 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 2, "y": 3 }, "end": { "x": 2, "y": 4 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 3 }, "end": { "x": 1, "y": 4 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 1, "y": 5 }, "end": { "x": 2, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 4 }, "end": { "x": 1, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 2, "y": 4 }, "end": { "x": 3, "y": 4 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 2, "y": 5 }, "end": { "x": 3, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 3, "y": 4 }, "end": { "x": 3, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 4, "y": 4 }, "end": { "x": 4, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 4, "y": 4 }, "end": { "x": 5, "y": 4 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 5, "y": 4 }, "end": { "x": 6, "y": 4 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 5, "y": 5 }, "end": { "x": 6, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 6, "y": 5 }, "end": { "x": 7, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 5, "y": 6 }, "end": { "x": 6, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 5, "y": 6 }, "end": { "x": 5, "y": 7 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 6 }, "end": { "x": 6, "y": 7 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 3, "y": 6 }, "end": { "x": 3, "y": 7 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 2, "y": 6 }, "end": { "x": 3, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 1, "y": 6 }, "end": { "x": 2, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 0, "y": 6 }, "end": { "x": 1, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 3, "y": 3 }, "end": { "x": 4, "y": 3 }, "doorID": 1, "invisible": false, "isOpen": true }, { "orientation": "horizontal", "start": { "x": 3, "y": 4 }, "end": { "x": 4, "y": 4 }, "doorID": 2, "invisible": false, "isOpen": true }, { "orientation": "horizontal", "start": { "x": 3, "y": 5 }, "end": { "x": 4, "y": 5 }, "doorID": 3, "invisible": false, "isOpen": true }, { "orientation": "horizontal", "start": { "x": 3, "y": 6 }, "end": { "x": 4, "y": 6 }, "doorID": 4, "invisible": false, "isOpen": true }, { "orientation": "vertical", "start": { "x": 3, "y": 5 }, "end": { "x": 3, "y": 6 }, "doorID": 5, "invisible": false, "isOpen": true }, { "orientation": "vertical", "start": { "x": 4, "y": 2 }, "end": { "x": 4, "y": 3 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 3, "y": 2 }, "end": { "x": 3, "y": 3 }, "doorID": null, "invisible": false, "isOpen": false }], "buttons": [{ "position": { "x": 4, "y": 5 }, "doorID": 1, "pressed": false }, { "position": { "x": 6, "y": 6 }, "doorID": 4, "pressed": false }, { "position": { "x": 6, "y": 2 }, "doorID": 3, "pressed": false }, { "position": { "x": 2, "y": 2 }, "doorID": 2, "pressed": false }, { "position": { "x": 0, "y": 2 }, "doorID": 5, "pressed": false }], "stepLimit": 6, "target": { "reached": 0, "pos": { "x": 3, "y": 6 } }, "rumble": { "shouldRumble": false, "offset": { "x": 0, "y": 0 }, "count": 0 }, "moveAttempts": { "left": false, "right": false, "up": false, "down": false, "revTime": false }
@@ -969,6 +959,16 @@ var level10 = function level10() {
 };
 
 module.exports = { level10: level10 };
+},{}],16:[function(require,module,exports){
+"use strict";
+
+var level1 = function level1() {
+  return {
+    "level": null, "prevTime": -1, "time": 0, "numReversals": 0, "agents": [{ "history": [{ "x": 0, "y": 0 }] }], "walls": [{ "orientation": "horizontal", "start": { "x": 0, "y": 0 }, "end": { "x": 7, "y": 0 } }, { "orientation": "horizontal", "start": { "x": 0, "y": 7 }, "end": { "x": 7, "y": 7 } }, { "orientation": "vertical", "start": { "x": 0, "y": 0 }, "end": { "x": 0, "y": 7 } }, { "orientation": "vertical", "start": { "x": 7, "y": 0 }, "end": { "x": 7, "y": 7 } }, { "orientation": "vertical", "start": { "x": 1, "y": 0 }, "end": { "x": 1, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 1 }, "end": { "x": 1, "y": 2 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 2 }, "end": { "x": 1, "y": 3 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 3 }, "end": { "x": 1, "y": 4 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 4 }, "end": { "x": 1, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 1, "y": 5 }, "end": { "x": 1, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 1, "y": 6 }, "end": { "x": 2, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 2, "y": 6 }, "end": { "x": 3, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 4, "y": 6 }, "end": { "x": 4, "y": 7 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 0, "y": 4 }, "end": { "x": 1, "y": 4 }, "doorID": 1, "invisible": false, "isOpen": true }, { "orientation": "vertical", "start": { "x": 4, "y": 5 }, "end": { "x": 4, "y": 6 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 4, "y": 4 }, "end": { "x": 4, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 3, "y": 3 }, "end": { "x": 3, "y": 4 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 3, "y": 2 }, "end": { "x": 3, "y": 3 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 3, "y": 1 }, "end": { "x": 3, "y": 2 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 3, "y": 1 }, "end": { "x": 4, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 4, "y": 1 }, "end": { "x": 5, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "horizontal", "start": { "x": 5, "y": 1 }, "end": { "x": 6, "y": 1 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 1 }, "end": { "x": 6, "y": 2 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 2 }, "end": { "x": 6, "y": 3 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 3 }, "end": { "x": 6, "y": 4 }, "doorID": null, "invisible": false, "isOpen": false }, { "orientation": "vertical", "start": { "x": 6, "y": 4 }, "end": { "x": 6, "y": 5 }, "doorID": null, "invisible": false, "isOpen": false }], "buttons": [{ "position": { "x": 3, "y": 3 }, "doorID": 1, "pressed": false }], "stepLimit": 6, "target": { "reached": 0, "pos": { "x": 0, "y": 6 } }, "rumble": { "shouldRumble": false, "offset": { "x": 0, "y": 0 }, "count": 0 }, "moveAttempts": { "left": false, "right": false, "up": false, "down": false, "revTime": false }
+  };
+};
+
+module.exports = { level1: level1 };
 },{}],17:[function(require,module,exports){
 "use strict";
 
@@ -1195,21 +1195,20 @@ module.exports = { initLevelCompleteSystem: initLevelCompleteSystem };
 'use strict';
 
 var initLevelTutorialSystem = function initLevelTutorialSystem(store) {
-  var shouldShowLevel1Tutorial = true;
-  var shouldShowLevel2Tutorial = true;
+  var shouldShowKeepMovingTutorial = true;
+  var shouldShowStuckTutorial = true;
   var dispatch = store.dispatch;
-  var level1TutorialModal = {
-    type: 'SET_MODAL',
-    text: 'You\'ve reached the button that opens the orange door. Now keep moving until your' + ' original self reaches the time machine again.',
-    buttons: [{ text: 'Got it, gonna move around', onClick: function onClick() {
-        return dispatch({ type: 'DISMISS_MODAL' });
-      } }]
-  };
-
-  var level2TutorialModal = {
+  var stuckTutorialModal = {
     type: 'SET_MODAL',
     text: 'Your original self is stuck at the door. Press the space bar to go back in time' + ' again and keep going.',
     buttons: [{ text: 'Ok. Gotta go back in time', onClick: function onClick() {
+        return dispatch({ type: 'DISMISS_MODAL' });
+      } }]
+  };
+  var keepMovingTutorialModal = {
+    type: 'SET_MODAL',
+    text: 'You\'ve reached the button that opens the orange door. Now keep moving until your' + ' original self reaches the time machine again.',
+    buttons: [{ text: 'Got it, gonna move around', onClick: function onClick() {
         return dispatch({ type: 'DISMISS_MODAL' });
       } }]
   };
@@ -1224,29 +1223,30 @@ var initLevelTutorialSystem = function initLevelTutorialSystem(store) {
     var levelNum = level.level;
 
     // level 1 tutorial
-    if (levelNum == 0) {
-      var atButton = false;
-      var agent = level.agents[0];
-      var agentPos = agent.history[agent.history.length - 1];
-      if (agentPos.x == 1 && agentPos.y == 0) {
-        atButton = true;
-      }
-      if (shouldShowLevel1Tutorial && atButton) {
-        shouldShowLevel1Tutorial = false;
-        dispatch(level1TutorialModal);
-      }
+    if (levelNum != 0) {
+      return;
     }
 
-    // level 2 tutorial
-    if (levelNum == 1) {
-      var mustReverseTime = false;
-      if (level.time == 4 && level.prevTime == 3 && level.rumble && level.rumble.shouldRumble == true && level.numReversals == 1) {
-        mustReverseTime = true;
-      }
-      if (shouldShowLevel2Tutorial && mustReverseTime) {
-        shouldShowLevel2Tutorial = false;
-        dispatch(level2TutorialModal);
-      }
+    // stuck
+    var mustReverseTime = false;
+    if (level.time == 3 && level.prevTime == 2 && level.rumble && level.rumble.shouldRumble == true && level.numReversals == 1) {
+      mustReverseTime = true;
+    }
+    if (shouldShowStuckTutorial && mustReverseTime) {
+      shouldShowStuckTutorial = false;
+      dispatch(stuckTutorialModal);
+    }
+
+    // keep moving
+    var atButton = false;
+    var agent = level.agents[0];
+    var agentPos = agent.history[agent.history.length - 1];
+    if (agentPos.x == 3 && agentPos.y == 3) {
+      atButton = true;
+    }
+    if (shouldShowKeepMovingTutorial && atButton) {
+      shouldShowKeepMovingTutorial = false;
+      dispatch(keepMovingTutorialModal);
     }
   });
 };
@@ -1911,13 +1911,14 @@ var Maze = function (_React$Component) {
       return positions.map(function (pos, i) {
         var num = positions.length - i;
         var isUserAgent = i == 0;
+        var isLast = i == positions.length - 1;
         if (!pos) return null;
-        return _this2.drawTweenedAgent(pos, num, true, isUserAgent);
+        return _this2.drawTweenedAgent(pos, num, true, isUserAgent, isLast);
       });
     }
   }, {
     key: 'drawTweenedAgent',
-    value: function drawTweenedAgent(pos, num, shouldTween, isUserAgent) {
+    value: function drawTweenedAgent(pos, num, shouldTween, isUserAgent, isLast) {
       var _this3 = this;
 
       return React.createElement(
@@ -1931,26 +1932,32 @@ var Maze = function (_React$Component) {
           }
         },
         function (motionVal) {
-          return _this3.drawAgent(motionVal, num, isUserAgent);
+          return _this3.drawAgent(motionVal, num, isUserAgent, isLast);
         }
       );
     }
   }, {
     key: 'drawAgent',
-    value: function drawAgent(pos, num, isUserAgent) {
-      return React.createElement('div', {
-        key: 'agent_' + num,
-        className: 'tile',
-        style: {
-          top: pos.y * 80,
-          left: pos.x * 80,
-          background: '#edcf72',
-          color: '#f9f6f2',
-          opacity: isUserAgent ? 1 : 0.5,
-          width: isUserAgent ? 62 : 70,
-          border: isUserAgent ? '4px solid orange' : '0px'
-        }
-      });
+    value: function drawAgent(pos, num, isUserAgent, isLast) {
+      return React.createElement(
+        'div',
+        {
+          key: 'agent_' + num,
+          className: 'tile',
+          style: {
+            top: pos.y * 80,
+            left: pos.x * 80,
+            background: '#edcf72',
+            color: '#f9f6f2',
+            opacity: isUserAgent ? 1 : 0.5,
+            width: isUserAgent ? 62 : 70,
+            border: isUserAgent ? '4px solid orange' : '0px',
+            fontSize: 15,
+            textAlign: 'right'
+          }
+        },
+        isLast ? null : '\u231B'
+      );
     }
   }, {
     key: 'renderTarget',

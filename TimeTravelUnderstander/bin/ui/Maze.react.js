@@ -42,13 +42,14 @@ var Maze = function (_React$Component) {
       return positions.map(function (pos, i) {
         var num = positions.length - i;
         var isUserAgent = i == 0;
+        var isLast = i == positions.length - 1;
         if (!pos) return null;
-        return _this2.drawTweenedAgent(pos, num, true, isUserAgent);
+        return _this2.drawTweenedAgent(pos, num, true, isUserAgent, isLast);
       });
     }
   }, {
     key: 'drawTweenedAgent',
-    value: function drawTweenedAgent(pos, num, shouldTween, isUserAgent) {
+    value: function drawTweenedAgent(pos, num, shouldTween, isUserAgent, isLast) {
       var _this3 = this;
 
       return React.createElement(
@@ -62,26 +63,32 @@ var Maze = function (_React$Component) {
           }
         },
         function (motionVal) {
-          return _this3.drawAgent(motionVal, num, isUserAgent);
+          return _this3.drawAgent(motionVal, num, isUserAgent, isLast);
         }
       );
     }
   }, {
     key: 'drawAgent',
-    value: function drawAgent(pos, num, isUserAgent) {
-      return React.createElement('div', {
-        key: 'agent_' + num,
-        className: 'tile',
-        style: {
-          top: pos.y * 80,
-          left: pos.x * 80,
-          background: '#edcf72',
-          color: '#f9f6f2',
-          opacity: isUserAgent ? 1 : 0.5,
-          width: isUserAgent ? 62 : 70,
-          border: isUserAgent ? '4px solid orange' : '0px'
-        }
-      });
+    value: function drawAgent(pos, num, isUserAgent, isLast) {
+      return React.createElement(
+        'div',
+        {
+          key: 'agent_' + num,
+          className: 'tile',
+          style: {
+            top: pos.y * 80,
+            left: pos.x * 80,
+            background: '#edcf72',
+            color: '#f9f6f2',
+            opacity: isUserAgent ? 1 : 0.5,
+            width: isUserAgent ? 62 : 70,
+            border: isUserAgent ? '4px solid orange' : '0px',
+            fontSize: 15,
+            textAlign: 'right'
+          }
+        },
+        isLast ? null : '\u231B'
+      );
     }
   }, {
     key: 'renderTarget',

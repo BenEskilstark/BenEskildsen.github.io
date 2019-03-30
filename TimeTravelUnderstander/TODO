@@ -1,8 +1,11 @@
 
  - - - - - - TODO - - - - - -
+ - Animate held time machine on non-player-controlled agents when they go back in time
+ - Tell which direction other agents are facing
  - Fix flickering when tapping on mobile
  - More levels
  - Deleting buttons
+ - Spacebar and enter to dismiss modals
 
  - - - - - - WISH - - - - - -
  - support levels with variable widths
@@ -75,3 +78,5 @@
  - put on github
  - edit Vance's level to be workable
  - Don't close doors until the end of the reverse time animation
+ - Show character holding time machine
+ - More open first level

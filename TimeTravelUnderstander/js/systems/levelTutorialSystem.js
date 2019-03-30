@@ -1,24 +1,23 @@
 // @flow
 
 const initLevelTutorialSystem = (store) => {
-  let shouldShowLevel1Tutorial = true;
-  let shouldShowLevel2Tutorial = true;
+  let shouldShowKeepMovingTutorial = true;
+  let shouldShowStuckTutorial = true;
   const dispatch = store.dispatch;
-  const level1TutorialModal = {
-    type: 'SET_MODAL',
-    text: 'You\'ve reached the button that opens the orange door. Now keep moving until your'
-      + ' original self reaches the time machine again.',
-    buttons: [
-      {text: 'Got it, gonna move around', onClick: () => dispatch({type: 'DISMISS_MODAL'})},
-    ],
-  };
-
-  const level2TutorialModal = {
+  const stuckTutorialModal = {
     type: 'SET_MODAL',
     text: 'Your original self is stuck at the door. Press the space bar to go back in time'
       + ' again and keep going.',
     buttons: [
       {text: 'Ok. Gotta go back in time', onClick: () => dispatch({type: 'DISMISS_MODAL'})},
+    ],
+  };
+  const keepMovingTutorialModal = {
+    type: 'SET_MODAL',
+    text: 'You\'ve reached the button that opens the orange door. Now keep moving until your'
+      + ' original self reaches the time machine again.',
+    buttons: [
+      {text: 'Got it, gonna move around', onClick: () => dispatch({type: 'DISMISS_MODAL'})},
     ],
   };
 
@@ -31,34 +30,36 @@ const initLevelTutorialSystem = (store) => {
     const levelNum = level.level;
 
     // level 1 tutorial
-    if (levelNum == 0) {
-      let atButton = false;
-      const agent = level.agents[0];
-      const agentPos = agent.history[agent.history.length - 1];
-      if (agentPos.x == 1 && agentPos.y == 0) {
-        atButton = true;
-      }
-      if (shouldShowLevel1Tutorial && atButton) {
-        shouldShowLevel1Tutorial = false;
-        dispatch(level1TutorialModal);
-      }
+    if (levelNum != 0) {
+      return
     }
 
-    // level 2 tutorial
-    if (levelNum == 1) {
-      let mustReverseTime = false;
-      if (
-        level.time == 4 && level.prevTime == 3 &&
-        level.rumble && level.rumble.shouldRumble == true &&
-        level.numReversals == 1
-      ) {
-        mustReverseTime = true;
-      }
-      if (shouldShowLevel2Tutorial && mustReverseTime) {
-        shouldShowLevel2Tutorial = false;
-        dispatch(level2TutorialModal);
-      }
+    // stuck
+    let mustReverseTime = false;
+    if (
+      level.time == 3 && level.prevTime == 2 &&
+      level.rumble && level.rumble.shouldRumble == true &&
+      level.numReversals == 1
+    ) {
+      mustReverseTime = true;
     }
+    if (shouldShowStuckTutorial && mustReverseTime) {
+      shouldShowStuckTutorial = false;
+      dispatch(stuckTutorialModal);
+    }
+
+    // keep moving
+    let atButton = false;
+    const agent = level.agents[0];
+    const agentPos = agent.history[agent.history.length - 1];
+    if (agentPos.x == 3 && agentPos.y == 3) {
+      atButton = true;
+    }
+    if (shouldShowKeepMovingTutorial && atButton) {
+      shouldShowKeepMovingTutorial = false;
+      dispatch(keepMovingTutorialModal);
+    }
+
   });
 };
 
