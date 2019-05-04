@@ -1,0 +1,55 @@
+
+ - - - - - - TODO - - - - - -
+ - implement employees and wages
+   - Visually disable pay button when no one needs it
+   - workers should quit at random, instead of FIFO
+ - hiring must cost money or else you can hire and never pay
+ - ticker should display each message on its own line
+ - ticker should have upper padding or other styling
+ - implement research action
+ - implement research tech tree
+ - implement lobby action
+ - implement lobby tech tree
+ - fix button hover depression not going away
+
+ - - - - - LATER - - - - - -
+ - maybe(state, jsx, name) that shows/flickers comps
+ - tune rate of adding trash
+
+ - - - - - - WISH - - - - - -
+ - should all employees press button together, or should the button visually
+   pressed many times?
+ - some sort of flicker/highlight when a value changes
+ - employees quit if they are //under//paid
+ - not all trash is recyclable
+ - God Mode for testing
+
+ - - - - - REFACTOR - - - - -
+ - Pull out the cards in Game.react into their own comps
+ - handle perf stealing clicks (maybe?)
+
+ - - - - - - DONE - - - - - -
+ - config for default values of initial state
+ - Base React Components
+   - slider (for wage)
+   - ticker
+   - cards
+   - Button
+   - label and value pair
+   - radio picker
+ - put on github
+ - hired employees click their button at a certain rate
+ - don't burn or recycle if trash == 0
+ - implement trash amount going up over time
+ - Added cards for scientist and lawyer
+ - Refactor wages to be at contractor/employee level
+ - track number of employees expecting payment and # about to quit
+ - managers click pay at a certain rate
+ - system where employees quit if they aren't paid
+ - implement ticker react component
+ - implement ticker system for sending messages
+ - implement quantity on employee click actions so they don't fire tons of actions
+ - remove wage sliders -- changing wage can be covered with research
+ - Don't let you pay when no one needs it
+ - Employees should actually quit instead of bouncing around (must choose which role)
+ - Fix paying actually resetting counters
