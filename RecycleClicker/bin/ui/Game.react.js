@@ -122,10 +122,6 @@ var Game = function (_React$Component) {
           }),
           React.createElement(LabelledValue, { label: 'Foremen', value: state.employees.Foreman.cur }),
           React.createElement(LabelledValue, {
-            label: 'Contrs. paid up',
-            value: state.employees.contractor.dontNeedPay
-          }),
-          React.createElement(LabelledValue, {
             label: 'Contrs. to pay',
             value: state.employees.contractor.needPay
           }),
@@ -149,11 +145,7 @@ var Game = function (_React$Component) {
           }),
           React.createElement(LabelledValue, { label: 'Managers', value: state.employees.Manager.cur }),
           React.createElement(LabelledValue, {
-            label: 'Empls. paid up',
-            value: state.employees.employee.dontNeedPay
-          }),
-          React.createElement(LabelledValue, {
-            label: 'Employees to pay',
+            label: 'Empls. to pay',
             value: state.employees.employee.needPay
           }),
           React.createElement(LabelledValue, {

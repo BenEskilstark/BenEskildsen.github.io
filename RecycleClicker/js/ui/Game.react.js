@@ -86,10 +86,6 @@ class Game extends React.Component {
           />
           <LabelledValue label="Foremen" value={state.employees.Foreman.cur} />
           <LabelledValue
-            label="Contrs. paid up"
-            value={state.employees.contractor.dontNeedPay}
-          />
-          <LabelledValue
             label="Contrs. to pay"
             value={state.employees.contractor.needPay}
           />
@@ -109,11 +105,7 @@ class Game extends React.Component {
           />
           <LabelledValue label="Managers" value={state.employees.Manager.cur} />
           <LabelledValue
-            label="Empls. paid up"
-            value={state.employees.employee.dontNeedPay}
-          />
-          <LabelledValue
-            label="Employees to pay"
+            label="Empls. to pay"
             value={state.employees.employee.needPay}
           />
           <LabelledValue

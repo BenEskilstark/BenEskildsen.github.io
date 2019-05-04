@@ -3,14 +3,11 @@
  - implement employees and wages
    - Visually disable pay button when no one needs it
    - workers should quit at random, instead of FIFO
- - hiring must cost money or else you can hire and never pay
- - ticker should display each message on its own line
  - ticker should have upper padding or other styling
- - implement research action
- - implement research tech tree
- - implement lobby action
- - implement lobby tech tree
  - fix button hover depression not going away
+ - additional research and lobby options
+ - plan out various rates
+ - plan out order of ui elements appears
 
  - - - - - LATER - - - - - -
  - maybe(state, jsx, name) that shows/flickers comps
@@ -53,3 +50,9 @@
  - Don't let you pay when no one needs it
  - Employees should actually quit instead of bouncing around (must choose which role)
  - Fix paying actually resetting counters
+ - hiring must cost money or else you can hire and never pay
+ - ticker should display each message on its own line
+ - implement research action
+ - implement research tech tree
+ - implement lobby action
+ - implement lobby tech tree
