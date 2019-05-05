@@ -13,7 +13,7 @@ var React = require('React');
 // props:
 // messages: Array of messages to try to display
 
-var NUM_MESSAGES_TO_DISPLAY = 5;
+var NUM_MESSAGES_TO_DISPLAY = 3;
 
 var Ticker = function (_React$Component) {
   _inherits(Ticker, _React$Component);
@@ -31,10 +31,11 @@ var Ticker = function (_React$Component) {
 
       var toDisplay = [];
       var numMessagesToDisplay = Math.min(NUM_MESSAGES_TO_DISPLAY, messages.length);
-      for (var i = 0; i < numMessagesToDisplay; i++) {
+      var len = Math.max(messages.length - numMessagesToDisplay, 0);
+      for (var i = len; i < messages.length; i++) {
 
         var message = messages[i];
-        if (i == numMessagesToDisplay - 1) {
+        if (i == messages.length - 1) {
           message = '> ' + message;
         }
         toDisplay.push(React.createElement(
