@@ -680,7 +680,7 @@ module.exports = { initEmployeeClickSystem: initEmployeeClickSystem };
 },{}],13:[function(require,module,exports){
 'use strict';
 
-var contractorNeedPayInterval = 1500 / 4;
+var contractorNeedPayInterval = 500;
 var employeeNeedPayInterval = 5000;
 
 var initEmployeeNeedPaySystem = function initEmployeeNeedPaySystem(store) {
@@ -737,7 +737,7 @@ var initResearchAndLobbySystem = function initResearchAndLobbySystem(store) {
 
     justResearched = state.lobby.justResearched;
     if (justResearched) {
-      dispatch({ type: 'REMOVE_JUST_RESEARCHED', researchOrLobby: 'research' });
+      dispatch({ type: 'REMOVE_JUST_RESEARCHED', researchOrLobby: 'lobby' });
       dispatch({
         type: 'TICKER',
         message: 'Just lobbied for ' + justResearched.name

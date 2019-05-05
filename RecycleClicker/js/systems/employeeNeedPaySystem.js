@@ -1,6 +1,6 @@
 // @flow
 
-const contractorNeedPayInterval = 1500 / 4;
+const contractorNeedPayInterval = 500;
 const employeeNeedPayInterval = 5000;
 
 const initEmployeeNeedPaySystem = (store) => {

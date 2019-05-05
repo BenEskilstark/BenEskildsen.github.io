@@ -28,7 +28,7 @@ var initResearchAndLobbySystem = function initResearchAndLobbySystem(store) {
 
     justResearched = state.lobby.justResearched;
     if (justResearched) {
-      dispatch({ type: 'REMOVE_JUST_RESEARCHED', researchOrLobby: 'research' });
+      dispatch({ type: 'REMOVE_JUST_RESEARCHED', researchOrLobby: 'lobby' });
       dispatch({
         type: 'TICKER',
         message: 'Just lobbied for ' + justResearched.name

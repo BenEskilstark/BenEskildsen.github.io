@@ -1,6 +1,6 @@
 'use strict';
 
-var contractorNeedPayInterval = 1500 / 4;
+var contractorNeedPayInterval = 500;
 var employeeNeedPayInterval = 5000;
 
 var initEmployeeNeedPaySystem = function initEmployeeNeedPaySystem(store) {
