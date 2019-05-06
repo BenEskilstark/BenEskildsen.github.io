@@ -8,7 +8,6 @@
  - plan out various rates
  - plan out order of ui elements appears
  - fix button not showing as pressing on mobile
- - I need a script to auto-deploy to my github.io
 
  - - - - - LATER - - - - - -
  - maybe(state, jsx, name) that shows/flickers comps
@@ -62,3 +61,4 @@
  - implement lobby action
  - implement lobby tech tree
  - reduce num lines shown in ticker to 3
+ - I need a script to auto-deploy to my github.io
