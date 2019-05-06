@@ -3,15 +3,19 @@
  - implement employees and wages
    - Visually disable pay button when no one needs it
    - workers should quit at random, instead of FIFO
- - ticker should have upper padding or other styling
  - fix button hover depression not going away
  - additional research and lobby options
  - plan out various rates
  - plan out order of ui elements appears
+ - fix button not showing as pressing on mobile
+ - I need a script to auto-deploy to my github.io
 
  - - - - - LATER - - - - - -
  - maybe(state, jsx, name) that shows/flickers comps
  - tune rate of adding trash
+ - visionary role
+ - options presented in ticker
+ - ticker should have upper padding or other styling
 
  - - - - - - WISH - - - - - -
  - should all employees press button together, or should the button visually
@@ -22,7 +26,8 @@
  - God Mode for testing
 
  - - - - - REFACTOR - - - - -
- - Pull out the cards in Game.react into their own comps
+ - Pull out the cards in Game.react into their own modules
+ - Move employee needPay rates into the state config
  - handle perf stealing clicks (maybe?)
 
  - - - - - - DONE - - - - - -
@@ -56,3 +61,4 @@
  - implement research tech tree
  - implement lobby action
  - implement lobby tech tree
+ - reduce num lines shown in ticker to 3
