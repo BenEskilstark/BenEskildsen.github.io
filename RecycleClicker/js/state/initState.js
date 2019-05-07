@@ -26,19 +26,20 @@ const initState = (): State => {
     research: {
       cur: 0,
       greedyOptions: [
-        {name: 'Faster burning', cost: 50},
-        {name: 'Even faster burning', cost: 250},
+        {name: 'Faster burning', cost: 150},
+        {name: 'Even faster burning', cost: 500},
       ],
       goodOptions: [
-        {name: 'Cheaper recycling', cost: 100},
+        {name: 'Cheaper recycling', cost: 1000},
       ],
       justResearched: null,
     },
     lobby: {
       cur: 0,
       greedyOptions: [
-        {name: 'Recycling subsidies', cost: 100},
-        {name: 'Lower minimum wage', cost: 1000},
+        {name: 'Recycling subsidies', cost: 250},
+        {name: 'Contractor over-time', cost: 1000},
+        {name: 'Lower minimum wage', cost: 2000},
         {name: 'Ultra-consumerist society', cost: 10000},
       ],
       goodOptions: [
@@ -64,7 +65,7 @@ const initState = (): State => {
       },
       employee: {
         cur: 0,
-        wage: 10000,
+        wage: 50000,
         dontNeedPay: 0,
         needPay: 0,
         aboutToLeave: 0,
@@ -82,7 +83,7 @@ const initState = (): State => {
       },
       Foreman: {
         cur: 0,
-        clickRate: 100,
+        clickRate: 20,
         action: 'PAY_CONTRACTOR',
       },
       Manager: {
@@ -114,12 +115,16 @@ const initState = (): State => {
       trashPerRecycle: 1,
       revenuePerRecycle: 100,
 
+      contractorNeedPayInterval: 500,
+      employeeNeedPayInterval: 5000,
+
       contractors: ['Recycler', 'Burner'],
       employees: ['Recruiter', 'Foreman', 'Manager', 'Scientist', 'Lawyer'],
       allRoles: [
         'Burner', 'Recycler', 'Foreman', 'Recruiter', 'Manager', 'Scientist', 'Lawyer',
       ],
 
+      trashInterval: 500,
       trashMultiplier: 1,
     },
   };

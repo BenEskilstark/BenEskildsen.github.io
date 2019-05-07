@@ -14,12 +14,13 @@ var burnOrRecycleReducer = function burnOrRecycleReducer(state, action) {
       {
         var num = action.num;
 
-        if (state.trash.cur == 0) {
+        if (state.trash.cur <= 0) {
           return state;
         }
+        var nextTrash = Math.max(state.trash.cur - trashPerBurn * num, 0);
         return _extends({}, state, {
           trash: _extends({}, state.trash, {
-            cur: state.trash.cur - trashPerBurn * num
+            cur: nextTrash
           }),
           burn: _extends({}, state.burn, {
             cur: state.burn.cur + trashPerBurn * num
@@ -43,12 +44,13 @@ var burnOrRecycleReducer = function burnOrRecycleReducer(state, action) {
       {
         var _num = action.num;
 
-        if (state.trash.cur == 0) {
+        if (state.trash.cur <= 0) {
           return state;
         }
+        var _nextTrash = Math.max(state.trash.cur - trashPerRecycle * _num, 0);
         return _extends({}, state, {
           trash: _extends({}, state.trash, {
-            cur: state.trash.cur - trashPerRecycle * _num
+            cur: _nextTrash
           }),
           recycle: _extends({}, state.recycle, {
             cur: state.recycle.cur + trashPerRecycle * _num

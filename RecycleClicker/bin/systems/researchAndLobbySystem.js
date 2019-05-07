@@ -38,6 +38,9 @@ var initResearchAndLobbySystem = function initResearchAndLobbySystem(store) {
         case 'Recycling subsidies':
           dispatch({ type: 'CHEAPER_RECYCLING', additionalRevenuePerRecycle: 100 });
           break;
+        case 'Contractor over-time':
+          dispatch({ type: 'CONTRACTOR_OVER_TIME' });
+          break;
         case 'Lower minimum wage':
           dispatch({ type: 'SET_WAGE', roleType: 'contractor', wage: 400 });
           break;

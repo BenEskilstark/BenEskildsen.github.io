@@ -11,8 +11,8 @@ const employeeReducer = (state: State, action): State => {
       const roleType = state.config.employees.includes(role) ? 'employee' : 'contractor';
       const byRoleType = state.employees[roleType];
       const {money} = state;
-      // hiring costs the wage up front so you can't get free labor
-      const wage = byRoleType.wage;
+      // hiring costs 2x the wage up front so you can't get free labor
+      const wage = byRoleType.wage * 2;
       if (wage > money.cur) {
         return state;
       }
@@ -122,6 +122,15 @@ const employeeReducer = (state: State, action): State => {
             dontNeedPay: 0,
             cur: byRoleType.cur - byRoleType.aboutToLeave,
           },
+        },
+      };
+    }
+    case 'CONTRACTOR_OVER_TIME': {
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          contractorNeedPayInterval: state.config.contractorNeedPayInterval * 1.5,
         },
       };
     }

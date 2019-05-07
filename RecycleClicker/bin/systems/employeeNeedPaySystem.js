@@ -1,8 +1,5 @@
 'use strict';
 
-var contractorNeedPayInterval = 500;
-var employeeNeedPayInterval = 5000;
-
 var initEmployeeNeedPaySystem = function initEmployeeNeedPaySystem(store) {
 
   var time = store.getState().time;
@@ -15,6 +12,10 @@ var initEmployeeNeedPaySystem = function initEmployeeNeedPaySystem(store) {
       return;
     }
     time = state.time;
+    var _state$config = state.config,
+        contractorNeedPayInterval = _state$config.contractorNeedPayInterval,
+        employeeNeedPayInterval = _state$config.employeeNeedPayInterval;
+
 
     if (time % contractorNeedPayInterval == 0) {
       dispatch({ type: 'NEED_PAY', roleType: 'contractor' });

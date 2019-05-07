@@ -72,7 +72,8 @@ var Game = function (_React$Component) {
           Card,
           null,
           React.createElement(Button, {
-            label: 'Hire',
+            id: 'HIRE',
+            label: 'Hire (-2x wage)',
             onClick: function onClick() {
               return dispatch({ type: 'HIRE', num: 1 });
             }
@@ -88,34 +89,35 @@ var Game = function (_React$Component) {
         React.createElement(
           Card,
           null,
-          React.createElement(Button, { label: 'Burn', onClick: function onClick() {
+          React.createElement(Button, {
+            id: 'BURN',
+            label: "Burn (+" + getDisplayMoney(state.config.revenuePerBurn) + ")",
+            onClick: function onClick() {
               return dispatch({ type: 'BURN', num: 1 });
-            } }),
+            }
+          }),
           React.createElement(LabelledValue, { label: 'Burners', value: state.employees.Burner.cur }),
-          React.createElement(LabelledValue, { label: 'Trash burned', value: state.burn.cur }),
-          React.createElement(LabelledValue, {
-            label: '$/burn',
-            value: getDisplayMoney(state.config.revenuePerBurn)
-          })
-        ),
-        React.createElement(
-          Card,
-          null,
-          React.createElement(Button, { label: 'Recycle', onClick: function onClick() {
-              return dispatch({ type: 'RECYCLE', num: 1 });
-            } }),
-          React.createElement(LabelledValue, { label: 'Recyclers', value: state.employees.Recycler.cur }),
-          React.createElement(LabelledValue, { label: 'Trash recycled', value: state.recycle.cur }),
-          React.createElement(LabelledValue, {
-            label: '$/recycle',
-            value: getDisplayMoney(state.config.revenuePerRecycle)
-          })
+          React.createElement(LabelledValue, { label: 'Trash burned', value: state.burn.cur })
         ),
         React.createElement(
           Card,
           null,
           React.createElement(Button, {
-            label: 'Pay Contractors',
+            id: 'RECYCLE',
+            label: "Recycle (+" + getDisplayMoney(state.config.revenuePerRecycle) + ")",
+            onClick: function onClick() {
+              return dispatch({ type: 'RECYCLE', num: 1 });
+            }
+          }),
+          React.createElement(LabelledValue, { label: 'Recyclers', value: state.employees.Recycler.cur }),
+          React.createElement(LabelledValue, { label: 'Trash recycled', value: state.recycle.cur })
+        ),
+        React.createElement(
+          Card,
+          null,
+          React.createElement(Button, {
+            id: 'PAY_CONTRACTOR',
+            label: "Pay Contractor (-" + getDisplayMoney(state.employees.contractor.wage) + ")",
             onClick: function onClick() {
               return dispatch({ type: 'PAY_CONTRACTOR', num: 1 });
             }
@@ -128,17 +130,14 @@ var Game = function (_React$Component) {
           React.createElement(LabelledValue, {
             label: 'About to quit',
             value: state.employees.contractor.aboutToLeave
-          }),
-          React.createElement(LabelledValue, {
-            label: 'Wage',
-            value: getDisplayMoney(state.employees.contractor.wage)
           })
         ),
         React.createElement(
           Card,
           null,
           React.createElement(Button, {
-            label: 'Pay Employees',
+            id: 'PAY_EMPLOYEE',
+            label: "Pay Employee (-" + getDisplayMoney(state.employees.employee.wage) + ")",
             onClick: function onClick() {
               return dispatch({ type: 'PAY_EMPLOYEE', num: 1 });
             }
@@ -151,16 +150,13 @@ var Game = function (_React$Component) {
           React.createElement(LabelledValue, {
             label: 'About to quit',
             value: state.employees.employee.aboutToLeave
-          }),
-          React.createElement(LabelledValue, {
-            label: 'Salary',
-            value: getDisplayMoney(state.employees.employee.wage)
           })
         ),
         React.createElement(
           Card,
           null,
           React.createElement(Button, {
+            id: 'RESEARCH',
             label: 'Research',
             onClick: function onClick() {
               return dispatch({ type: 'RESEARCH', num: 1 });
@@ -185,6 +181,7 @@ var Game = function (_React$Component) {
           Card,
           null,
           React.createElement(Button, {
+            id: 'LOBBY',
             label: 'Lobby',
             onClick: function onClick() {
               return dispatch({ type: 'LOBBY', num: 1 });

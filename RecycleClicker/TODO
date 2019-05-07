@@ -7,7 +7,6 @@
  - additional research and lobby options
  - plan out various rates
  - plan out order of ui elements appears
- - fix button not showing as pressing on mobile
 
  - - - - - LATER - - - - - -
  - maybe(state, jsx, name) that shows/flickers comps
@@ -15,18 +14,19 @@
  - visionary role
  - options presented in ticker
  - ticker should have upper padding or other styling
+ - max width for desktop
+ - text shouldn't be selectable
+ - randomize various rates per playthrough?
 
  - - - - - - WISH - - - - - -
  - should all employees press button together, or should the button visually
    pressed many times?
  - some sort of flicker/highlight when a value changes
- - employees quit if they are //under//paid
  - not all trash is recyclable
  - God Mode for testing
 
  - - - - - REFACTOR - - - - -
  - Pull out the cards in Game.react into their own modules
- - Move employee needPay rates into the state config
  - handle perf stealing clicks (maybe?)
 
  - - - - - - DONE - - - - - -
@@ -62,3 +62,5 @@
  - implement lobby tech tree
  - reduce num lines shown in ticker to 3
  - I need a script to auto-deploy to my github.io
+ - Move employee needPay rates into the state config
+ - fix button not showing as pressing on mobile

@@ -22,9 +22,9 @@ var employeeReducer = function employeeReducer(state, action) {
         var _roleType = state.config.employees.includes(role) ? 'employee' : 'contractor';
         var _byRoleType = state.employees[_roleType];
         var _money = state.money;
-        // hiring costs the wage up front so you can't get free labor
+        // hiring costs 2x the wage up front so you can't get free labor
 
-        var _wage = _byRoleType.wage;
+        var _wage = _byRoleType.wage * 2;
         if (_wage > _money.cur) {
           return state;
         }
@@ -117,6 +117,14 @@ var employeeReducer = function employeeReducer(state, action) {
             dontNeedPay: 0,
             cur: _byRoleType2.cur - _byRoleType2.aboutToLeave
           })))
+        });
+      }
+    case 'CONTRACTOR_OVER_TIME':
+      {
+        return _extends({}, state, {
+          config: _extends({}, state.config, {
+            contractorNeedPayInterval: state.config.contractorNeedPayInterval * 1.5
+          })
         });
       }
   }

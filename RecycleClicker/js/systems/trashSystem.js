@@ -1,7 +1,5 @@
 // @flow
 
-const timeInterval = 1500;
-
 const initTrashSystem = (store) => {
 
   let time = store.getState().time;
@@ -12,10 +10,10 @@ const initTrashSystem = (store) => {
       return;
     }
     time = state.time;
+    const {trashInterval, trashMultiplier} = state.config;
 
-    const {trashMultiplier} = state.config;
-    if (time % (timeInterval / trashMultiplier) == 0) {
-      const trashAmount = 200 * (time / timeInterval) * trashMultiplier;
+    if (time % (trashInterval / trashMultiplier) == 0) {
+      const trashAmount = 200 * (time / trashInterval) * trashMultiplier;
       store.dispatch({type: 'ADD_TRASH', trash: trashAmount});
     }
   });

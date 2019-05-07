@@ -7,7 +7,7 @@ var getDisplayMoney = function getDisplayMoney(value) {
   if (typeof value != 'number') {
     money = value.money.cur;
   }
-  return '$' + (money / 100).toFixed(2);
+  return '$' + (money / 100).toFixed(0);
 };
 
 module.exports = {

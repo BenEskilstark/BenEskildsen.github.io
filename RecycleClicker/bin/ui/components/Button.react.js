@@ -11,6 +11,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = require('React');
 
 // props:
+// id: string
 // label: string
 // onClick: () => void
 
@@ -26,10 +27,11 @@ var Button = function (_React$Component) {
   _createClass(Button, [{
     key: 'render',
     value: function render() {
+      var id = this.props.id || this.props.label;
       return React.createElement(
         'button',
         { type: 'button',
-          id: this.props.label.toUpperCase() + '_button',
+          id: id.toUpperCase() + '_button',
           onClick: this.props.onClick
         },
         this.props.label

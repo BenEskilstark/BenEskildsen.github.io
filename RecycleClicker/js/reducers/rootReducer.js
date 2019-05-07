@@ -31,6 +31,7 @@ const rootReducer = ((state: State, action: Action): State => {
     case 'BURN':
     case 'FASTER_BURN':
     case 'RECYCLE':
+    case 'CHEAPER_RECYCLING':
       return burnOrRecycleReducer(state, action);
     case 'HIRE':
     case 'SET_WAGE':
@@ -39,6 +40,7 @@ const rootReducer = ((state: State, action: Action): State => {
     case 'NEED_PAY':
     case 'ABOUT_TO_LEAVE':
     case 'QUIT':
+    case 'CONTRACTOR_OVER_TIME':
       return employeeReducer(state, action);
     case 'SELECT_ROLE':
       return uiReducer(state, action);

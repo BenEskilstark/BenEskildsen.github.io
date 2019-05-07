@@ -58,12 +58,13 @@ var burnOrRecycleReducer = function burnOrRecycleReducer(state, action) {
       {
         var num = action.num;
 
-        if (state.trash.cur == 0) {
+        if (state.trash.cur <= 0) {
           return state;
         }
+        var nextTrash = Math.max(state.trash.cur - trashPerBurn * num, 0);
         return _extends({}, state, {
           trash: _extends({}, state.trash, {
-            cur: state.trash.cur - trashPerBurn * num
+            cur: nextTrash
           }),
           burn: _extends({}, state.burn, {
             cur: state.burn.cur + trashPerBurn * num
@@ -87,12 +88,13 @@ var burnOrRecycleReducer = function burnOrRecycleReducer(state, action) {
       {
         var _num = action.num;
 
-        if (state.trash.cur == 0) {
+        if (state.trash.cur <= 0) {
           return state;
         }
+        var _nextTrash = Math.max(state.trash.cur - trashPerRecycle * _num, 0);
         return _extends({}, state, {
           trash: _extends({}, state.trash, {
-            cur: state.trash.cur - trashPerRecycle * _num
+            cur: _nextTrash
           }),
           recycle: _extends({}, state.recycle, {
             cur: state.recycle.cur + trashPerRecycle * _num
@@ -137,9 +139,9 @@ var employeeReducer = function employeeReducer(state, action) {
         var _roleType = state.config.employees.includes(role) ? 'employee' : 'contractor';
         var _byRoleType = state.employees[_roleType];
         var _money = state.money;
-        // hiring costs the wage up front so you can't get free labor
+        // hiring costs 2x the wage up front so you can't get free labor
 
-        var _wage = _byRoleType.wage;
+        var _wage = _byRoleType.wage * 2;
         if (_wage > _money.cur) {
           return state;
         }
@@ -232,6 +234,14 @@ var employeeReducer = function employeeReducer(state, action) {
             dontNeedPay: 0,
             cur: _byRoleType2.cur - _byRoleType2.aboutToLeave
           })))
+        });
+      }
+    case 'CONTRACTOR_OVER_TIME':
+      {
+        return _extends({}, state, {
+          config: _extends({}, state.config, {
+            contractorNeedPayInterval: state.config.contractorNeedPayInterval * 1.5
+          })
         });
       }
   }
@@ -393,6 +403,7 @@ var rootReducer = function rootReducer(state, action) {
     case 'NEED_PAY':
     case 'ABOUT_TO_LEAVE':
     case 'QUIT':
+    case 'CONTRACTOR_OVER_TIME':
       return employeeReducer(state, action);
     case 'SELECT_ROLE':
       return uiReducer(state, action);
@@ -496,7 +507,7 @@ var getDisplayMoney = function getDisplayMoney(value) {
   if (typeof value != 'number') {
     money = value.money.cur;
   }
-  return '$' + (money / 100).toFixed(2);
+  return '$' + (money / 100).toFixed(0);
 };
 
 module.exports = {
@@ -528,13 +539,13 @@ var initState = function initState() {
     },
     research: {
       cur: 0,
-      greedyOptions: [{ name: 'Faster burning', cost: 50 }, { name: 'Even faster burning', cost: 250 }],
-      goodOptions: [{ name: 'Cheaper recycling', cost: 100 }],
+      greedyOptions: [{ name: 'Faster burning', cost: 150 }, { name: 'Even faster burning', cost: 500 }],
+      goodOptions: [{ name: 'Cheaper recycling', cost: 1000 }],
       justResearched: null
     },
     lobby: {
       cur: 0,
-      greedyOptions: [{ name: 'Recycling subsidies', cost: 100 }, { name: 'Lower minimum wage', cost: 1000 }, { name: 'Ultra-consumerist society', cost: 10000 }],
+      greedyOptions: [{ name: 'Recycling subsidies', cost: 250 }, { name: 'Contractor over-time', cost: 1000 }, { name: 'Lower minimum wage', cost: 2000 }, { name: 'Ultra-consumerist society', cost: 10000 }],
       goodOptions: [{ name: 'Fully-sustainable society', cost: 10000 }],
       justResearched: null
     },
@@ -554,7 +565,7 @@ var initState = function initState() {
       },
       employee: {
         cur: 0,
-        wage: 10000,
+        wage: 50000,
         dontNeedPay: 0,
         needPay: 0,
         aboutToLeave: 0,
@@ -572,7 +583,7 @@ var initState = function initState() {
       },
       Foreman: {
         cur: 0,
-        clickRate: 100,
+        clickRate: 20,
         action: 'PAY_CONTRACTOR'
       },
       Manager: {
@@ -603,6 +614,9 @@ var initState = function initState() {
       revenuePerBurn: 200,
       trashPerRecycle: 1,
       revenuePerRecycle: 100,
+
+      contractorNeedPayInterval: 500,
+      employeeNeedPayInterval: 5000,
 
       contractors: ['Recycler', 'Burner'],
       employees: ['Recruiter', 'Foreman', 'Manager', 'Scientist', 'Lawyer'],
@@ -680,9 +694,6 @@ module.exports = { initEmployeeClickSystem: initEmployeeClickSystem };
 },{}],13:[function(require,module,exports){
 'use strict';
 
-var contractorNeedPayInterval = 500;
-var employeeNeedPayInterval = 5000;
-
 var initEmployeeNeedPaySystem = function initEmployeeNeedPaySystem(store) {
 
   var time = store.getState().time;
@@ -695,6 +706,10 @@ var initEmployeeNeedPaySystem = function initEmployeeNeedPaySystem(store) {
       return;
     }
     time = state.time;
+    var _state$config = state.config,
+        contractorNeedPayInterval = _state$config.contractorNeedPayInterval,
+        employeeNeedPayInterval = _state$config.employeeNeedPayInterval;
+
 
     if (time % contractorNeedPayInterval == 0) {
       dispatch({ type: 'NEED_PAY', roleType: 'contractor' });
@@ -746,6 +761,9 @@ var initResearchAndLobbySystem = function initResearchAndLobbySystem(store) {
       switch (justResearched.name) {
         case 'Recycling subsidies':
           dispatch({ type: 'CHEAPER_RECYCLING', additionalRevenuePerRecycle: 100 });
+          break;
+        case 'Contractor over-time':
+          dispatch({ type: 'CONTRACTOR_OVER_TIME' });
           break;
         case 'Lower minimum wage':
           dispatch({ type: 'SET_WAGE', roleType: 'contractor', wage: 400 });
@@ -863,7 +881,8 @@ var Game = function (_React$Component) {
           Card,
           null,
           React.createElement(Button, {
-            label: 'Hire',
+            id: 'HIRE',
+            label: 'Hire (-2x wage)',
             onClick: function onClick() {
               return dispatch({ type: 'HIRE', num: 1 });
             }
@@ -879,34 +898,35 @@ var Game = function (_React$Component) {
         React.createElement(
           Card,
           null,
-          React.createElement(Button, { label: 'Burn', onClick: function onClick() {
+          React.createElement(Button, {
+            id: 'BURN',
+            label: "Burn (+" + getDisplayMoney(state.config.revenuePerBurn) + ")",
+            onClick: function onClick() {
               return dispatch({ type: 'BURN', num: 1 });
-            } }),
+            }
+          }),
           React.createElement(LabelledValue, { label: 'Burners', value: state.employees.Burner.cur }),
-          React.createElement(LabelledValue, { label: 'Trash burned', value: state.burn.cur }),
-          React.createElement(LabelledValue, {
-            label: '$/burn',
-            value: getDisplayMoney(state.config.revenuePerBurn)
-          })
-        ),
-        React.createElement(
-          Card,
-          null,
-          React.createElement(Button, { label: 'Recycle', onClick: function onClick() {
-              return dispatch({ type: 'RECYCLE', num: 1 });
-            } }),
-          React.createElement(LabelledValue, { label: 'Recyclers', value: state.employees.Recycler.cur }),
-          React.createElement(LabelledValue, { label: 'Trash recycled', value: state.recycle.cur }),
-          React.createElement(LabelledValue, {
-            label: '$/recycle',
-            value: getDisplayMoney(state.config.revenuePerRecycle)
-          })
+          React.createElement(LabelledValue, { label: 'Trash burned', value: state.burn.cur })
         ),
         React.createElement(
           Card,
           null,
           React.createElement(Button, {
-            label: 'Pay Contractors',
+            id: 'RECYCLE',
+            label: "Recycle (+" + getDisplayMoney(state.config.revenuePerRecycle) + ")",
+            onClick: function onClick() {
+              return dispatch({ type: 'RECYCLE', num: 1 });
+            }
+          }),
+          React.createElement(LabelledValue, { label: 'Recyclers', value: state.employees.Recycler.cur }),
+          React.createElement(LabelledValue, { label: 'Trash recycled', value: state.recycle.cur })
+        ),
+        React.createElement(
+          Card,
+          null,
+          React.createElement(Button, {
+            id: 'PAY_CONTRACTOR',
+            label: "Pay Contractor (-" + getDisplayMoney(state.employees.contractor.wage) + ")",
             onClick: function onClick() {
               return dispatch({ type: 'PAY_CONTRACTOR', num: 1 });
             }
@@ -919,17 +939,14 @@ var Game = function (_React$Component) {
           React.createElement(LabelledValue, {
             label: 'About to quit',
             value: state.employees.contractor.aboutToLeave
-          }),
-          React.createElement(LabelledValue, {
-            label: 'Wage',
-            value: getDisplayMoney(state.employees.contractor.wage)
           })
         ),
         React.createElement(
           Card,
           null,
           React.createElement(Button, {
-            label: 'Pay Employees',
+            id: 'PAY_EMPLOYEE',
+            label: "Pay Employee (-" + getDisplayMoney(state.employees.employee.wage) + ")",
             onClick: function onClick() {
               return dispatch({ type: 'PAY_EMPLOYEE', num: 1 });
             }
@@ -942,16 +959,13 @@ var Game = function (_React$Component) {
           React.createElement(LabelledValue, {
             label: 'About to quit',
             value: state.employees.employee.aboutToLeave
-          }),
-          React.createElement(LabelledValue, {
-            label: 'Salary',
-            value: getDisplayMoney(state.employees.employee.wage)
           })
         ),
         React.createElement(
           Card,
           null,
           React.createElement(Button, {
+            id: 'RESEARCH',
             label: 'Research',
             onClick: function onClick() {
               return dispatch({ type: 'RESEARCH', num: 1 });
@@ -976,6 +990,7 @@ var Game = function (_React$Component) {
           Card,
           null,
           React.createElement(Button, {
+            id: 'LOBBY',
             label: 'Lobby',
             onClick: function onClick() {
               return dispatch({ type: 'LOBBY', num: 1 });
@@ -1026,6 +1041,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = require('React');
 
 // props:
+// id: string
 // label: string
 // onClick: () => void
 
@@ -1041,10 +1057,11 @@ var Button = function (_React$Component) {
   _createClass(Button, [{
     key: 'render',
     value: function render() {
+      var id = this.props.id || this.props.label;
       return React.createElement(
         'button',
         { type: 'button',
-          id: this.props.label.toUpperCase() + '_button',
+          id: id.toUpperCase() + '_button',
           onClick: this.props.onClick
         },
         this.props.label

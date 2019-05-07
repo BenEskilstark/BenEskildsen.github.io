@@ -10,14 +10,15 @@ const burnOrRecycleReducer = (state: State, action): State => {
   switch (action.type) {
     case 'BURN': {
       const {num} = action;
-      if (state.trash.cur == 0) {
+      if (state.trash.cur <= 0) {
         return state;
       }
+      const nextTrash = Math.max(state.trash.cur - trashPerBurn * num, 0);
       return {
         ...state,
         trash: {
           ...state.trash,
-          cur: state.trash.cur - trashPerBurn * num,
+          cur: nextTrash,
         },
         burn: {
           ...state.burn,
@@ -43,14 +44,15 @@ const burnOrRecycleReducer = (state: State, action): State => {
     }
     case 'RECYCLE': {
       const {num} = action;
-      if (state.trash.cur == 0) {
+      if (state.trash.cur <= 0) {
         return state;
       }
+      const nextTrash = Math.max(state.trash.cur - trashPerRecycle * num, 0);
       return {
         ...state,
         trash: {
           ...state.trash,
-          cur: state.trash.cur - trashPerRecycle * num,
+          cur: nextTrash,
         },
         recycle: {
           ...state.recycle,

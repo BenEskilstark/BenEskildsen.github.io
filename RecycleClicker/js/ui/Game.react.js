@@ -50,7 +50,8 @@ class Game extends React.Component {
         </Card>
         <Card>
           <Button
-            label="Hire"
+            id="HIRE"
+            label="Hire (-2x wage)"
             onClick={() => dispatch({type: 'HIRE', num: 1})}
           />
           <RadioPicker
@@ -61,27 +62,28 @@ class Game extends React.Component {
         </Card>
 
         <Card>
-          <Button label="Burn" onClick={() => dispatch({type: 'BURN', num: 1})} />
+          <Button
+            id="BURN"
+            label={"Burn (+" + getDisplayMoney(state.config.revenuePerBurn) + ")"}
+            onClick={() => dispatch({type: 'BURN', num: 1})}
+          />
           <LabelledValue label="Burners" value={state.employees.Burner.cur} />
           <LabelledValue label="Trash burned" value={state.burn.cur} />
-          <LabelledValue
-            label="$/burn"
-            value={getDisplayMoney(state.config.revenuePerBurn)}
-          />
         </Card>
         <Card>
-          <Button label="Recycle" onClick={() => dispatch({type: 'RECYCLE', num: 1})} />
+          <Button
+            id="RECYCLE"
+            label={"Recycle (+" + getDisplayMoney(state.config.revenuePerRecycle) + ")"}
+            onClick={() => dispatch({type: 'RECYCLE', num: 1})}
+          />
           <LabelledValue label="Recyclers" value={state.employees.Recycler.cur} />
           <LabelledValue label="Trash recycled" value={state.recycle.cur} />
-          <LabelledValue
-            label="$/recycle"
-            value={getDisplayMoney(state.config.revenuePerRecycle)}
-          />
         </Card>
 
         <Card>
           <Button
-            label="Pay Contractors"
+            id="PAY_CONTRACTOR"
+            label={"Pay Contractor (-" + getDisplayMoney(state.employees.contractor.wage) + ")"}
             onClick={() => dispatch({type: 'PAY_CONTRACTOR', num: 1})}
           />
           <LabelledValue label="Foremen" value={state.employees.Foreman.cur} />
@@ -93,14 +95,11 @@ class Game extends React.Component {
             label="About to quit"
             value={state.employees.contractor.aboutToLeave}
           />
-          <LabelledValue
-            label="Wage"
-            value={getDisplayMoney(state.employees.contractor.wage)}
-          />
         </Card>
         <Card>
           <Button
-            label="Pay Employees"
+            id="PAY_EMPLOYEE"
+            label={"Pay Employee (-" + getDisplayMoney(state.employees.employee.wage) + ")"}
             onClick={() => dispatch({type: 'PAY_EMPLOYEE', num: 1})}
           />
           <LabelledValue label="Managers" value={state.employees.Manager.cur} />
@@ -112,14 +111,11 @@ class Game extends React.Component {
             label="About to quit"
             value={state.employees.employee.aboutToLeave}
           />
-          <LabelledValue
-            label="Salary"
-            value={getDisplayMoney(state.employees.employee.wage)}
-          />
         </Card>
 
         <Card>
           <Button
+            id="RESEARCH"
             label="Research"
             onClick={() => dispatch({type: 'RESEARCH', num: 1})}
           />
@@ -144,6 +140,7 @@ class Game extends React.Component {
         </Card>
         <Card>
           <Button
+            id="LOBBY"
             label="Lobby"
             onClick={() => dispatch({type: 'LOBBY', num: 1})}
           />

@@ -52,6 +52,7 @@ var rootReducer = function rootReducer(state, action) {
     case 'NEED_PAY':
     case 'ABOUT_TO_LEAVE':
     case 'QUIT':
+    case 'CONTRACTOR_OVER_TIME':
       return employeeReducer(state, action);
     case 'SELECT_ROLE':
       return uiReducer(state, action);

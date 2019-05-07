@@ -1,8 +1,5 @@
 // @flow
 
-const contractorNeedPayInterval = 500;
-const employeeNeedPayInterval = 5000;
-
 const initEmployeeNeedPaySystem = (store) => {
 
   let time = store.getState().time;
@@ -14,6 +11,7 @@ const initEmployeeNeedPaySystem = (store) => {
       return;
     }
     time = state.time;
+    const {contractorNeedPayInterval, employeeNeedPayInterval} = state.config;
 
     if (time % contractorNeedPayInterval == 0) {
       dispatch({type: 'NEED_PAY', roleType: 'contractor'});
