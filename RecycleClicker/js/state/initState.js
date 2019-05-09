@@ -6,18 +6,31 @@ const initState = (): State => {
   return {
     time: 0,
     ui: {
+      godMode: false,
+
+      hireVisible: false,
+      hireVisibleFlicker: 0,
+      payContractorVisible: false,
+      payContractorVisibleFlicker: 0,
+      payEmployeeVisible: false,
+      payEmployeeVisibleFlicker: 0,
+      researchVisible: false,
+      researchVisibleFlicker: 0,
+      lobbyVisible: false,
+      lobbyVisibleFlicker: 0,
+
       selectedRole: 'Burner',
     },
     burn: {
       cur: 0,
-      max: 1000,
+      max: 1000000,
     },
     recycle: {
       cur: 0,
       max: Infinity,
     },
     trash: {
-      cur: 100,
+      cur: 1000,
       max: 1000,
     },
     money: {
@@ -28,21 +41,29 @@ const initState = (): State => {
       greedyOptions: [
         {name: 'Faster burning', cost: 150},
         {name: 'Even faster burning', cost: 500},
+        {name: 'Upgraded incinerators', cost: 3000},
       ],
       goodOptions: [
         {name: 'Cheaper recycling', cost: 1000},
+        {name: 'Efficient recycling', cost: 1000},
+        {name: 'Dredge the oceans', cost: 2500},
+        {name: 'Convert all burners to recyclers', cost: 5000},
       ],
       justResearched: null,
     },
     lobby: {
       cur: 0,
       greedyOptions: [
-        {name: 'Recycling subsidies', cost: 250},
         {name: 'Contractor over-time', cost: 1000},
         {name: 'Lower minimum wage', cost: 2000},
+        {name: 'Late-stage capitalism', cost: 5000},
         {name: 'Ultra-consumerist society', cost: 10000},
       ],
       goodOptions: [
+        {name: 'Recycling subsidies', cost: 500},
+        {name: 'Raise contractor wages', cost: 1000},
+        {name: 'Universal healthcare', cost: 2000},
+        {name: 'Communism', cost: 5000},
         {name: 'Fully-sustainable society', cost: 10000},
       ],
       justResearched: null,
@@ -119,9 +140,9 @@ const initState = (): State => {
       employeeNeedPayInterval: 5000,
 
       contractors: ['Recycler', 'Burner'],
-      employees: ['Recruiter', 'Foreman', 'Manager', 'Scientist', 'Lawyer'],
+      employees: ['Foreman', 'Manager', 'Scientist', 'Lawyer'],
       allRoles: [
-        'Burner', 'Recycler', 'Foreman', 'Recruiter', 'Manager', 'Scientist', 'Lawyer',
+        'Burner', 'Recycler', 'Foreman', 'Manager', 'Scientist', 'Lawyer',
       ],
 
       trashInterval: 500,

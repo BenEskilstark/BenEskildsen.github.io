@@ -1,7 +1,5 @@
 'use strict';
 
-var timeInterval = 1500;
-
 var initTrashSystem = function initTrashSystem(store) {
 
   var time = store.getState().time;
@@ -12,11 +10,13 @@ var initTrashSystem = function initTrashSystem(store) {
       return;
     }
     time = state.time;
+    var _state$config = state.config,
+        trashInterval = _state$config.trashInterval,
+        trashMultiplier = _state$config.trashMultiplier;
 
-    var trashMultiplier = state.config.trashMultiplier;
 
-    if (time % (timeInterval / trashMultiplier) == 0) {
-      var trashAmount = 200 * (time / timeInterval) * trashMultiplier;
+    if (time % (trashInterval / trashMultiplier) == 0) {
+      var trashAmount = 200 * (time / trashInterval) * trashMultiplier;
       store.dispatch({ type: 'ADD_TRASH', trash: trashAmount });
     }
   });

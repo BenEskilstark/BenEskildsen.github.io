@@ -1,32 +1,26 @@
 
  - - - - - - TODO - - - - - -
- - implement employees and wages
-   - Visually disable pay button when no one needs it
-   - workers should quit at random, instead of FIFO
- - fix button hover depression not going away
- - additional research and lobby options
- - plan out various rates
- - plan out order of ui elements appears
+ - randomize various rates per play-through
+ - text shouldn't be selectable
+ - better indications for multi-line tickers from research
 
  - - - - - LATER - - - - - -
- - maybe(state, jsx, name) that shows/flickers comps
- - tune rate of adding trash
  - visionary role
- - options presented in ticker
- - ticker should have upper padding or other styling
- - max width for desktop
- - text shouldn't be selectable
- - randomize various rates per playthrough?
+ - rich html options presented in ticker
+ - system for various one-off events
+ - model various rates
+ - win and loss conditions
+ - favicon
 
  - - - - - - WISH - - - - - -
  - should all employees press button together, or should the button visually
    pressed many times?
  - some sort of flicker/highlight when a value changes
  - not all trash is recyclable
- - God Mode for testing
+ - local storage system so you can resume
+ - gray-out radio options you can't afford ?
 
  - - - - - REFACTOR - - - - -
- - Pull out the cards in Game.react into their own modules
  - handle perf stealing clicks (maybe?)
 
  - - - - - - DONE - - - - - -
@@ -64,3 +58,13 @@
  - I need a script to auto-deploy to my github.io
  - Move employee needPay rates into the state config
  - fix button not showing as pressing on mobile
+ - Pull out the cards in Game.react into their own modules
+ - plan out order of ui elements appears
+ - max width for desktop
+ - maybe(state, jsx, name) that shows/flickers comps
+ - God Mode for testing
+ - workers should quit at random, instead of FIFO
+ - (fully) implement employees and wages
+ - fix button hover depression not going away
+ - Visually disable pay button when no one needs it
+ - additional research and lobby options

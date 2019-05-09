@@ -10,6 +10,8 @@ const {initEmployeeClickSystem} = require('./systems/employeeClickSystem');
 const {initTrashSystem} = require('./systems/trashSystem');
 const {initResearchAndLobbySystem} = require('./systems/researchAndLobbySystem');
 const {initEmployeeNeedPaySystem} = require('./systems/employeeNeedPaySystem');
+const {initCardFlickerSystem} = require('./systems/cardFlickerSystem');
+const {initCardVisibilitySystem} = require('./systems/cardVisibilitySystem');
 
 const store = createStore(rootReducer);
 window.store = store; // useful for debugging
@@ -23,6 +25,8 @@ initEmployeeClickSystem(store);
 initTrashSystem(store);
 initEmployeeNeedPaySystem(store);
 initResearchAndLobbySystem(store);
+initCardFlickerSystem(store);
+initCardVisibilitySystem(store);
 
 const interval = setInterval(
   () => store.dispatch({type: 'TICK'}),

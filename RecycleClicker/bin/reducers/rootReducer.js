@@ -1,5 +1,9 @@
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _require = require('./burnOrRecycleReducer'),
     burnOrRecycleReducer = _require.burnOrRecycleReducer;
 
@@ -44,6 +48,7 @@ var rootReducer = function rootReducer(state, action) {
     case 'BURN':
     case 'FASTER_BURN':
     case 'RECYCLE':
+    case 'CHEAPER_RECYCLING':
       return burnOrRecycleReducer(state, action);
     case 'HIRE':
     case 'SET_WAGE':
@@ -53,8 +58,12 @@ var rootReducer = function rootReducer(state, action) {
     case 'ABOUT_TO_LEAVE':
     case 'QUIT':
     case 'CONTRACTOR_OVER_TIME':
+    case 'CONVERT_WORKERS':
       return employeeReducer(state, action);
     case 'SELECT_ROLE':
+    case 'SET_CARD_VISIBILITY':
+    case 'SET_GOD_MODE':
+    case 'FLICKER_CARD':
       return uiReducer(state, action);
     case 'RESEARCH':
     case 'RESEARCH_GREEDY':
@@ -66,6 +75,10 @@ var rootReducer = function rootReducer(state, action) {
       return researchOrLobbyReducer(state, action);
     case 'TICKER':
       return tickerReducer(state, action);
+    case 'SET_CONFIG_VALUE':
+      return _extends({}, state, {
+        config: _extends({}, state.config, _defineProperty({}, action.config, action.value))
+      });
   }
   return state;
 };

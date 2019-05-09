@@ -20,7 +20,7 @@ const researchOrLobbyReducer = (state: State, action: Action): State => {
       if (state.research.greedyOptions.length == 0) {
         return state;
       }
-      if (state.research.cur < state.research.greedyOptions[0].cost) {
+      if (state.research.cur < state.research.greedyOptions[0].cost && !state.ui.godMode) {
         return state;
       }
       const option = state.research.greedyOptions.shift();
@@ -39,7 +39,7 @@ const researchOrLobbyReducer = (state: State, action: Action): State => {
       if (state.research.goodOptions.length == 0) {
         return state;
       }
-      if (state.research.cur < state.research.goodOptions[0].cost) {
+      if (state.research.cur < state.research.goodOptions[0].cost && !state.ui.godMode) {
         return state;
       }
       const option = state.research.goodOptions.shift();
@@ -58,7 +58,7 @@ const researchOrLobbyReducer = (state: State, action: Action): State => {
       if (state.lobby.greedyOptions.length == 0) {
         return state;
       }
-      if (state.lobby.cur < state.lobby.greedyOptions[0].cost) {
+      if (state.lobby.cur < state.lobby.greedyOptions[0].cost && !state.ui.godMode) {
         return state;
       }
       const option = state.lobby.greedyOptions.shift();
@@ -77,7 +77,7 @@ const researchOrLobbyReducer = (state: State, action: Action): State => {
       if (state.lobby.goodOptions.length == 0) {
         return state;
       }
-      if (state.lobby.cur < state.lobby.goodOptions[0].cost) {
+      if (state.lobby.cur < state.lobby.goodOptions[0].cost && !state.ui.godMode) {
         return state;
       }
       const option = state.lobby.goodOptions.shift();

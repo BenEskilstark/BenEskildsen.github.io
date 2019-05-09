@@ -22,6 +22,12 @@ var _require5 = require('./systems/researchAndLobbySystem'),
 var _require6 = require('./systems/employeeNeedPaySystem'),
     initEmployeeNeedPaySystem = _require6.initEmployeeNeedPaySystem;
 
+var _require7 = require('./systems/cardFlickerSystem'),
+    initCardFlickerSystem = _require7.initCardFlickerSystem;
+
+var _require8 = require('./systems/cardVisibilitySystem'),
+    initCardVisibilitySystem = _require8.initCardVisibilitySystem;
+
 var store = createStore(rootReducer);
 window.store = store; // useful for debugging
 
@@ -34,6 +40,8 @@ initEmployeeClickSystem(store);
 initTrashSystem(store);
 initEmployeeNeedPaySystem(store);
 initResearchAndLobbySystem(store);
+initCardFlickerSystem(store);
+initCardVisibilitySystem(store);
 
 var interval = setInterval(function () {
   return store.dispatch({ type: 'TICK' });

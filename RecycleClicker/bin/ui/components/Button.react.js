@@ -14,6 +14,7 @@ var React = require('React');
 // id: string
 // label: string
 // onClick: () => void
+// disabled: optional boolean
 
 var Button = function (_React$Component) {
   _inherits(Button, _React$Component);
@@ -27,14 +28,19 @@ var Button = function (_React$Component) {
   _createClass(Button, [{
     key: 'render',
     value: function render() {
-      var id = this.props.id || this.props.label;
+      var props = this.props;
+
+      var id = props.id || props.label;
       return React.createElement(
         'button',
         { type: 'button',
+          key: id,
+          className: props.disabled ? 'buttonDisable' : '',
           id: id.toUpperCase() + '_button',
-          onClick: this.props.onClick
+          onClick: props.disabled ? function () {} : props.onClick,
+          disabled: props.disabled
         },
-        this.props.label
+        props.label
       );
     }
   }]);
