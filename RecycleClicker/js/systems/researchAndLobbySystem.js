@@ -85,7 +85,8 @@ const initResearchAndLobbySystem = (store) => {
           break;
         case 'Universal healthcare':
           dispatch({type: 'TICKER', message: 'Now we don\'t have to pay employees as much'});
-          dispatch({type: 'SET_WAGE', roleType: 'employee', wage: 40000})
+          dispatch({type: 'SET_WAGE', roleType: 'employee', wage: 40000});
+          break;
         case 'Communism':
           dispatch({type: 'SET_WAGE', roleType: 'contractor', wage: 1500});
           dispatch({type: 'SET_WAGE', roleType: 'employee', wage: state.employees.contractor.wage});
