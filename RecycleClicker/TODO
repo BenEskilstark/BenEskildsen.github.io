@@ -1,20 +1,25 @@
 
  - - - - - - TODO - - - - - -
- - animate ticker
- - unlock batch hiring
+ - Ticker upgrade
+   - rich html options presented in ticker
+   - animate ticker
+   - system for various one-off events
+      - strike, wage-theft case, disease, gov. fine,
+   - unlock batch hiring (via ticker?)
+ - win and loss conditions
+   - system for winning/losing
+   - system for messaging about too much burning
+   - system for messaging about not collecting trash fast enough
+   - reaching 0 trash and 0 trash multiplier = win
 
  - - - - - BALANCE  - - - - -
- - Handle doing good vs greedy tech trees out-of-order
+ - Handle doing good vs greedy tech trees out-of-order (namely wages)
 
  - - - - - - BUGS - - - - - -
- - text shouldn't be selectable
+ - actually prevent tap and drag zooming!
 
  - - - - - LATER - - - - - -
- - rich html options presented in ticker
- - system for various one-off events
- - ultra-late game between
- - model various rates
- - win and loss conditions
+ - ultra-late game between sustainable society and 0 trash, what happens?
  - favicon
  - local storage system so you can resume
 
@@ -22,9 +27,8 @@
  - randomize various rates per play-through?
  - should all employees press button together, or should the button visually
    pressed many times?
- - some sort of flicker/highlight when a value changes
  - not all trash is recyclable
- - gray-out radio options you can't afford ?
+ - model various rates
 
  - - - - - REFACTOR - - - - -
  - reduce depth of directory hierarchy
@@ -82,3 +86,4 @@
  - don't show clicks that do nothing
  - Make hire UI clearer
  - Figure out universal healthcare wage setting
+ - text shouldn't be selectable
