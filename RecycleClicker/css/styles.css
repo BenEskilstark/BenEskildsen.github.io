@@ -1,18 +1,29 @@
 body {
   margin: 0;
-  touch-action: manipulation;
+  touch-action: manipulation; /* prevents tap-to-zoom on iphone */
+  background-color: #faf8ef;
 }
 
 .container {
   width: 100%;
+  touch-action: manipulation; /* prevents tap-to-zoom on iphone */
+  max-width: 500px;
+  margin: auto;
   height: 100%;
   font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+
+  -webkitt-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 .background {
   width: 100%;
   height: 100%;
-  background-color: #faf8ef;
   overflow: hidden;
 }
 
@@ -47,22 +58,22 @@ body {
 button {
   width: 99%;
   margin: 0 auto;
+  margin-bottom: 2px;
   display: block;
   color: rgba(0, 0, 0, 0.5);
   border: 1px solid #C1C1C1;
   background: rgba(158,158,158,.1);
   border-radius: 3px;
   padding: 5px;
-  text-transform: uppercase;
   font-weight: 600;
   transition: background 0.3s linear;
   cursor: pointer;
   outline: none;
 }
 
-button:hover {
-  background: rgba(158,158,158,.3);
-  color: rgba(0, 0, 0, 0.6);
+.buttonDisable {
+  color: rgba(0, 0, 0, 0.2);
+  background: rgba(158,158,158,.01);
 }
 
 /* ------------------------------------------------------------------ */
@@ -99,3 +110,6 @@ button:hover {
   float: right;
 }
 
+.radioDivider {
+  border: 0.5px solid gray;
+}

@@ -40,3 +40,11 @@ Date  Time Started  Time Spent  Work Completed
 5/5     7:30pm       15min      Wrote bash script to deploy to both git repos
 
 5/6     8:25pm       60min      Bug fixes, tuning various rates (6hr 15min)
+
+5/8     11:30am      2.75hrs    Max width and centering on desktop, break cards out of
+                                Game.react, Flicker system for cards just displaying
+                                Randomize who quits when no wage, Added god mode for
+                                testing, visually disable buttons you can't press.
+                                Added some additional research and lobby options (9hrs)
+
+5/18    9:10pm

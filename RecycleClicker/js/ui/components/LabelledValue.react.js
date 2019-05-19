@@ -9,10 +9,10 @@ class LabelledValue extends React.Component {
   render() {
     return (
       <span className="labelledValue">
-        <div className="labelName">
+        <div className="labelName" key={this.props.label}>
           {this.props.label}:
         </div>
-        <div className="labelValue">
+        <div className="labelValue" key={this.props.label + "_" + this.props.value}>
           {this.props.value}
         </div>
       </span>

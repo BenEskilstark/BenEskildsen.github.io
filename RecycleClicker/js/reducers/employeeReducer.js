@@ -6,7 +6,7 @@ const {max, min, floor, random} = Math;
 const employeeReducer = (state: State, action): State => {
   switch (action.type) {
     case 'HIRE': {
-      const {num} = action;
+      const num = state.config.employeesPerHire;
       const role = state.ui.selectedRole;
       const roleType = state.config.employees.includes(role) ? 'employee' : 'contractor';
       const byRoleType = state.employees[roleType];
@@ -95,18 +95,20 @@ const employeeReducer = (state: State, action): State => {
       const byRoleType = state.employees[roleType];
 
       // employees leave by role, randomly -- IN PLACE!
-      const roles = state.config[roleType + 's']; // TODO shuffle this
+      const roles = state.config[roleType + 's'];
       const numQuitting = byRoleType.aboutToLeave;
       let toQuit = numQuitting;
       let numQuit = 0;
-      let i = 0;
-      while (toQuit > 0 && i < roles.length) {
+      let i = Math.floor(Math.random() * roles.length); // randomize who quits
+      let count = 0;
+      while (toQuit > 0 && count < roles.length) {
         const role = roles[i];
         const curInRole = employees[role].cur;
         employees[role].cur = max(employees[role].cur - toQuit, 0);
         numQuit += (curInRole - employees[role].cur);
         toQuit = numQuitting - numQuit;
-        i++;
+        count++;
+        i = (i + 1) % roles.length;
       }
 
       return {
@@ -133,6 +135,22 @@ const employeeReducer = (state: State, action): State => {
           contractorNeedPayInterval: state.config.contractorNeedPayInterval * 1.5,
         },
       };
+    }
+    case 'CONVERT_WORKERS': {
+      return {
+        ...state,
+        employees: {
+          ...state.employees,
+          [action.roleFrom]: {
+            ...state.employees[action.roleFrom],
+            cur: 0,
+          },
+          [action.roleTo]: {
+            ...state.employees[action.roleTo],
+            cur: state.employees[action.roleTo].cur + state.employees[action.roleFrom].cur,
+          }
+        }
+      }
     }
   }
   return state;

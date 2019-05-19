@@ -4,17 +4,22 @@ const React = require('React');
 // id: string
 // label: string
 // onClick: () => void
+// disabled: optional boolean
 
 class Button extends React.Component {
 
   render() {
-    const id = this.props.id || this.props.label;
+    const {props} = this;
+    const id = props.id || props.label;
     return (
       <button type="button"
+        key={id}
+        className={props.disabled ? 'buttonDisable' : ''}
         id={id.toUpperCase() + '_button'}
-        onClick={this.props.onClick}
+        onClick={props.disabled ? () => {} : props.onClick}
+        disabled={props.disabled}
       >
-        {this.props.label}
+        {props.label}
       </button>
     );
   }

@@ -24,12 +24,32 @@ const initEmployeeClickSystem = (store) => {
     for (const roleOption of state.employees.roleOptions) {
       const role = state.employees[roleOption];
       const button = document.getElementById(role.action + '_button');
+
       if (time % role.clickRate == 0 && role.cur > 0) {
+
+        // don't press button if it won't do anything
+        if (
+          role.action == 'PAY_CONTRACTOR' &&
+          state.employees.contractor.dontNeedPay == state.employees.contractor.cur
+        ) {
+          continue;
+        }
+        if (
+          role.action == 'PAY_EMPLOYEE' &&
+          state.employees.employee.dontNeedPay == state.employees.employee.cur
+        ) {
+          continue;
+        }
+        if (
+          (role.action == 'RECYCLE' || role.action == 'BURN') && state.trash.cur <= 0
+        ) {
+          continue;
+        }
+
         setTimeout(() => {
           button.setAttribute('style', depressedStr);
           setTimeout(() => button.setAttribute('style', unDepressedStr), 150);
         }, 0);
-
         dispatch({type: role.action, num: role.cur});
       }
     }

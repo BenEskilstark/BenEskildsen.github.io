@@ -31,13 +31,13 @@ var LabelledValue = function (_React$Component) {
         { className: "labelledValue" },
         React.createElement(
           "div",
-          { className: "labelName" },
+          { className: "labelName", key: this.props.label },
           this.props.label,
           ":"
         ),
         React.createElement(
           "div",
-          { className: "labelValue" },
+          { className: "labelValue", key: this.props.label + "_" + this.props.value },
           this.props.value
         )
       );

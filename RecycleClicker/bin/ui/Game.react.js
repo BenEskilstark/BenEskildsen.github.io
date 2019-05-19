@@ -12,12 +12,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = require('React');
 
-var Button = require('./components/Button.react');
-var Card = require('./components/Card.react');
-var LabelledValue = require('./components/LabelledValue.react');
-var RadioPicker = require('./components/RadioPicker.react');
-var Slider = require('./components/Slider.react');
-var Table = require('./components/Table.react');
+var BurnAndRecycleRow = require('./BurnAndRecycleRow.react');
+var PayContractorAndEmployeeRow = require('./PayContractorAndEmployeeRow.react');
+var ResearchAndLobbyRow = require('./ResearchAndLobbyRow.react');
+var OverviewAndHireRow = require('./OverviewAndHireRow.react');
 var Ticker = require('./components/Ticker.react');
 
 var _require = require('../selectors/selectors.js'),
@@ -54,154 +52,10 @@ var Game = function (_React$Component) {
         React.Fragment,
         null,
         React.createElement(Ticker, { messages: state.ticker.messages }),
-        React.createElement(
-          Card,
-          null,
-          React.createElement(LabelledValue, { label: 'Trash', value: state.trash.cur }),
-          React.createElement(LabelledValue, { label: 'Money', value: getDisplayMoney(state) }),
-          React.createElement(LabelledValue, {
-            label: 'Contractors',
-            value: state.employees.Recycler.cur + state.employees.Burner.cur
-          }),
-          React.createElement(LabelledValue, {
-            label: 'Employees',
-            value: state.employees.Manager.cur + state.employees.Recruiter.cur + state.employees.Scientist.cur + state.employees.Lawyer.cur + state.employees.Foreman.cur
-          })
-        ),
-        React.createElement(
-          Card,
-          null,
-          React.createElement(Button, {
-            id: 'HIRE',
-            label: 'Hire (-2x wage)',
-            onClick: function onClick() {
-              return dispatch({ type: 'HIRE', num: 1 });
-            }
-          }),
-          React.createElement(RadioPicker, {
-            options: state.employees.roleOptions,
-            selected: state.ui.selectedRole,
-            onChange: function onChange(role) {
-              return dispatch({ type: 'SELECT_ROLE', role: role });
-            }
-          })
-        ),
-        React.createElement(
-          Card,
-          null,
-          React.createElement(Button, {
-            id: 'BURN',
-            label: "Burn (+" + getDisplayMoney(state.config.revenuePerBurn) + ")",
-            onClick: function onClick() {
-              return dispatch({ type: 'BURN', num: 1 });
-            }
-          }),
-          React.createElement(LabelledValue, { label: 'Burners', value: state.employees.Burner.cur }),
-          React.createElement(LabelledValue, { label: 'Trash burned', value: state.burn.cur })
-        ),
-        React.createElement(
-          Card,
-          null,
-          React.createElement(Button, {
-            id: 'RECYCLE',
-            label: "Recycle (+" + getDisplayMoney(state.config.revenuePerRecycle) + ")",
-            onClick: function onClick() {
-              return dispatch({ type: 'RECYCLE', num: 1 });
-            }
-          }),
-          React.createElement(LabelledValue, { label: 'Recyclers', value: state.employees.Recycler.cur }),
-          React.createElement(LabelledValue, { label: 'Trash recycled', value: state.recycle.cur })
-        ),
-        React.createElement(
-          Card,
-          null,
-          React.createElement(Button, {
-            id: 'PAY_CONTRACTOR',
-            label: "Pay Contractor (-" + getDisplayMoney(state.employees.contractor.wage) + ")",
-            onClick: function onClick() {
-              return dispatch({ type: 'PAY_CONTRACTOR', num: 1 });
-            }
-          }),
-          React.createElement(LabelledValue, { label: 'Foremen', value: state.employees.Foreman.cur }),
-          React.createElement(LabelledValue, {
-            label: 'Contrs. to pay',
-            value: state.employees.contractor.needPay
-          }),
-          React.createElement(LabelledValue, {
-            label: 'About to quit',
-            value: state.employees.contractor.aboutToLeave
-          })
-        ),
-        React.createElement(
-          Card,
-          null,
-          React.createElement(Button, {
-            id: 'PAY_EMPLOYEE',
-            label: "Pay Employee (-" + getDisplayMoney(state.employees.employee.wage) + ")",
-            onClick: function onClick() {
-              return dispatch({ type: 'PAY_EMPLOYEE', num: 1 });
-            }
-          }),
-          React.createElement(LabelledValue, { label: 'Managers', value: state.employees.Manager.cur }),
-          React.createElement(LabelledValue, {
-            label: 'Empls. to pay',
-            value: state.employees.employee.needPay
-          }),
-          React.createElement(LabelledValue, {
-            label: 'About to quit',
-            value: state.employees.employee.aboutToLeave
-          })
-        ),
-        React.createElement(
-          Card,
-          null,
-          React.createElement(Button, {
-            id: 'RESEARCH',
-            label: 'Research',
-            onClick: function onClick() {
-              return dispatch({ type: 'RESEARCH', num: 1 });
-            }
-          }),
-          React.createElement(LabelledValue, { label: 'Scientists', value: state.employees.Scientist.cur }),
-          React.createElement(LabelledValue, { label: 'Research', value: state.research.cur }),
-          state.research.greedyOptions.length > 0 ? React.createElement(Button, {
-            label: state.research.greedyOptions[0].name + " (cost " + state.research.greedyOptions[0].cost + ")",
-            onClick: function onClick() {
-              return dispatch({ type: 'RESEARCH_GREEDY' });
-            }
-          }) : null,
-          state.research.goodOptions.length > 0 ? React.createElement(Button, {
-            label: state.research.goodOptions[0].name + " (cost " + state.research.goodOptions[0].cost + ")",
-            onClick: function onClick() {
-              return dispatch({ type: 'RESEARCH_GOOD' });
-            }
-          }) : null
-        ),
-        React.createElement(
-          Card,
-          null,
-          React.createElement(Button, {
-            id: 'LOBBY',
-            label: 'Lobby',
-            onClick: function onClick() {
-              return dispatch({ type: 'LOBBY', num: 1 });
-            }
-          }),
-          React.createElement(LabelledValue, { label: 'Lawyers', value: state.employees.Lawyer.cur }),
-          React.createElement(LabelledValue, { label: 'Lobbying', value: state.lobby.cur }),
-          state.lobby.greedyOptions.length > 0 ? React.createElement(Button, {
-            label: state.lobby.greedyOptions[0].name + " (cost " + state.lobby.greedyOptions[0].cost + ")",
-            onClick: function onClick() {
-              return dispatch({ type: 'LOBBY_GREEDY' });
-            }
-          }) : null,
-          state.lobby.goodOptions.length > 0 ? React.createElement(Button, {
-            label: state.lobby.goodOptions[0].name + " (cost " + state.lobby.goodOptions[0].cost + ")",
-            onClick: function onClick() {
-              return dispatch({ type: 'LOBBY_GOOD' });
-            }
-          }) : null
-        )
+        React.createElement(OverviewAndHireRow, { state: state, dispatch: dispatch }),
+        React.createElement(BurnAndRecycleRow, { state: state, dispatch: dispatch }),
+        React.createElement(PayContractorAndEmployeeRow, { state: state, dispatch: dispatch }),
+        React.createElement(ResearchAndLobbyRow, { state: state, dispatch: dispatch })
       );
 
       return React.createElement(

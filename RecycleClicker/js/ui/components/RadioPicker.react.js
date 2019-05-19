@@ -10,6 +10,12 @@ class Button extends React.Component {
   render() {
     const optionToggles = [];
     for (const option of this.props.options) {
+      // HACK alert:
+      if (option == 'Foreman') {
+        optionToggles.push(
+          <div className="radioDivider" />
+        );
+      }
       optionToggles.push(
         <div className="radioOption">
           {option}
