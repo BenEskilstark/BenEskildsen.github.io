@@ -4,7 +4,7 @@ const Button = require('./components/Button.react');
 const Card = require('./components/Card.react');
 const LabelledValue = require('./components/LabelledValue.react');
 
-const {getDisplayMoney, maybe} = require('../selectors/selectors.js');
+const {getDisplayMoney, maybe} = require('../selectors.js');
 
 /**
  * {props: {state}}
@@ -60,8 +60,8 @@ class PayContractorAndEmployeeRow extends React.Component {
     );
     return (
       <React.Fragment>
-        {maybe(state, dispatch, payContractorCard, 'payContractorVisible')}
-        {maybe(state, dispatch, payEmployeeCard, 'payEmployeeVisible')}
+        {maybe(state, payContractorCard, 'payContractorVisible')}
+        {maybe(state, payEmployeeCard, 'payEmployeeVisible')}
       </React.Fragment>
     );
   }

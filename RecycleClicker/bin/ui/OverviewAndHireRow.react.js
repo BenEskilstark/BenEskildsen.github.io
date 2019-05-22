@@ -15,7 +15,7 @@ var Card = require('./components/Card.react');
 var LabelledValue = require('./components/LabelledValue.react');
 var RadioPicker = require('./components/RadioPicker.react');
 
-var _require = require('../selectors/selectors.js'),
+var _require = require('../selectors.js'),
     getDisplayMoney = _require.getDisplayMoney,
     maybe = _require.maybe;
 
@@ -41,7 +41,12 @@ var OverviewAndHireRow = function (_React$Component) {
           dispatch = _props.dispatch;
 
       var contractorOrEmployee = state.config.employees.includes(state.ui.selectedRole) ? 'employee' : 'contractor';
-      var wage = 2 * state.employees[contractorOrEmployee].wage * state.config.employeesPerHire;
+      var wage = 2 * state.employees[contractorOrEmployee].wage;
+
+      // only hire more than one contractor at once
+      if (contractorOrEmployee == 'contractor') {
+        wage *= state.config.employeesPerHire;
+      }
       var hireCard = React.createElement(
         Card,
         null,
@@ -78,7 +83,7 @@ var OverviewAndHireRow = function (_React$Component) {
             value: state.employees.Manager.cur + state.employees.Recruiter.cur + state.employees.Scientist.cur + state.employees.Lawyer.cur + state.employees.Foreman.cur
           })
         ),
-        maybe(state, dispatch, hireCard, 'hireVisible')
+        maybe(state, hireCard, 'hireVisible')
       );
     }
   }]);

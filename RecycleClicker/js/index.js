@@ -12,6 +12,8 @@ const {initResearchAndLobbySystem} = require('./systems/researchAndLobbySystem')
 const {initEmployeeNeedPaySystem} = require('./systems/employeeNeedPaySystem');
 const {initCardFlickerSystem} = require('./systems/cardFlickerSystem');
 const {initCardVisibilitySystem} = require('./systems/cardVisibilitySystem');
+const {initRandomEventSystem} = require('./systems/randomEventSystem');
+const {initWinLossSystem} = require('./systems/winLossSystem');
 
 const store = createStore(rootReducer);
 window.store = store; // useful for debugging
@@ -27,6 +29,8 @@ initEmployeeNeedPaySystem(store);
 initResearchAndLobbySystem(store);
 initCardFlickerSystem(store);
 initCardVisibilitySystem(store);
+initRandomEventSystem(store);
+initWinLossSystem(store);
 
 const interval = setInterval(
   () => store.dispatch({type: 'TICK'}),

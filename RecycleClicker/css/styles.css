@@ -51,6 +51,17 @@ body {
   width: 100%;
 }
 
+.buttonOption {
+
+}
+
+.buttonOption button {
+  width: 25%;
+  display: inline-block;
+  float: right;
+  margin-bottom: 0;
+}
+
 /* ------------------------------------------------------------------ */
 /* Buttons */
 /* ------------------------------------------------------------------ */

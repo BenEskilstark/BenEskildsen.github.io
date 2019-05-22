@@ -25,7 +25,7 @@ var _require6 = require('./researchOrLobbyReducer'),
 var _require7 = require('./tickerReducer'),
     tickerReducer = _require7.tickerReducer;
 
-var _require8 = require('../state/initState'),
+var _require8 = require('../initState'),
     initState = _require8.initState;
 
 var rootReducer = function rootReducer(state, action) {

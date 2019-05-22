@@ -6,9 +6,12 @@ const {max, min, floor, random} = Math;
 const employeeReducer = (state: State, action): State => {
   switch (action.type) {
     case 'HIRE': {
-      const num = state.config.employeesPerHire;
+      let num = state.config.employeesPerHire;
       const role = state.ui.selectedRole;
       const roleType = state.config.employees.includes(role) ? 'employee' : 'contractor';
+      if (roleType == 'employee') {
+        num = 1; // for now, only hire one employee at a time
+      }
       const byRoleType = state.employees[roleType];
       const {money} = state;
       // hiring costs 2x the wage up front so you can't get free labor

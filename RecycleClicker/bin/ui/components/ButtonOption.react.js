@@ -9,50 +9,65 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var React = require('React');
+var Button = require('./Button.react');
 
 // props:
-// messages: Array of messages to try to display
-//    messages can be either simple strings or jsx
+// id: optional string
+// label: string
+// optionNames: Array<string>
+// onClicks: Array<() => void>
 
-var NUM_MESSAGES_TO_DISPLAY = 3;
+var ButtonOption = function (_React$Component) {
+  _inherits(ButtonOption, _React$Component);
 
-var Ticker = function (_React$Component) {
-  _inherits(Ticker, _React$Component);
+  function ButtonOption(props) {
+    _classCallCheck(this, ButtonOption);
 
-  function Ticker() {
-    _classCallCheck(this, Ticker);
+    var _this = _possibleConstructorReturn(this, (ButtonOption.__proto__ || Object.getPrototypeOf(ButtonOption)).call(this, props));
 
-    return _possibleConstructorReturn(this, (Ticker.__proto__ || Object.getPrototypeOf(Ticker)).apply(this, arguments));
+    _this.state = { disabled: false };
+    return _this;
   }
 
-  _createClass(Ticker, [{
+  _createClass(ButtonOption, [{
     key: 'render',
     value: function render() {
-      var messages = this.props.messages;
+      var _this2 = this;
 
-      var toDisplay = [];
-      var numMessagesToDisplay = Math.min(NUM_MESSAGES_TO_DISPLAY, messages.length);
-      var len = Math.max(messages.length - numMessagesToDisplay, 0);
-      for (var i = len; i < messages.length; i++) {
-        var message = messages[i];
-        // if (i == messages.length - 1) {
-        //   message = '> ' + message;
-        // }
-        toDisplay.push(React.createElement(
-          'div',
-          { key: 'message_' + i },
-          message
-        ));
+      var props = this.props,
+          state = this.state;
+
+      var id = props.id || props.label;
+      var buttons = [];
+
+      var _loop = function _loop(i) {
+        buttons.push(React.createElement(Button, {
+          label: props.optionNames[i],
+          onClick: function onClick() {
+            _this2.setState({ disabled: true });
+            props.onClicks[i]();
+          },
+          disabled: state.disabled
+        }));
+      };
+
+      for (var i = 0; i < props.optionNames.length; i++) {
+        _loop(i);
       }
       return React.createElement(
         'div',
-        { className: 'ticker' },
-        toDisplay
+        {
+          className: 'buttonOption',
+          key: 'buttonOption_' + id,
+          id: 'buttonOption_' + id
+        },
+        props.label,
+        buttons
       );
     }
   }]);
 
-  return Ticker;
+  return ButtonOption;
 }(React.Component);
 
-module.exports = Ticker;
+module.exports = ButtonOption;

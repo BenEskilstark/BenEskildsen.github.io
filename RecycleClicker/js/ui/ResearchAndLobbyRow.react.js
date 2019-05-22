@@ -4,7 +4,7 @@ const Button = require('./components/Button.react');
 const Card = require('./components/Card.react');
 const LabelledValue = require('./components/LabelledValue.react');
 
-const {getDisplayMoney, maybe} = require('../selectors/selectors.js');
+const {getDisplayMoney, maybe} = require('../selectors.js');
 
 /**
  * {props: {state}}
@@ -73,8 +73,8 @@ class ResearchAndLobbyRow extends React.Component {
     );
     return (
       <React.Fragment>
-        {maybe(state, dispatch, researchCard, 'researchVisible')}
-        {maybe(state, dispatch, lobbyCard, 'lobbyVisible')}
+        {maybe(state, researchCard, 'researchVisible')}
+        {maybe(state, lobbyCard, 'lobbyVisible')}
       </React.Fragment>
     );
   }

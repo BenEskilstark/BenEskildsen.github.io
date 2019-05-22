@@ -28,6 +28,12 @@ var _require7 = require('./systems/cardFlickerSystem'),
 var _require8 = require('./systems/cardVisibilitySystem'),
     initCardVisibilitySystem = _require8.initCardVisibilitySystem;
 
+var _require9 = require('./systems/randomEventSystem'),
+    initRandomEventSystem = _require9.initRandomEventSystem;
+
+var _require10 = require('./systems/winLossSystem'),
+    initWinLossSystem = _require10.initWinLossSystem;
+
 var store = createStore(rootReducer);
 window.store = store; // useful for debugging
 
@@ -42,6 +48,8 @@ initEmployeeNeedPaySystem(store);
 initResearchAndLobbySystem(store);
 initCardFlickerSystem(store);
 initCardVisibilitySystem(store);
+initRandomEventSystem(store);
+initWinLossSystem(store);
 
 var interval = setInterval(function () {
   return store.dispatch({ type: 'TICK' });

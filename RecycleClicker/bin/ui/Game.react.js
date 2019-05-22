@@ -18,7 +18,7 @@ var ResearchAndLobbyRow = require('./ResearchAndLobbyRow.react');
 var OverviewAndHireRow = require('./OverviewAndHireRow.react');
 var Ticker = require('./components/Ticker.react');
 
-var _require = require('../selectors/selectors.js'),
+var _require = require('../selectors.js'),
     getDisplayMoney = _require.getDisplayMoney;
 
 /**

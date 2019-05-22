@@ -14,7 +14,7 @@ var Button = require('./components/Button.react');
 var Card = require('./components/Card.react');
 var LabelledValue = require('./components/LabelledValue.react');
 
-var _require = require('../selectors/selectors.js'),
+var _require = require('../selectors.js'),
     getDisplayMoney = _require.getDisplayMoney,
     maybe = _require.maybe;
 
@@ -97,8 +97,8 @@ var ResearchAndLobbyRow = function (_React$Component) {
       return React.createElement(
         React.Fragment,
         null,
-        maybe(state, dispatch, researchCard, 'researchVisible'),
-        maybe(state, dispatch, lobbyCard, 'lobbyVisible')
+        maybe(state, researchCard, 'researchVisible'),
+        maybe(state, lobbyCard, 'lobbyVisible')
       );
     }
   }]);

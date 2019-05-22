@@ -19,6 +19,9 @@ var employeeReducer = function employeeReducer(state, action) {
         var _num = state.config.employeesPerHire;
         var role = state.ui.selectedRole;
         var _roleType = state.config.employees.includes(role) ? 'employee' : 'contractor';
+        if (_roleType == 'employee') {
+          _num = 1; // for now, only hire one employee at a time
+        }
         var _byRoleType = state.employees[_roleType];
         var _money = state.money;
         // hiring costs 2x the wage up front so you can't get free labor

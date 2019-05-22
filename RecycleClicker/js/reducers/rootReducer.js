@@ -8,7 +8,7 @@ const {uiReducer} = require('./uiReducer');
 const {researchOrLobbyReducer} = require('./researchOrLobbyReducer');
 const {tickerReducer} = require('./tickerReducer');
 
-const {initState} = require('../state/initState');
+const {initState} = require('../initState');
 
 import type {State, Action} from '../types';
 

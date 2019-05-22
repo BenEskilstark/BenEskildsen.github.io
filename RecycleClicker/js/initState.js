@@ -1,6 +1,8 @@
-'use strict';
+// @flow
 
-var initState = function initState() {
+import type {State} from './types';
+
+const initState = (): State => {
   return {
     time: 0,
     ui: {
@@ -17,48 +19,70 @@ var initState = function initState() {
       lobbyVisible: false,
       lobbyVisibleFlicker: 0,
 
-      selectedRole: 'Burner'
+      selectedRole: 'Burner',
     },
     burn: {
       cur: 0,
-      max: 1000000
+      max: 1000000,
     },
     recycle: {
       cur: 0,
-      max: Infinity
+      max: Infinity,
     },
     trash: {
       cur: 1000,
-      max: 1000
+      max: 1000,
     },
     money: {
-      cur: 10000
+      cur: 10000,
     },
     research: {
       cur: 0,
-      greedyOptions: [{ name: 'Faster burning', cost: 150 }, { name: 'Even faster burning', cost: 1500 }, { name: 'Upgraded incinerators', cost: 5000 }],
-      goodOptions: [{ name: 'Cheaper recycling', cost: 1000 }, { name: 'Efficient recycling', cost: 2000 }, { name: 'Dredge the oceans', cost: 5000 }, { name: 'Convert all burners to recyclers', cost: 10000 }],
-      justResearched: null
+      greedyOptions: [
+        {name: 'Faster burning', cost: 150},
+        {name: 'Even faster burning', cost: 1500},
+        {name: 'Upgraded incinerators', cost: 5000},
+      ],
+      goodOptions: [
+        {name: 'Cheaper recycling', cost: 1000},
+        {name: 'Efficient recycling', cost: 2000},
+        {name: 'Dredge the oceans', cost: 5000},
+        {name: 'Convert all burners to recyclers', cost: 10000},
+      ],
+      justResearched: null,
     },
     lobby: {
       cur: 0,
-      greedyOptions: [{ name: 'Contractor over-time', cost: 1000 }, { name: 'Lower minimum wage', cost: 3000 }, { name: 'Late-stage capitalism', cost: 5000 }, { name: 'Ultra-consumerist society', cost: 10000 }],
-      goodOptions: [{ name: 'Recycling subsidies', cost: 500 }, { name: 'Raise contractor wages', cost: 1000 }, { name: 'Universal healthcare', cost: 4000 }, { name: 'Communism', cost: 10000 }, { name: 'Fully-sustainable society', cost: 50000 }],
-      justResearched: null
+      greedyOptions: [
+        {name: 'Contractor over-time', cost: 1000},
+        {name: 'Lower minimum wage', cost: 3000},
+        {name: 'Late-stage capitalism', cost: 5000},
+        {name: 'Ultra-consumerist society', cost: 10000},
+      ],
+      goodOptions: [
+        {name: 'Recycling subsidies', cost: 500},
+        {name: 'Raise contractor wages', cost: 1000},
+        {name: 'Universal healthcare', cost: 4000},
+        {name: 'Communism', cost: 10000},
+        {name: 'Fully-sustainable society', cost: 50000},
+      ],
+      justResearched: null,
     },
     ticker: {
-      messages: []
+      messages: [],
     },
     employees: {
       cur: 0,
-      roleOptions: ['Burner', 'Recycler', 'Foreman', 'Manager', 'Scientist', 'Lawyer'],
+      roleOptions: [
+        'Burner', 'Recycler', 'Foreman', 'Manager', 'Scientist', 'Lawyer',
+      ],
       contractor: {
         cur: 0,
         wage: 500,
         dontNeedPay: 0,
         needPay: 0,
         aboutToLeave: 0,
-        quit: 0
+        quit: 0,
       },
       employee: {
         cur: 0,
@@ -66,43 +90,43 @@ var initState = function initState() {
         dontNeedPay: 0,
         needPay: 0,
         aboutToLeave: 0,
-        quit: 0
+        quit: 0,
       },
       Burner: {
         cur: 0,
         clickRate: 100,
-        action: 'BURN'
+        action: 'BURN',
       },
       Recycler: {
         cur: 0,
         clickRate: 100,
-        action: 'RECYCLE'
+        action: 'RECYCLE',
       },
       Foreman: {
         cur: 0,
         clickRate: 20,
-        action: 'PAY_CONTRACTOR'
+        action: 'PAY_CONTRACTOR',
       },
       Manager: {
         cur: 0,
         clickRate: 100,
-        action: 'PAY_EMPLOYEE'
+        action: 'PAY_EMPLOYEE',
       },
       Recruiter: {
         cur: 0,
         clickRate: 500,
-        action: 'HIRE'
+        action: 'HIRE',
       },
       Scientist: {
         cur: 0,
         clickRate: 100,
-        action: 'RESEARCH'
+        action: 'RESEARCH',
       },
       Lawyer: {
         cur: 0,
         clickRate: 100,
-        action: 'LOBBY'
-      }
+        action: 'LOBBY',
+      },
     },
     config: {
       msPerTick: 20,
@@ -119,12 +143,14 @@ var initState = function initState() {
 
       contractors: ['Recycler', 'Burner'],
       employees: ['Foreman', 'Manager', 'Scientist', 'Lawyer'],
-      allRoles: ['Burner', 'Recycler', 'Foreman', 'Manager', 'Scientist', 'Lawyer'],
+      allRoles: [
+        'Burner', 'Recycler', 'Foreman', 'Manager', 'Scientist', 'Lawyer',
+      ],
 
       trashInterval: 500,
-      trashMultiplier: 1
-    }
+      trashMultiplier: 1,
+    },
   };
-};
+}
 
-module.exports = { initState: initState };
+module.exports = {initState};

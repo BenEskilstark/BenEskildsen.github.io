@@ -5,7 +5,7 @@ const Card = require('./components/Card.react');
 const LabelledValue = require('./components/LabelledValue.react');
 const RadioPicker = require('./components/RadioPicker.react');
 
-const {getDisplayMoney, maybe} = require('../selectors/selectors.js');
+const {getDisplayMoney, maybe} = require('../selectors.js');
 
 /**
  * {props: {state}}
@@ -16,7 +16,12 @@ class OverviewAndHireRow extends React.Component {
     const contractorOrEmployee = state.config.employees.includes(state.ui.selectedRole)
       ? 'employee'
       : 'contractor';
-    const wage = 2 * state.employees[contractorOrEmployee].wage * state.config.employeesPerHire;
+    let wage = 2 * state.employees[contractorOrEmployee].wage;
+
+    // only hire more than one contractor at once
+    if (contractorOrEmployee == 'contractor') {
+      wage *= state.config.employeesPerHire;
+    }
     const hireCard = (
       <Card>
         <Button
@@ -50,7 +55,7 @@ class OverviewAndHireRow extends React.Component {
             }
           />
         </Card>
-        {maybe(state, dispatch, hireCard, 'hireVisible')}
+        {maybe(state, hireCard, 'hireVisible')}
       </React.Fragment>
     );
   }
