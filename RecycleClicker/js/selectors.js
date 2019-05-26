@@ -20,6 +20,9 @@ function maybe(
   component: React.Node,
   visibilityProperty: string,
  ): ?React.Node {
+  if (state.ui.gameOver) {
+    return <Card />;
+  }
   if (state.ui[visibilityProperty] || state.ui.godMode) {
     return component;
   }

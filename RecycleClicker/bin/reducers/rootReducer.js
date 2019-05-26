@@ -37,6 +37,14 @@ var rootReducer = function rootReducer(state, action) {
         // const stateCookie = parseInt(localStorage.getItem('state')) || 0;
         return state;
       }
+    case 'RESTART':
+      return initState();
+    case 'GAME_OVER':
+      return _extends({}, state, {
+        ui: _extends({}, state.ui, {
+          gameOver: action.win ? 'win' : 'lose'
+        })
+      });
     case 'CLEAR_LOCAL_STORAGE':
       localStorage.clear();
       return state;

@@ -20,6 +20,16 @@ const rootReducer = ((state: State, action: Action): State => {
       // const stateCookie = parseInt(localStorage.getItem('state')) || 0;
       return state;
     }
+    case 'RESTART':
+      return initState();
+    case 'GAME_OVER':
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          gameOver: action.win ? 'win' : 'lose',
+        },
+      };
     case 'CLEAR_LOCAL_STORAGE':
       localStorage.clear();
       return state;

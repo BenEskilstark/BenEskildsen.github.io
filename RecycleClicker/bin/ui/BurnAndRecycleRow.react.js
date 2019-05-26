@@ -50,7 +50,7 @@ var BurnAndRecycleRow = function (_React$Component) {
             onClick: function onClick() {
               return dispatch({ type: 'BURN', num: 1 });
             },
-            disabled: state.trash.cur <= 0
+            disabled: state.trash.cur <= 0 || state.ui.gameOver
           }),
           React.createElement(LabelledValue, { label: 'Burners', value: state.employees.Burner.cur }),
           React.createElement(LabelledValue, { label: 'Trash burned', value: state.burn.cur })
@@ -64,7 +64,7 @@ var BurnAndRecycleRow = function (_React$Component) {
             onClick: function onClick() {
               return dispatch({ type: 'RECYCLE', num: 1 });
             },
-            disabled: state.trash.cur <= 0
+            disabled: state.trash.cur <= 0 || state.ui.gameOver
           }),
           React.createElement(LabelledValue, { label: 'Recyclers', value: state.employees.Recycler.cur }),
           React.createElement(LabelledValue, { label: 'Trash recycled', value: state.recycle.cur })

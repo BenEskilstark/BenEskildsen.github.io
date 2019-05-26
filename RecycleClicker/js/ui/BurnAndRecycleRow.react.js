@@ -19,7 +19,7 @@ class BurnAndRecycleRow extends React.Component {
             id="BURN"
             label={"Burn (+" + getDisplayMoney(state.config.revenuePerBurn) + ")"}
             onClick={() => dispatch({type: 'BURN', num: 1})}
-            disabled={state.trash.cur <= 0}
+            disabled={state.trash.cur <= 0 || state.ui.gameOver}
           />
           <LabelledValue label="Burners" value={state.employees.Burner.cur} />
           <LabelledValue label="Trash burned" value={state.burn.cur} />
@@ -29,7 +29,7 @@ class BurnAndRecycleRow extends React.Component {
             id="RECYCLE"
             label={"Recycle (+" + getDisplayMoney(state.config.revenuePerRecycle) + ")"}
             onClick={() => dispatch({type: 'RECYCLE', num: 1})}
-            disabled={state.trash.cur <= 0}
+            disabled={state.trash.cur <= 0 || state.ui.gameOver}
           />
           <LabelledValue label="Recyclers" value={state.employees.Recycler.cur} />
           <LabelledValue label="Trash recycled" value={state.recycle.cur} />

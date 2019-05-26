@@ -1,5 +1,9 @@
 'use strict';
 
+var round = Math.round,
+    random = Math.random;
+
+
 var initState = function initState() {
   return {
     time: 0,
@@ -17,11 +21,12 @@ var initState = function initState() {
       lobbyVisible: false,
       lobbyVisibleFlicker: 0,
 
-      selectedRole: 'Burner'
+      selectedRole: 'Burner',
+      gameOver: null // or 'lose', 'win'
     },
     burn: {
       cur: 0,
-      max: 1000000
+      max: 100000 + round(random() * 400000)
     },
     recycle: {
       cur: 0,
@@ -29,7 +34,7 @@ var initState = function initState() {
     },
     trash: {
       cur: 1000,
-      max: 1000
+      max: 5000000 + round(random() * 5000000)
     },
     money: {
       cur: 10000

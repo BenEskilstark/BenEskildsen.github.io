@@ -15,6 +15,9 @@ var getDisplayMoney = function getDisplayMoney(value) {
 };
 
 function maybe(state, component, visibilityProperty) {
+  if (state.ui.gameOver) {
+    return React.createElement(Card, null);
+  }
   if (state.ui[visibilityProperty] || state.ui.godMode) {
     return component;
   }

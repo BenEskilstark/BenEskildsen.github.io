@@ -3,17 +3,17 @@
  - Ticker upgrade
    - animate ticker
    - implement strike, wage-theft case, disease, gov. fine,
- - win and loss conditions
-   - system for messaging about too much burning
-   - system for messaging about not collecting trash fast enough
-   - reaching 0 trash and 0 trash multiplier = win
-   - messaging or screen to show when you hit win/loss with option to restart
+
+ - - - - - REFACTOR - - - - -
+ - Local state in systems prevents restart/saving game
 
  - - - - - BALANCE  - - - - -
  - Handle doing good vs greedy tech trees out-of-order (namely wages)
+   - Don't raise employee wages in communism -> late stage capitalism
 
  - - - - - - BUGS - - - - - -
  - actually prevent tap and drag zooming!
+ - buttons take up vertical ticker space when next message is long
 
  - - - - - LATER - - - - - -
  - ultra-late game between sustainable society and 0 trash, what happens?
@@ -27,7 +27,8 @@
  - not all trash is recyclable
  - model various rates
 
- - - - - - REFACTOR - - - - -
+
+
 
  - - - - - - DONE - - - - - -
  - config for default values of initial state
@@ -89,3 +90,9 @@
  - system for various one-off events
  - unlock batch hiring (via ticker?)
  - system for winning/losing
+
+ - system for messaging about too much burning
+ - system for messaging about not collecting trash fast enough
+ - messaging or screen to show when you hit win/loss with option to restart
+ - win and loss conditions
+ - reaching 0 trash and 0 trash multiplier = win
