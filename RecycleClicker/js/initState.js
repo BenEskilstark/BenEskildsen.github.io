@@ -7,6 +7,24 @@ import type {State} from './types';
 const initState = (): State => {
   return {
     time: 0,
+    systems: {
+      buttonsShown: {
+        contractors2: false,
+        contractors5: false,
+        contractors10: false,
+      },
+      warningsShown: {
+        burning25: false,
+        burning50: false,
+        burning75: false,
+        burning90: false,
+
+        trash25: false,
+        trash50: false,
+        trash75: false,
+        trash90: false,
+      },
+    },
     ui: {
       godMode: false,
 

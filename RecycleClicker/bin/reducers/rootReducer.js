@@ -87,6 +87,10 @@ var rootReducer = function rootReducer(state, action) {
       return _extends({}, state, {
         config: _extends({}, state.config, _defineProperty({}, action.config, action.value))
       });
+    case 'SET_SYSTEM_VALUE':
+      return _extends({}, state, {
+        systems: _extends({}, state.systems, _defineProperty({}, action.system, _extends({}, action.system, _defineProperty({}, action.property, action.value))))
+      });
   }
   return state;
 };

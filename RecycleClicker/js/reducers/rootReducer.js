@@ -76,6 +76,17 @@ const rootReducer = ((state: State, action: Action): State => {
           [action.config]: action.value,
         },
       };
+    case 'SET_SYSTEM_VALUE':
+      return {
+        ...state,
+        systems: {
+          ...state.systems,
+          [action.system]: {
+            ...action.system,
+            [action.property]: action.value,
+          },
+        },
+      };
   }
   return state;
 });

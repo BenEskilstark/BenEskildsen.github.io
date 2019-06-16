@@ -3,12 +3,6 @@
 var React = require('React');
 var ButtonOption = require('../ui/components/ButtonOption.react');
 
-var buttonsShown = {
-  contractors2: false,
-  contractors5: false,
-  contractors10: false
-};
-
 var initRandomEventSystem = function initRandomEventSystem(store) {
 
   var time = store.getState().time;
@@ -21,13 +15,16 @@ var initRandomEventSystem = function initRandomEventSystem(store) {
       return;
     }
     time = state.time;
+    var buttonsShown = state.systems.buttonsShown;
 
     // -----------------------------------------------------------------------------------
     // Hiring multiple contractors at once
     // -----------------------------------------------------------------------------------
 
     if (state.employees.contractor.cur >= 200 && !buttonsShown.contractors2) {
-      buttonsShown.contractors2 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'buttonsShown', property: 'contractors2', value: true
+      });
       dispatch(ticker(React.createElement(ButtonOption, {
         label: 'Hire 2 contractors at a time?',
         optionNames: ['Yes'],
@@ -37,7 +34,9 @@ var initRandomEventSystem = function initRandomEventSystem(store) {
       })));
     }
     if (state.employees.contractor.cur >= 1000 && !buttonsShown.contractors5) {
-      buttonsShown.contractors5 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'buttonsShown', property: 'contractors5', value: true
+      });
       dispatch(ticker(React.createElement(ButtonOption, {
         label: 'Hire 5 contractors at a time?',
         optionNames: ['Yes'],
@@ -47,7 +46,9 @@ var initRandomEventSystem = function initRandomEventSystem(store) {
       })));
     }
     if (state.employees.contractor.cur >= 2500 && !buttonsShown.contractors10) {
-      buttonsShown.contractors10 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'buttonsShown', property: 'contractors10', value: true
+      });
       dispatch(ticker(React.createElement(ButtonOption, {
         label: 'Hire 10 contractors at a time?',
         optionNames: ['Yes'],

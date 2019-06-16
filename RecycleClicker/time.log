@@ -58,3 +58,5 @@ Date  Time Started  Time Spent  Work Completed
 
                   ------------
                    = 12 hrs
+
+6/16    11:10am     30min       Move system state into redux state

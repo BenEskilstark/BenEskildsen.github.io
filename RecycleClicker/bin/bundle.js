@@ -67,6 +67,24 @@ var round = Math.round,
 var initState = function initState() {
   return {
     time: 0,
+    systems: {
+      buttonsShown: {
+        contractors2: false,
+        contractors5: false,
+        contractors10: false
+      },
+      warningsShown: {
+        burning25: false,
+        burning50: false,
+        burning75: false,
+        burning90: false,
+
+        trash25: false,
+        trash50: false,
+        trash75: false,
+        trash90: false
+      }
+    },
     ui: {
       godMode: false,
 
@@ -606,6 +624,10 @@ var rootReducer = function rootReducer(state, action) {
       return _extends({}, state, {
         config: _extends({}, state.config, _defineProperty({}, action.config, action.value))
       });
+    case 'SET_SYSTEM_VALUE':
+      return _extends({}, state, {
+        systems: _extends({}, state.systems, _defineProperty({}, action.system, _extends({}, action.system, _defineProperty({}, action.property, action.value))))
+      });
   }
   return state;
 };
@@ -827,16 +849,6 @@ module.exports = { initCardFlickerSystem: initCardFlickerSystem };
 },{}],14:[function(require,module,exports){
 'use strict';
 
-// only trigger one time per card
-var cards = {
-  'hireVisible': false,
-  'payContractorVisible': false,
-  'payEmployeeVisible': false,
-  'researchVisible': false,
-  'lobbyVisible': false
-};
-var MAX = 20;
-
 var initCardVisibilitySystem = function initCardVisibilitySystem(store) {
 
   var time = store.getState().time;
@@ -853,32 +865,27 @@ var initCardVisibilitySystem = function initCardVisibilitySystem(store) {
 
     // hire
 
-    if (cards.hireVisible == false && state.burn.cur + state.recycle.cur > 50) {
-      cards.hireVisible = true;
+    if (ui.hireVisible == false && state.burn.cur + state.recycle.cur > 50) {
       dispatch({ type: 'SET_CARD_VISIBILITY', card: 'hireVisible' });
     }
 
     // pay contractors
-    if (cards.payContractorVisible == false && state.employees.contractor.cur > 0) {
-      cards.payContractorVisible = true;
+    if (ui.payContractorVisible == false && state.employees.contractor.cur > 0) {
       dispatch({ type: 'SET_CARD_VISIBILITY', card: 'payContractorVisible' });
     }
 
     // pay employees
-    if (cards.payEmployeeVisible == false && state.employees.employee.cur > 0) {
-      cards.payEmployeeVisible = true;
+    if (ui.payEmployeeVisible == false && state.employees.employee.cur > 0) {
       dispatch({ type: 'SET_CARD_VISIBILITY', card: 'payEmployeeVisible' });
     }
 
     // research
-    if (cards.researchVisible == false && (state.employees.Manager.cur > 0 || state.employees.Scientist.cur > 0 || state.employees.Lawyer.cur > 0)) {
-      cards.researchVisible = true;
+    if (ui.researchVisible == false && (state.employees.Manager.cur > 0 || state.employees.Scientist.cur > 0 || state.employees.Lawyer.cur > 0)) {
       dispatch({ type: 'SET_CARD_VISIBILITY', card: 'researchVisible' });
     }
 
     // lobby
-    if (cards.lobbyVisible == false && (state.employees.Manager.cur > 0 || state.employees.Scientist.cur > 0 || state.employees.Lawyer.cur > 0)) {
-      cards.lobbyVisible = true;
+    if (ui.lobbyVisible == false && (state.employees.Manager.cur > 0 || state.employees.Scientist.cur > 0 || state.employees.Lawyer.cur > 0)) {
       dispatch({ type: 'SET_CARD_VISIBILITY', card: 'lobbyVisible' });
     }
   });
@@ -998,12 +1005,6 @@ module.exports = { initEmployeeNeedPaySystem: initEmployeeNeedPaySystem };
 var React = require('React');
 var ButtonOption = require('../ui/components/ButtonOption.react');
 
-var buttonsShown = {
-  contractors2: false,
-  contractors5: false,
-  contractors10: false
-};
-
 var initRandomEventSystem = function initRandomEventSystem(store) {
 
   var time = store.getState().time;
@@ -1016,13 +1017,16 @@ var initRandomEventSystem = function initRandomEventSystem(store) {
       return;
     }
     time = state.time;
+    var buttonsShown = state.systems.buttonsShown;
 
     // -----------------------------------------------------------------------------------
     // Hiring multiple contractors at once
     // -----------------------------------------------------------------------------------
 
     if (state.employees.contractor.cur >= 200 && !buttonsShown.contractors2) {
-      buttonsShown.contractors2 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'buttonsShown', property: 'contractors2', value: true
+      });
       dispatch(ticker(React.createElement(ButtonOption, {
         label: 'Hire 2 contractors at a time?',
         optionNames: ['Yes'],
@@ -1032,7 +1036,9 @@ var initRandomEventSystem = function initRandomEventSystem(store) {
       })));
     }
     if (state.employees.contractor.cur >= 1000 && !buttonsShown.contractors5) {
-      buttonsShown.contractors5 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'buttonsShown', property: 'contractors5', value: true
+      });
       dispatch(ticker(React.createElement(ButtonOption, {
         label: 'Hire 5 contractors at a time?',
         optionNames: ['Yes'],
@@ -1042,7 +1048,9 @@ var initRandomEventSystem = function initRandomEventSystem(store) {
       })));
     }
     if (state.employees.contractor.cur >= 2500 && !buttonsShown.contractors10) {
-      buttonsShown.contractors10 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'buttonsShown', property: 'contractors10', value: true
+      });
       dispatch(ticker(React.createElement(ButtonOption, {
         label: 'Hire 10 contractors at a time?',
         optionNames: ['Yes'],
@@ -1216,18 +1224,6 @@ module.exports = { initTrashSystem: initTrashSystem };
 var React = require('React');
 var RestartButtonOption = require('../ui/components/RestartButtonOption.react');
 
-var warningsShown = {
-  burning25: false,
-  burning50: false,
-  burning75: false,
-  burning90: false,
-
-  trash25: false,
-  trash50: false,
-  trash75: false,
-  trash90: false
-};
-
 var initWinLossSystem = function initWinLossSystem(store) {
 
   var time = store.getState().time;
@@ -1240,26 +1236,36 @@ var initWinLossSystem = function initWinLossSystem(store) {
       return;
     }
     time = state.time;
+    var warningsShown = state.systems.warningsShown;
 
     // ----------------------------------------------------------------
     // Too much burning
     // ----------------------------------------------------------------
+
     var burn = state.burn;
 
     if (burn.cur >= burn.max * 0.25 && !warningsShown.burning25) {
-      warningsShown.burning25 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'burning25', value: true
+      });
       dispatch(ticker('Burning too much trash leads to catastrophe'));
     }
     if (burn.cur >= burn.max * 0.50 && !warningsShown.burning50) {
-      warningsShown.burning50 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'burning50', value: true
+      });
       dispatch(ticker('Amount of trash burned is dangerously high'));
     }
     if (burn.cur >= burn.max * 0.75 && !warningsShown.burning75) {
-      warningsShown.burning75 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'burning75', value: true
+      });
       dispatch(ticker('Burning trash will soon lead to catastrophe!'));
     }
     if (burn.cur >= burn.max * 0.90 && !warningsShown.burning90) {
-      warningsShown.burning90 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'burning90', value: true
+      });
       dispatch(ticker('Burning will destroy the world imminently'));
     }
 
@@ -1278,19 +1284,27 @@ var initWinLossSystem = function initWinLossSystem(store) {
     var trash = state.trash;
 
     if (trash.cur >= trash.max * 0.25 && !warningsShown.trash25) {
-      warningsShown.trash25 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'trash25', value: true
+      });
       dispatch(ticker('Collect trash quickly to avoid catastrophe'));
     }
     if (trash.cur >= trash.max * 0.50 && !warningsShown.trash50) {
-      warningsShown.trash50 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'trash50', value: true
+      });
       dispatch(ticker('The streets overflow with uncollected trash'));
     }
     if (trash.cur >= trash.max * 0.75 && !warningsShown.trash75) {
-      warningsShown.trash75 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'trash75', value: true
+      });
       dispatch(ticker('Uncollected trash levels are dangerously high'));
     }
     if (trash.cur >= trash.max * 0.90 && !warningsShown.trash90) {
-      warningsShown.trash90 = true;
+      dispatch({ type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'trash90', value: true
+      });
       dispatch(ticker('Trash catastrophe will occur at any moment'));
     }
 

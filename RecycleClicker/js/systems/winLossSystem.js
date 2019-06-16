@@ -3,18 +3,6 @@
 const React = require('React');
 const RestartButtonOption = require('../ui/components/RestartButtonOption.react');
 
-const warningsShown = {
-  burning25: false,
-  burning50: false,
-  burning75: false,
-  burning90: false,
-
-  trash25: false,
-  trash50: false,
-  trash75: false,
-  trash90: false,
-}
-
 const initWinLossSystem = (store) => {
 
   let time = store.getState().time;
@@ -26,31 +14,40 @@ const initWinLossSystem = (store) => {
       return;
     }
     time = state.time;
+    const {warningsShown} = state.systems;
 
     // ----------------------------------------------------------------
     // Too much burning
     // ----------------------------------------------------------------
     const {burn} = state;
     if (burn.cur >= burn.max * 0.25 && !warningsShown.burning25) {
-      warningsShown.burning25 = true;
+      dispatch({type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'burning25', value: true
+      });
       dispatch(ticker(
         'Burning too much trash leads to catastrophe',
       ));
     }
     if (burn.cur >= burn.max * 0.50 && !warningsShown.burning50) {
-      warningsShown.burning50 = true;
+      dispatch({type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'burning50', value: true
+      });
       dispatch(ticker(
         'Amount of trash burned is dangerously high',
       ));
     }
     if (burn.cur >= burn.max * 0.75 && !warningsShown.burning75) {
-      warningsShown.burning75 = true;
+      dispatch({type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'burning75', value: true
+      });
       dispatch(ticker(
         'Burning trash will soon lead to catastrophe!',
       ));
     }
     if (burn.cur >= burn.max * 0.90 && !warningsShown.burning90) {
-      warningsShown.burning90 = true;
+      dispatch({type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'burning90', value: true
+      });
       dispatch(ticker(
         'Burning will destroy the world imminently',
       ));
@@ -75,25 +72,33 @@ const initWinLossSystem = (store) => {
     // ----------------------------------------------------------------
     const {trash} = state;
     if (trash.cur >= trash.max * 0.25 && !warningsShown.trash25) {
-      warningsShown.trash25 = true;
+      dispatch({type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'trash25', value: true
+      });
       dispatch(ticker(
         'Collect trash quickly to avoid catastrophe',
       ));
     }
     if (trash.cur >= trash.max * 0.50 && !warningsShown.trash50) {
-      warningsShown.trash50 = true;
+      dispatch({type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'trash50', value: true
+      });
       dispatch(ticker(
         'The streets overflow with uncollected trash',
       ));
     }
     if (trash.cur >= trash.max * 0.75 && !warningsShown.trash75) {
-      warningsShown.trash75 = true;
+      dispatch({type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'trash75', value: true
+      });
       dispatch(ticker(
         'Uncollected trash levels are dangerously high',
       ));
     }
     if (trash.cur >= trash.max * 0.90 && !warningsShown.trash90) {
-      warningsShown.trash90 = true;
+      dispatch({type: 'SET_SYSTEM_VALUE',
+        system: 'warningsShown', property: 'trash90', value: true
+      });
       dispatch(ticker(
         'Trash catastrophe will occur at any moment',
       ));

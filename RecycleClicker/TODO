@@ -3,9 +3,8 @@
  - Ticker upgrade
    - animate ticker
    - implement strike, wage-theft case, disease, gov. fine,
-
- - - - - - REFACTOR - - - - -
- - Local state in systems prevents restart/saving game
+ - favicon
+ - local storage system so you can resume
 
  - - - - - BALANCE  - - - - -
  - Handle doing good vs greedy tech trees out-of-order (namely wages)
@@ -15,17 +14,13 @@
  - actually prevent tap and drag zooming!
  - buttons take up vertical ticker space when next message is long
 
- - - - - - LATER - - - - - -
- - ultra-late game between sustainable society and 0 trash, what happens?
- - favicon
- - local storage system so you can resume
-
  - - - - - - WISH - - - - - -
  - randomize various rates per play-through?
  - should all employees press button together, or should the button visually
    pressed many times?
  - not all trash is recyclable
  - model various rates
+ - ultra-late game between sustainable society and 0 trash, what happens?
 
 
 
@@ -96,3 +91,5 @@
  - messaging or screen to show when you hit win/loss with option to restart
  - win and loss conditions
  - reaching 0 trash and 0 trash multiplier = win
+
+ - Local state in systems prevents restart/saving game
